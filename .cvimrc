@@ -1,0 +1,21 @@
+ with L H
+unmap J
+unmap K
+map L nextTab
+map H previousTab
+
+" search through tabs with b
+unmap B
+unmap b
+map b :buffer<Space>
+
+let blacklists = ["https://www.shortcutfoo.com/*"]
+
+" search youtube with 'yt'
+let searchengine youtube = "http://www.youtube.com/results?page={startPage?}&utm_source=opensearch&search_query=%s"
+let searchalias yt = "youtube"
+
+" allegro search engine
+let searchengine allegro = "http://allegro.pl/listing.php/search?category=0&sg=0&description=1&string=%s&order=d&change_view=1"
+
+let completionengines = ["google", "youtube"]

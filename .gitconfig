@@ -1,0 +1,17 @@
+[user]
+    name = tarnas14
+    email = tarnas14@gmail.com
+[alias]
+    rs = remote update origin --prune
+    ci = commit -m
+    cia = commit -am
+    co = checkout
+    br = branch
+    st = status
+    amend = commit --amend -m
+    A = add -A :/
+    firstPush = push --set-upstream origin
+[core]
+    excludesfile = ~/.gitignore_global
+[push]
+    default = simple
