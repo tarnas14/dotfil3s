@@ -9,5 +9,11 @@ link:
 	if [ ! -e "$(HOME)/.gitignore_global" ]; then\
 		ln -s $(dotfil3s_root)/.gitignore_global $(HOME)/.gitignore_global;\
 	fi
+	if [ ! -e "$(HOME)/.config" ]; then\
+		mkdir "$(HOME)/.config";\
+	fi
+	if [ ! -e "$(HOME)/.config/nvim" ]; then\
+		ln -s $(dotfil3s_root)/nvim $(HOME)/.config/nvim;\
+	fi
 	echo "all linked"
 .PHONY: link 
