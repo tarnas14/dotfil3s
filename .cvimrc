@@ -1,4 +1,4 @@
- with L H
+" moving around panes with L H
 unmap J
 unmap K
 map L nextTab
