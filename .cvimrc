@@ -8,6 +8,7 @@ map H previousTab
 unmap B
 unmap b
 map b :buffer<Space>
+map b :bookmarks<Space>
 
 let blacklists = ["https://www.shortcutfoo.com/*"]
 
