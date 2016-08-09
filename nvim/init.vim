@@ -42,10 +42,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 
-Plug 'Valloric/YouCompleteMe'
-
 Plug 'scrooloose/syntastic'
-Plug 'jelera/vim-javascript-syntax'
+
+Plug 'pangloss/vim-javascript'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 " colorschemes
 
