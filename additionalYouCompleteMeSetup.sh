@@ -2,6 +2,11 @@
 
 readonly youCompleteMePath=~/.config/nvim/plugged/YouCompleteMe
 
+if [ ! -e "$youCompleteMePath" ]; then
+  echo "run this script only after installing nvim and running :PlugInstall, pl0x"
+  exit
+fi
+
 alreadyInstalled=false
 installYouCompleteMe=true
 
