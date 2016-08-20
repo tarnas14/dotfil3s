@@ -46,6 +46,8 @@ Plug 'scrooloose/syntastic'
 
 Plug 'pangloss/vim-javascript'
 Plug 'Valloric/YouCompleteMe'
+
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 " colorschemes
 
@@ -103,3 +105,11 @@ highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
+
+" nerdcommener settings
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" DONT EVEN GET ME STARTED
+" apparently vim gets <C-_> when you press ctrl+/
+nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
+vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
