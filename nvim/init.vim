@@ -52,8 +52,10 @@ Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe'
 
 Plug 'scrooloose/nerdcommenter'
+Plug 'matze/vim-move'
 call plug#end()
-" colorschemes
+
+" COLOURS
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -72,21 +74,21 @@ call plug#end()
 set background=dark
 colorscheme one
 
-" airline config
+" PLUGIN vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-" vim-easymotion configuration
+" PLUGIN easymotion/vim-easymotion
 " bidirectional character search
 map <leader>f <Plug>(easymotion-bd-f)
 
-" ctrl-space config
+" PLUGIN vim-ctrlspace/vim-ctrlspace
 nnoremap <silent><C-p> :CtrlSpace O<CR>
 if executable("ag")
   let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
 
-" syntastic
+" PLUGIN scrooloose/syntastic
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -109,7 +111,7 @@ highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
-" nerdcommenter settings
+" PLUGIN scrooloose/nerdcommenter
 "
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -117,4 +119,8 @@ let g:NERDSpaceDelims = 1
 " apparently vim gets <C-_> when you press ctrl+/
 nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
 vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
+
+" PLUGIN matze/vim-move
+
+let g:move_key_modifier = 'C-A'
 
