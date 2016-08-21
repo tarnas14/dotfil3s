@@ -11,6 +11,9 @@ set shiftwidth=0
 set autoindent
 set smartindent
 
+set listchars+=space:.
+set list
+
 set nobackup
 set noswapfile
 
