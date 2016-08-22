@@ -19,7 +19,7 @@ Maybe I will add a bootstrap script that will setup a fresh ubuntu installation,
 4. run `./additionalYouCompleteMeSetup.sh` to run the plugin installation script (with tern-completer and dependency)
 5. profit
 
-# colours
+# if tmux colours are not right
 
 settig up tmux True colour was a pain in the ass, so I leave it here... it works in tmux >=2.2 (to check your version use `tmux -V`)
 
@@ -45,6 +45,7 @@ awk 'BEGIN{
 
 ## configuring tmux to use true colours
 
+solution explained here is already in the .tmux.conf (for terminals with $TERM == xterm-256color) file, but I'm leaving it here just in case
 [instructions here](https://sunaku.github.io/tmux-24bit-color.html#usage)
 
 dont bother with the patch, as mentioned it just works in tmux >=2.2
