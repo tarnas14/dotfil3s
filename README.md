@@ -11,12 +11,12 @@ Maybe I will add a bootstrap script that will setup a fresh ubuntu installation,
 1. run `make link` - dotfiles that are not present on your machine will be linked in proper places
 2. profit
 
-## neovim
+## nvim and dependencies
 
-1. run `./install-nvim.sh` to install neovim
+1. run `./letsgo.sh` to install neovim and other programs (used by nvim)
 2. make sure vim dotfiles are linked
 3. in `nvim` install all plugins with :PlugInstall
-4. run `./additionalYouCompleteMeSetup.sh` to run the plugin installation script (with tern-completer and dependency)
+4. run `./setup-plugins.sh` to install additional dependencies that nvim plugins need
 5. profit
 
 # if tmux colours are not right
