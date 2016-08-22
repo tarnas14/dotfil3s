@@ -80,10 +80,11 @@ let g:airline_powerline_fonts = 1
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
-map <leader>f <Plug>(easymotion-bd-f)
+map <leader>f <Plug>(easymotion-bd-fj
 
 " PLUGIN vim-ctrlspace/vim-ctrlspace
 nnoremap <silent><C-p> :CtrlSpace O<CR>
+nnoremap <leader>r :call ctrlspace#files#RefreshFiles()<CR>
 if executable("ag")
   let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
