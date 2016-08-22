@@ -53,6 +53,7 @@ Plug 'Valloric/YouCompleteMe'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " COLOURS
