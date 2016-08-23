@@ -2,8 +2,6 @@
 
 syntax on
 set number
-set hidden
-set nocompatible
 
 set expandtab
 set tabstop=2
@@ -37,23 +35,19 @@ nnoremap <C-A-w> :bdelete!<CR>
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'rakr/vim-one'
-
-Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
-
 Plug 'scrooloose/syntastic'
-
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'Valloric/YouCompleteMe'
-
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
+
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 call plug#end()
 
 " COLOURS
@@ -75,20 +69,24 @@ call plug#end()
 set background=dark
 colorscheme one
 
+" PLUGIN ctrlpvim/ctrlp.vim
+
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_use_caching = 0
+" DONT EVEN GET ME STARTED
+" apparently command-line vim gets <C-@> when you press ctrl+space
+nnoremap <C-@> :CtrlPBuffer<CR>
+nnoremap <C-Space> :CtrlPBuffer<CR>
+nnoremap <leader>r :CtrlPClearCache<CR>
+
 " PLUGIN vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
-map <leader>f <Plug>(easymotion-bd-fj
-
-" PLUGIN vim-ctrlspace/vim-ctrlspace
-nnoremap <silent><C-p> :CtrlSpace O<CR>
-nnoremap <leader>r :call ctrlspace#files#RefreshFiles()<CR>
-if executable("ag")
-  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
+map <leader>f <Plug>(easymotion-bd-f)
 
 " PLUGIN scrooloose/syntastic
 
@@ -118,9 +116,9 @@ highlight link SyntasticStyleWarningSign SignColumn
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " DONT EVEN GET ME STARTED
-" apparently vim gets <C-_> when you press ctrl+/
-nnoremap <C-_> :call NERDComment(0,"toggle")<CR>
-vnoremap <C-_> :call NERDComment(0,"toggle")<CR>
+" apparently command-line vim gets <C-_> when you press ctrl+/
+noremap <C-_> :call NERDComment(0,"toggle")<CR>
+noremap <C-/> :call NERDComment(0,"toggle")<CR>
 
 " PLUGIN matze/vim-move
 
