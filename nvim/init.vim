@@ -48,6 +48,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'scrooloose/nerdtree'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -125,3 +126,6 @@ noremap <C-/> :call NERDComment(0,"toggle")<CR>
 
 let g:move_key_modifier = 'C-A'
 
+" PLUGIN scrooloose/nerdtree
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeIgnore=['node_modules', 'elm-stuff']
