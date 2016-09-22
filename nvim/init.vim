@@ -51,6 +51,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+
+Plug 'lambdatoast/elm.vim'
 call plug#end()
 
 " COLOURS
