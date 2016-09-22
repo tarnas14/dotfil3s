@@ -12,6 +12,7 @@ if ! command_exists nvim ; then
   sudo python3 -m pip install neovim
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt-get update
+  sudo apt-get install xclip
   sudo apt-get install -y neovim
 else
   echo "nvim already installed"
