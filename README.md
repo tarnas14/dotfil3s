@@ -59,7 +59,7 @@ awk 'BEGIN{
 solution explained here is already in the .tmux.conf (for terminals with $TERM == xterm-256color) file, but I'm leaving it here just in case
 [instructions here](https://sunaku.github.io/tmux-24bit-color.html#usage)
 
-dont bother with the patch, as mentioned it just works in [tmux >=2.2](#installing-tmux-2.2)
+dont bother with the patch, as mentioned it just works in [tmux >=2.2](#installing-tmux-22)
 
 # scripts
 
