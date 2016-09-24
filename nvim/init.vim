@@ -49,6 +49,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/vim-fugitive'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
