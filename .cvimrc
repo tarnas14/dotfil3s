@@ -1,8 +1,8 @@
-" moving around panes with L H
+" moving around panes with ctrl+l/h
 unmap J
 unmap K
-map L nextTab
-map H previousTab
+map <C-h> previousTab
+map <C-l> nextTab
 
 " search through tabs with b
 unmap B
