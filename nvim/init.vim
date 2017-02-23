@@ -17,6 +17,10 @@ set list
 set nobackup
 set noswapfile
 
+" folds
+set foldmethod=syntax
+set foldlevelstart=20
+
 " splits
 set splitbelow
 set splitright
