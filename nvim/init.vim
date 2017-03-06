@@ -54,10 +54,9 @@ Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
 
+Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-
-Plug 'lambdatoast/elm.vim'
 call plug#end()
 
 " COLOURS
