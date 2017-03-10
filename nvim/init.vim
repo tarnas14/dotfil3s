@@ -56,7 +56,9 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 call plug#end()
 
 " COLOURS
@@ -85,6 +87,8 @@ nnoremap <leader>r :call ctrlspace#files#RefreshFiles()<CR>
 if executable("ag")
   let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
 endif
+" the setting below is a workaround proposed to bug in https://github.com/vim-ctrlspace/vim-ctrlspace/issues/188
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
 
 " PLUGIN vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
