@@ -52,7 +52,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/nerdtree'
 
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
