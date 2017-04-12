@@ -48,7 +48,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'mtscout6/syntastic-local-eslint.vim'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
@@ -58,6 +57,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " COLOURS
