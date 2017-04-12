@@ -1,8 +1,5 @@
 dotfil3s_root=`pwd`
 link:
-	if [ ! -e "$(HOME)/.tmux.conf" ]; then\
-		ln -s $(dotfil3s_root)/.tmux.conf $(HOME)/.tmux.conf;\
-	fi
 	if [ ! -e "$(HOME)/.gitconfig" ]; then\
 		ln -s $(dotfil3s_root)/.gitconfig $(HOME)/.gitconfig;\
 	fi
@@ -23,5 +20,13 @@ link:
 		mkdir "$(HOME)/.tmux/plugins";\
 		ln -s $(dotfil3s_root)/tpm $(HOME)/.tmux/plugins/tpm;\
 	fi
+	if [ -e "$(HOME)/.tmux.conf" ]; then\
+		rm $(HOME)/.tmux.conf;\
+	fi
+	ln -s $(dotfil3s_root)/.tmux.conf $(HOME)/.tmux.conf;
+	if [ -e "$(HOME)/.zshrc" ]; then\
+		rm $(HOME)/.zshrc;\
+	fi
+	ln -s $(dotfil3s_root)/.zshrc $(HOME)/.zshrc;
 	echo "all linked"
 .PHONY: link 
