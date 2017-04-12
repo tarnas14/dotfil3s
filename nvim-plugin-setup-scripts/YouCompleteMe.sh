@@ -21,6 +21,9 @@ fi
 
 if [[ $installYouCompleteMe == true ]]; then
   sudo apt-get install -y build-essential cmake
+  nvm install node
+  npm i -g typescript
+  cd $youCompleteMePath; git submodule update --init --recursive
   cd $youCompleteMePath; ./install.py --tern-completer
   cd $youCompleteMePath; touch installed
   exit
