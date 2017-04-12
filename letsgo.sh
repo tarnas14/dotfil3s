@@ -4,7 +4,17 @@ command_exists () {
     type "$1" &> /dev/null ;
 }
 
-if [ ! -d "~/apps" ]; then 
+if ! command_exists tlp ; then
+  echo "installing tlp"
+  sudo add-apt-repository ppa:linrunner/tlp
+  sudo apt-get update
+  sudo apt-get install tlp tlp-rdw smartmontools ethtool
+else
+  echo "tlp already installed"
+fi
+
+# yes, assuming 'tarnas' user, give me a break
+if [ ! -d "/home/tarnas/apps" ]; then 
   mkdir ~/apps
 fi
 
@@ -25,6 +35,14 @@ else
   echo "tmux already installed"
 fi
 
+if [ ! -d "/home/tarnas/.nvm" ]; then
+  echo "installing nvm"
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+  nvm install node
+else
+  echo "nvm already there"
+fi
+
 if ! command_exists nvim ; then
   echo "installing nvim"
   sudo apt-get install -y software-properties-common &> /dev/null
@@ -37,13 +55,4 @@ if ! command_exists nvim ; then
   sudo apt-get install -y neovim
 else
   echo "nvim already installed"
-fi
-
-if ! command_exists tlp ; then
-  echo "installing tlp"
-  sudo add-apt-repository ppa:linrunner/tlp
-  sudo apt-get update
-  sudo apt-get install tlp tlp-rdw smartmontools ethtool
-else
-  echo "tlp already installed"
 fi
