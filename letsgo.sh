@@ -4,6 +4,27 @@ command_exists () {
     type "$1" &> /dev/null ;
 }
 
+if [ ! -d "~/apps" ]; then 
+  mkdir ~/apps
+fi
+
+if ! command_exists tmux ; then
+  echo "installing tmux"
+  sudo apt-get install libevent-dev
+  sudo apt-get install ncurses-dev
+  cd ~/Downloads
+  wget https://github.com/tmux/tmux/releases/download/2.3/tmux-2.3.tar.gz
+  tar -zxf tmux-2.3.tar.gz -C ~/apps
+  rm tmux-2.3.tar.gz
+  cd ~/apps
+  mv tmux-2.3 tmux
+  cd tmux
+  ./configure && make
+  sudo ln -s ~/apps/tmux/tmux /usr/local/bin/tmux
+else
+  echo "tmux already installed"
+fi
+
 if ! command_exists nvim ; then
   echo "installing nvim"
   sudo apt-get install -y software-properties-common &> /dev/null
