@@ -1,8 +1,9 @@
 dotfil3s_root=`pwd`
 link:
-	if [ ! -e "$(HOME)/.gitconfig" ]; then\
-		ln -s $(dotfil3s_root)/.gitconfig $(HOME)/.gitconfig;\
+	if [ -e "$(HOME)/.gitconfig" ]; then\
+		rm $(HOME)/.gitconfig;\
 	fi
+	ln -s $(dotfil3s_root)/.gitconfig $(HOME)/.gitconfig;\
 	if [ ! -e "$(HOME)/.gitignore_global" ]; then\
 		ln -s $(dotfil3s_root)/.gitignore_global $(HOME)/.gitignore_global;\
 	fi
