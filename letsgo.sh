@@ -4,6 +4,9 @@ command_exists () {
     type "$1" &> /dev/null ;
 }
 
+mkdir -p ~/.config/autostart
+cp ./autostart/* ~/.config/autostart
+
 if ! command_exists curl ; then
   echo "installing curl"
   sudo apt-get update
