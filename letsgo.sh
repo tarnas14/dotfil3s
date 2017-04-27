@@ -37,22 +37,23 @@ fi
 
 if [ ! -d "/home/tarnas/.nvm" ]; then
   echo "installing nvm"
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
   nvm install node
 else
   echo "nvm already there"
 fi
 
 if ! command_exists nvim ; then
-  echo "installing nvim"
+  echo "installing nvim with plug"
   sudo apt-get install -y software-properties-common &> /dev/null
   sudo apt-get install -y python-dev python-pip python3-dev python3-pip &> /dev/null
   sudo python2 -m pip install neovim
   sudo python3 -m pip install neovim
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt-get update
-  sudo apt-get install xclip
+  sudo apt-get install -y xclip
   sudo apt-get install -y neovim
+  curl -fLo ./nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 else
   echo "nvim already installed"
 fi
