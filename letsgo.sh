@@ -4,6 +4,14 @@ command_exists () {
     type "$1" &> /dev/null ;
 }
 
+if ! command_exists curl ; then
+  echo "installing curl"
+  sudo apt-get update
+  sudo apt-get -y install curl
+else
+  echo "curl already installed"
+fi
+
 if ! command_exists tlp ; then
   echo "installing tlp"
   sudo add-apt-repository ppa:linrunner/tlp
