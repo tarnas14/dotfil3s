@@ -13,9 +13,6 @@ link:
 	if [ ! -e "$(HOME)/.config/nvim" ]; then\
 		ln -s $(dotfil3s_root)/nvim $(HOME)/.config/nvim;\
 	fi
-	if [ ! -e "$(HOME)/scripts" ]; then\
-		ln -s $(dotfil3s_root)/scripts $(HOME)/scripts;\
-	fi
 	if [ ! -e "$(HOME)/.tmux" ]; then\
 		mkdir "$(HOME)/.tmux";\
 		mkdir "$(HOME)/.tmux/plugins";\
