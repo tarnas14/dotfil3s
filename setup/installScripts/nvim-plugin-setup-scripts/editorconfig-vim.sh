@@ -1,8 +1,6 @@
 #!/bin/bash
 
-command_exists () {
-    type "$1" &> /dev/null ;
-}
+. ../utils.sh
 
 if ! command_exists editorconfig ; then
   echo "installing editorconfig core"
