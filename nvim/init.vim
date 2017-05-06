@@ -51,6 +51,7 @@ Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-scripts/VimgrepBuffer'
 
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
@@ -59,6 +60,8 @@ Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 
 Plug 'Valloric/YouCompleteMe'
+
+Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 call plug#end()
 
 " COLOURS
