@@ -11,6 +11,7 @@
     amend = commit --amend -m
     A = add -A :/
     firstPush = push --set-upstream origin
+    hpush = !git push && git push heroku master
 [core]
     excludesfile = ~/.gitignore_global
 [push]
