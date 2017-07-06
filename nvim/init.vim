@@ -27,10 +27,10 @@ set splitright
 
 nnoremap <leader>\| :vsplit<CR>
 nnoremap <leader>- :split<CR>
-nnoremap <A-L> <C-W><C-L>
-nnoremap <A-H> <C-W><C-H>
-nnoremap <A-K> <C-W><C-K>
-nnoremap <A-J> <c-W><C-J>
+nnoremap <leader>L <C-W><C-L>
+nnoremap <leader>H <C-W><C-H>
+nnoremap <leader>K <C-W><C-K>
+nnoremap <leader>J <c-W><C-J>
 
 " buffer movement/control
 nnoremap <C-h> :bprevious<CR>
@@ -46,8 +46,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
-Plug 'scrooloose/syntastic'
-Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
@@ -56,9 +54,12 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'w0rp/ale'
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
+Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
+Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 call plug#end()
@@ -99,29 +100,6 @@ let g:airline#extensions#tabline#enabled = 1
 " bidirectional character search
 map <leader>f <Plug>(easymotion-bd-f)
 
-" PLUGIN scrooloose/syntastic
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
 " PLUGIN scrooloose/nerdcommenter
 "
 " Add spaces after comment delimiters by default
@@ -134,3 +112,27 @@ noremap <C-/> :call NERDComment(0,"toggle")<CR>
 " PLUGIN matze/vim-move
 
 let g:move_key_modifier = 'C-A'
+
+" PLUGIN w0rp/ale
+
+let g:ale_linters = {
+\  'javascript': ['flow', 'eslint'],
+\  'typescript': ['tslint']
+\}
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+" PLUG Shougo/deoplete
+let g:deoplete#enable_at_startup=1
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" PLUG peitalin/vim-jsx-typescript
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
