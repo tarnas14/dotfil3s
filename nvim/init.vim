@@ -62,6 +62,8 @@ Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
 Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
+
+Plug 'itchyny/calendar.vim'
 call plug#end()
 
 " COLOURS
@@ -136,3 +138,8 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " PLUG peitalin/vim-jsx-typescript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
+
+" PLUG itchyny/calendar.vim
+let g:calendar_google_calendar = 1
+command! Cal Calendar -view=week
+command! Calm Calendar -view=month
