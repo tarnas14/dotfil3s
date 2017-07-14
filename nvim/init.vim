@@ -27,10 +27,11 @@ set splitright
 
 nnoremap <leader>\| :vsplit<CR>
 nnoremap <leader>- :split<CR>
-nnoremap <leader>L <C-W><C-L>
-nnoremap <leader>H <C-W><C-H>
-nnoremap <leader>K <C-W><C-K>
-nnoremap <leader>J <c-W><C-J>
+
+nnoremap <A-L> <C-W><C-L>
+nnoremap <A-H> <C-W><C-H>
+nnoremap <A-K> <C-W><C-K>
+nnoremap <A-J> <c-W><C-J>
 
 " buffer movement/control
 nnoremap <C-h> :bprevious<CR>
@@ -49,6 +50,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/vim-cursorword'
 
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
