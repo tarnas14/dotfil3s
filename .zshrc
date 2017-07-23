@@ -94,3 +94,5 @@ export NVM_DIR="/home/tarnas/.nvm"
 if [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
+
+alias vtop="vtop --theme wizard"
