@@ -56,11 +56,16 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+
+" Potentially will be used, needs more testing of typescript and flow :)
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
+" Plug 'wokalski/autocomplete-flow'
+
 Plug 'w0rp/ale'
 
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
 Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
@@ -133,10 +138,8 @@ nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 " PLUG Shougo/deoplete
-let g:deoplete#enable_at_startup=1
-
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" let g:deoplete#enable_at_startup=1
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " PLUG peitalin/vim-jsx-typescript
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
