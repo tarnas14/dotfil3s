@@ -96,3 +96,4 @@ if [ -z "$TMUX" ]; then
 fi
 
 alias vtop="vtop --theme wizard"
+export EDITOR="nvim"
