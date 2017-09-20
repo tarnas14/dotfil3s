@@ -1,0 +1,8 @@
+#!/bin/bash
+IS_ENABLED=$(xinput list-props $1 | grep 139 | awk -F ':' '{print $2}')
+if [ $IS_ENABLED -eq 1 ]
+then
+  xinput disable $1
+else
+  xinput enable $1
+fi
