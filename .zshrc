@@ -98,4 +98,13 @@ fi
 alias vtop="vtop --theme wizard"
 export EDITOR="nvim"
 
+_has() {
+  return $( whence $1 >/dev/null )
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if _has fzf && _has ag; then
+  export FZF_DEFAULT_COMMAND='ag -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+fi

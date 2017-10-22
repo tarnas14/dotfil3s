@@ -39,6 +39,8 @@ nnoremap <C-l> :bnext<CR>
 nnoremap <C-w> :bdelete<CR>
 nnoremap <C-A-w> :bdelete!<CR>
 
+set noshowmode
+
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'rakr/vim-one'
@@ -46,13 +48,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
-Plug 'vim-airline/vim-airline'
-Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'ap/vim-buftabline'
 
 Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
@@ -78,6 +80,9 @@ call plug#end()
 nmap j gj
 nmap k gk
 
+colorscheme one
+set background=dark
+
 " COLOURS
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -94,17 +99,16 @@ nmap k gk
     set termguicolors
   endif
 
-set background=dark
-colorscheme one
-
-" PLUGIN vim-airline/vim-airline
-let g:airline#extensions#tabline#enabled = 1
-
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
 map <leader>f <Plug>(easymotion-bd-f)
 
-"FZF"
+" lightline
+let g:lightline = {
+      \ 'colorscheme': 'one'
+      \ }
+
+" FZF
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'), <bang>0)
 map <C-p> :Files<CR>
