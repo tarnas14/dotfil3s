@@ -71,6 +71,13 @@ Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 Plug 'itchyny/calendar.vim'
 call plug#end()
 
+" Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
+" line wrapping on, this can cause the cursor to actually skip a few lines on the screen because
+" it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down'
+" to mean the next line on the screen
+nmap j gj
+nmap k gk
+
 " COLOURS
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
