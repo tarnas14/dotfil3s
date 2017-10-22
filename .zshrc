@@ -104,7 +104,7 @@ _has() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag -g ""'
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi

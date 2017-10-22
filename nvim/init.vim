@@ -103,19 +103,43 @@ set background=dark
 " bidirectional character search
 map <leader>f <Plug>(easymotion-bd-f)
 
-" lightline
+" PLUGIN itchyny/lightline.vim
 let g:lightline = {
       \ 'colorscheme': 'one'
       \ }
 
-" FZF
+" fzf
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'), <bang>0)
 map <C-p> :Files<CR>
 map <C-space> :Buffers<CR>
 map <leader>/ :Ag<CR>
 map <leader>l :Blines<CR>
-let FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split enew' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " PLUGIN scrooloose/nerdcommenter
 "
