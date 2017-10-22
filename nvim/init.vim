@@ -159,3 +159,5 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+
+command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
