@@ -97,3 +97,5 @@ fi
 
 alias vtop="vtop --theme wizard"
 export EDITOR="nvim"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

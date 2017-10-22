@@ -42,7 +42,8 @@ nnoremap <C-A-w> :bdelete!<CR>
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'rakr/vim-one'
-Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'vim-airline/vim-airline'
@@ -94,22 +95,18 @@ call plug#end()
 set background=dark
 colorscheme one
 
-" PLUGIN vim-ctrlspace/vim-ctrlspace
-
-nnoremap <silent><C-p> :CtrlSpace O<CR>
-nnoremap <leader>r :call ctrlspace#files#RefreshFiles()<CR>
-if executable("ag")
-  let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-" the setting below is a workaround proposed to bug in https://github.com/vim-ctrlspace/vim-ctrlspace/issues/188
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-
 " PLUGIN vim-airline/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
 map <leader>f <Plug>(easymotion-bd-f)
+
+"FZF"
+map <C-p> :Files<CR>
+map <C-space> :Buffers<CR>
+map <leader>/ :Ag<CR>
+let FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " PLUGIN scrooloose/nerdcommenter
 "
