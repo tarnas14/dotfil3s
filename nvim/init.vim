@@ -61,11 +61,6 @@ Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
-" Potentially will be used, needs more testing of typescript and flow :)
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'mhartington/nvim-typescript', { 'do': ':UpdateRemotePlugins' }
-" Plug 'wokalski/autocomplete-flow'
-
 Plug 'w0rp/ale'
 
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
