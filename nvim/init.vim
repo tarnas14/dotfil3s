@@ -51,7 +51,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
+Plug 'tpope/vim-fugitive'
 
+Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
@@ -148,3 +150,17 @@ autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
 let g:calendar_google_calendar = 1
 command! Cal Calendar -view=week
 command! Calm Calendar -view=month
+
+" PLUG tpope/vim-fugitive
+map <leader>gs :Gstatus<CR>
+map <leader>gf :Git! diff<CR>
+map <leader>gt :Git! diff --staged<CR>
+map <leader>gc :Gcommit<CR>
+map <leader>gl :Commits<CR>
+map <leader>gp :Gpush<CR>
+
+" disable arrows
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
