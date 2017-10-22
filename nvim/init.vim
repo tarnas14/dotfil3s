@@ -103,9 +103,12 @@ let g:airline#extensions#tabline#enabled = 1
 map <leader>f <Plug>(easymotion-bd-f)
 
 "FZF"
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'), <bang>0)
 map <C-p> :Files<CR>
 map <C-space> :Buffers<CR>
 map <leader>/ :Ag<CR>
+map <leader>l :Blines<CR>
 let FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " PLUGIN scrooloose/nerdcommenter
