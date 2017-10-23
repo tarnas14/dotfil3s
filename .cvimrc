@@ -10,7 +10,7 @@ unmap b
 map b :buffer<Space>
 map B :bookmarks<Space>
 
-let blacklists = ["https://www.shortcutfoo.com/*", "https://www.workflowy.com/*", "https://workflowy.com/*"]
+let blacklists = ["https://www.shortcutfoo.com/*", "https://www.workflowy.com/*", "https://workflowy.com/*", "https://inbox.google.com/*"]
 
 " search youtube with 'yt'
 let searchengine youtube = "http://www.youtube.com/results?page={startPage?}&utm_source=opensearch&search_query=%s"
