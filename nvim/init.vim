@@ -141,6 +141,9 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" PLUG 'ap/vim-buftabline'
+let g:buftabline_indicators = 1
+
 " PLUGIN scrooloose/nerdcommenter
 "
 " Add spaces after comment delimiters by default
