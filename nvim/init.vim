@@ -181,8 +181,10 @@ autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
 
 " PLUG itchyny/calendar.vim
 let g:calendar_google_calendar = 1
-command! Cal Calendar -view=week
+let g:calendar_google_task = 1
 command! Calm Calendar -view=month
+command! Calw Calendar -view=week
+command! Cald Calendar -view=day
 
 " PLUG tpope/vim-fugitive
 map <leader>gs :Gstatus<CR>
