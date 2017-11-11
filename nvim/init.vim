@@ -114,7 +114,7 @@ command! -bang -nargs=* Ag
 map <C-p> :Files<CR>
 map <C-space> :Buffers<CR>
 map <leader>/ :Ag<CR>
-map <leader>l :Blines<CR>
+map <leader>l :BLines<CR>
 
 " Default fzf layout
 " - down / up / left / right
