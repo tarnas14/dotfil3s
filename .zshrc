@@ -61,6 +61,10 @@ then
   export PATH="$PATH:$HOME/.npm-global/bin"
 fi
 
+export ANDROID_HOME=/home/tarnas/devtools
+export PATH=$PATH:/home/tarnas/devtools/platform-tools
+export PATH=$PATH:$ANDROID_HOME/bin
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
