@@ -1,6 +1,7 @@
 [user]
     name = tarnas14
     email = tarnas14@gmail.com
+    signingkey = 50EE41CD300B6540
 [alias]
     rs = remote update origin --prune
     ci = commit -m
