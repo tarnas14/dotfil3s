@@ -1,7 +1,7 @@
 [user]
     name = tarnas14
     email = tarnas14@gmail.com
-    signingkey = 50EE41CD300B6540
+    signingkey = 18DF23D2B66F333B
 [alias]
     rs = remote update origin --prune
     ci = commit -m
@@ -17,3 +17,5 @@
     excludesfile = ~/.gitignore_global
 [push]
     default = simple
+[commit]
+    gpgsign = true
