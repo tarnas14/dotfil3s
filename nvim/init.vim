@@ -44,6 +44,7 @@ set noshowmode
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'rakr/vim-one'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
@@ -71,6 +72,12 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 
 Plug 'itchyny/calendar.vim'
+
+Plug 'digitaltoad/vim-pug'
+
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+
 call plug#end()
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
