@@ -61,9 +61,14 @@ then
   export PATH="$PATH:$HOME/.npm-global/bin"
 fi
 
+# android
 export ANDROID_HOME=/home/tarnas/devtools
 export PATH=$PATH:/home/tarnas/devtools/platform-tools
 export PATH=$PATH:$ANDROID_HOME/bin
+
+GOPATH=$HOME/.go
+export GOPATH
+export PATH="$PATH:$GOPATH/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,3 +117,5 @@ if _has fzf && _has ag; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
+
+alias pytong=python
