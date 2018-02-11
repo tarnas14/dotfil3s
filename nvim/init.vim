@@ -90,9 +90,6 @@ call plug#end()
 nmap j gj
 nmap k gk
 
-colorscheme one
-set background=dark
-
 " COLOURS
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -108,6 +105,9 @@ set background=dark
   if (has("termguicolors"))
     set termguicolors
   endif
+
+colorscheme one
+set background=dark
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
