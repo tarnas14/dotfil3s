@@ -8,16 +8,13 @@ RUN apt-get update \
     && apt-get install -y build-essential cmake \
     && add-apt-repository -y ppa:neovim-ppa/unstable \
     && apt-get update \
-    && apt-get install -y neovim python-dev python-pip
+    && apt-get install -y neovim python-dev python-pip \
+    && apt-get -y autoclean
+
+RUN apt-get install -y tmux
 
 # replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-
-# update the repository sources list
-# and install dependencies
-RUN apt-get update \
-    && apt-get install -y curl \
-    && apt-get -y autoclean
 
 # nvm environment variables
 ENV NVM_DIR /usr/local/nvm
@@ -41,15 +38,20 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN node -v
 RUN npm -v
 
-RUN pip install --user neovim
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN useradd -m tarnasenv -s /bin/bash
+
+COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
+RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.config
+
+USER tarnasenv
+WORKDIR /home/tarnasenv
 
 RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-COPY ./nvim/init.vim /root/.config/nvim/
-
+# RUN ["nvim", "-c", "PlugInstall|q|q"]
 RUN nvim -c "PlugInstall|q|q"
 
-ENTRYPOINT nvim /project
+ENTRYPOINT tmux
