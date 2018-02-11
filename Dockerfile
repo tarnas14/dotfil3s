@@ -6,9 +6,13 @@ RUN apt-get update \
     && apt-get install -y git-core \
     && apt-get install -y software-properties-common \
     && apt-get install -y build-essential cmake \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y python-dev python-pip python3-dev python3-pip \
+    && python2 -m pip install neovim \
+    && python3 -m pip install neovim \
     && add-apt-repository -y ppa:neovim-ppa/unstable \
     && apt-get update \
-    && apt-get install -y neovim python-dev python-pip \
+    && apt-get install -y neovim \
     && apt-get -y autoclean
 
 RUN apt-get install -y tmux
@@ -44,6 +48,15 @@ RUN useradd -m tarnasenv -s /bin/bash
 
 COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
 RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.config
+
+RUN git clone https://github.com/tmux-plugins/tpm /home/tarnasenv/.tmux/plugins/tpm
+RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.tmux
+
+COPY ./.tmux.conf /home/tarnasenv/
+RUN chown tarnasenv:tarnasenv /home/tarnasenv/.tmux.conf
+
+# maybe chown the whole home directory at the end?
+# RUN chown tarnasenv:tarnasenv /home/tarnasenv/
 
 USER tarnasenv
 WORKDIR /home/tarnasenv
