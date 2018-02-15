@@ -83,6 +83,11 @@ RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.oh-my-zsh
 COPY ./.zshrc /home/tarnasenv/
 RUN chown tarnasenv:tarnasenv /home/tarnasenv/.zshrc
 
+COPY ./.gitignore_global /home/tarnasenv
+RUN chown tarnasenv:tarnasenv /home/tarnasenv/.gitignore_global
+COPY ./.gitconfig /home/tarnasenv
+RUN chown tarnasenv:tarnasenv /home/tarnasenv/.gitconfig
+
 USER tarnasenv
 WORKDIR /home/tarnasenv
 
