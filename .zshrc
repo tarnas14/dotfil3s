@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/tarnas/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -53,23 +53,6 @@ plugins=(git)
 
 # User configuration
 
-# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-export PATH="$PATH:$HOME/scripts"
-if [[ $PATH != *":$HOME/.npm-global/bin" ]]
-then
-  export PATH="$PATH:$HOME/.npm-global/bin"
-fi
-
-# android
-export ANDROID_HOME=/home/tarnas/devtools
-export PATH=$PATH:/home/tarnas/devtools/platform-tools
-export PATH=$PATH:$ANDROID_HOME/bin
-
-GOPATH=$HOME/.go
-export GOPATH
-export PATH="$PATH:$GOPATH/bin"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -97,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/home/tarnas/.nvm"
+export NVM_DIR="/usr/local/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [ -z "$TMUX" ]; then

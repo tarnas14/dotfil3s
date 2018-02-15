@@ -4,6 +4,7 @@ RUN apt-get update \
     && apt-get install -y silversearcher-ag \
     && apt-get install -y wget \
     && apt-get install -y curl \
+    && apt-get install -y zsh \
     && apt-get install -y git-core \
     && apt-get install -y software-properties-common \
     && apt-get install -y build-essential cmake \
@@ -51,7 +52,7 @@ RUN npm -v
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN useradd -m tarnasenv -s /bin/bash
+RUN useradd -m tarnasenv -s $(grep /zsh$ /etc/shells | tail -1)
 
 COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
 RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.config
@@ -76,13 +77,18 @@ RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/apps
 # maybe chown the whole home directory at the end?
 # RUN chown tarnasenv:tarnasenv /home/tarnasenv/
 
+RUN env git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git /home/tarnasenv/.oh-my-zsh
+RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.oh-my-zsh
+
+COPY ./.zshrc /home/tarnasenv/
+RUN chown tarnasenv:tarnasenv /home/tarnasenv/.zshrc
+
 USER tarnasenv
 WORKDIR /home/tarnasenv
 
 RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# RUN ["nvim", "-c", "PlugInstall|q|q"]
 RUN nvim -c "PlugInstall|q|q"
 
 ENTRYPOINT tmux
