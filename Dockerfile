@@ -88,4 +88,6 @@ RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 RUN nvim -c "PlugInstall|q|q"
 
-ENTRYPOINT tmux
+EXPOSE 3001 3002 3003 3004 3005
+
+ENTRYPOINT /usr/bin/zsh
