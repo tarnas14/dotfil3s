@@ -1,40 +1,29 @@
-# tarnas14 dotfiles
+# tarnas14 dockerized environment
 
-This repo contains dotfiles that setup my linux environment.
-For now it's just files that my programs use to look nice and work as I them to.
-Maybe I will add a bootstrap script that will setup a fresh ubuntu installation, no sure.
+This holds my tmux/nvim setup that I use for development. Along with node version manager and some stuff like that which I use on a daily basis.
+This dockerized environment is useful mainly for web/front/server development.
 
-# how to use
+## how to use
 
-// to do, I changed a lot and have to clean the scripts up before I update this...
+- change .gitconfig (my email, public pgp key and stuff is configured there)
+- change any of the .files (tmux, zshrc, vim)
+- build docker image
+- .. ?
+- profit
 
-## if tmux colours are not right
+## how I use it (some binding magic)
 
-settig up tmux True colour was a pain in the ass, so I leave it here... it works in tmux >=2.2 (to check your version use `tmux -V`)
+- I run the container with some mounted/bound directories:
+  - ~/.gnupg for git security
+  - ~/projects (just my directory I keep my code in)
+  - ~/.tmux/resurrect - directory where tmux sessions are stored by the tmux-resurrect plugin (I want that to be persisted through different container runs and host system sessions)
+- bind ports to host (for things and stuff)
 
-### testing colours in your command line
+# other stuff
 
-to check whether your terminal supports true colours run below script (you should see a sweet rainbow gradient if true colours are enabled)
+also included but probably not easily reusable:
+`.cvimrc` (my settings for cvim addon for google chrome)
+some scripts I use, gnome settings (not sure if reusable)
+some install scripts for the 'other stuff'
 
-```
-awk 'BEGIN{
-    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
-    for (colnum = 0; colnum<77; colnum++) {
-        r = 255-(colnum*255/76);
-        g = (colnum*510/76);
-        b = (colnum*255/76);
-        if (g>255) g = 510-g;
-        printf "\033[48;2;%d;%d;%dm", r,g,b;
-        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-        printf "%s\033[0m", substr(s,colnum+1,1);
-    }
-    printf "\n";
-}'
-```
-
-### configuring tmux to use true colours (if they dont work)
-
-solution explained here is already in the .tmux.conf (for terminals with $TERM == xterm-256color) file, but I'm leaving it here just in case
-[instructions here](https://sunaku.github.io/tmux-24bit-color.html#usage)
-
-dont bother with the patch, as mentioned it just works in [tmux >=2.2](#installing-tmux-22)
+// might clean this up more if I have time or some actual reason :D
