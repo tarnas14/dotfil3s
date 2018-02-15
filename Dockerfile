@@ -55,13 +55,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN useradd -m tarnasenv -s $(grep /zsh$ /etc/shells | tail -1)
 
 COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
-RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.config
 
 RUN git clone https://github.com/tmux-plugins/tpm /home/tarnasenv/.tmux/plugins/tpm
-RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.tmux
 
 COPY ./.tmux.conf /home/tarnasenv/
-RUN chown tarnasenv:tarnasenv /home/tarnasenv/.tmux.conf
 
 # install tmux
 RUN wget https://github.com/tmux/tmux/releases/download/2.3/tmux-2.3.tar.gz
@@ -72,22 +69,15 @@ RUN mv /home/tarnasenv/apps/tmux-2.3 /home/tarnasenv/apps/tmux
 WORKDIR /home/tarnasenv/apps/tmux
 RUN ./configure && make
 RUN ln -s /home/tarnasenv/apps/tmux/tmux /usr/local/bin/tmux
-RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/apps
-
-# maybe chown the whole home directory at the end?
-# RUN chown tarnasenv:tarnasenv /home/tarnasenv/
 
 RUN env git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git /home/tarnasenv/.oh-my-zsh
-RUN chown -R tarnasenv:tarnasenv /home/tarnasenv/.oh-my-zsh
 
 COPY ./.zshrc /home/tarnasenv/
-RUN chown tarnasenv:tarnasenv /home/tarnasenv/.zshrc
 
 COPY ./.gitignore_global /home/tarnasenv
-RUN chown tarnasenv:tarnasenv /home/tarnasenv/.gitignore_global
 COPY ./.gitconfig /home/tarnasenv
-RUN chown tarnasenv:tarnasenv /home/tarnasenv/.gitconfig
 
+RUN chown -R tarnasenv:tarnasenv /home/tarnasenv
 USER tarnasenv
 WORKDIR /home/tarnasenv
 
