@@ -56,7 +56,9 @@ RUN useradd -m tarnasenv -s $(grep /zsh$ /etc/shells | tail -1)
 
 COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
 
-RUN git clone https://github.com/tmux-plugins/tpm /home/tarnasenv/.tmux/plugins/tpm
+RUN mkdir /home/tarnasenv/.tmux
+RUN mkdir /home/tarnasenv/.tmux/plugins
+RUN git clone https://github.com/tmux-plugins/tmux-resurrect /home/tarnasenv/.tmux/plugins/tmux-resurrect
 
 COPY ./.tmux.conf /home/tarnasenv/
 
