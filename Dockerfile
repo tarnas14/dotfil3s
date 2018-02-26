@@ -79,6 +79,7 @@ COPY ./.zshrc /home/tarnasenv/
 COPY ./.gitignore_global /home/tarnasenv
 COPY ./.gitconfig /home/tarnasenv
 
+RUN mkdir /home/tarnasenv/.ssh
 RUN chown -R tarnasenv:tarnasenv /home/tarnasenv
 RUN chown -R tarnasenv:tarnasenv $NVM_DIR
 USER tarnasenv

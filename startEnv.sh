@@ -6,4 +6,6 @@ docker run -it --name $1 \
   --mount type=bind,src=/home/tarnas/secure,dst=/home/tarnasenv/secure \
   --mount type=bind,src=/home/tarnas/.tmux/dockerized-resurrect,dst=/home/tarnasenv/.tmux/resurrect \
   --mount type=bind,src=/home/tarnas/.gnupg,dst=/home/tarnasenv/.gnupg \
+  --mount type=bind,src=/home/tarnas/.ssh/id_rsa,dst=/home/tarnasenv/.ssh/id_rsa \
+  --mount type=bind,src=/home/tarnas/.ssh/id_rsa.pub,dst=/home/tarnasenv/.ssh/id_rsa.pub \
   tarnasenv
