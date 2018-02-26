@@ -80,6 +80,7 @@ COPY ./.gitignore_global /home/tarnasenv
 COPY ./.gitconfig /home/tarnasenv
 
 RUN chown -R tarnasenv:tarnasenv /home/tarnasenv
+RUN chown -R tarnasenv:tarnasenv $NVM_DIR
 USER tarnasenv
 WORKDIR /home/tarnasenv
 
@@ -87,6 +88,8 @@ RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 RUN nvim -c "PlugInstall|q|q"
+
+RUN npm i -g vtop create-elm-app elm npm-ls-scripts
 
 EXPOSE 3001 3002 3003 3004 3005
 
