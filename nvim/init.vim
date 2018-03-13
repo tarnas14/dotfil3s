@@ -122,6 +122,7 @@ let g:lightline = {
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'), <bang>0)
 map <C-p> :Files<CR>
+map <C-k> :Files<CR>
 map <C-space> :Buffers<CR>
 map <leader>/ :Ag<CR>
 map <leader>l :BLines<CR>
@@ -207,6 +208,8 @@ map <leader>gp :Gpush<CR>
 " PLUG thiagoalessio/rainbow_levels.vim
 map <leader>r :RainbowLevelsToggle<CR>
 
+" map file reload
+map <leader>e :e!<CR>
 
 " disable arrows
 nnoremap <up> <nop>
