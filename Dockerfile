@@ -25,11 +25,13 @@ ENV LC_CTYPE en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+RUN useradd -m tarnasenv -s $(grep /zsh$ /etc/shells | tail -1)
+
 # replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # nvm environment variables
-ENV NVM_DIR /usr/local/nvm
+ENV NVM_DIR /home/tarnasenv/nvm
 ENV NODE_VERSION 8.9.4
 
 # install nvm
@@ -46,13 +48,7 @@ RUN source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# confirm installation
-RUN node -v
-RUN npm -v
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN useradd -m tarnasenv -s $(grep /zsh$ /etc/shells | tail -1)
 
 COPY ./nvim/init.vim /home/tarnasenv/.config/nvim/
 
