@@ -6,6 +6,6 @@
 ./tlp.sh
 ./tmux.sh
 ./nvm.sh
-./dropbox.sh
+./debPackages.sh
 ./nvim.sh
 ./link-configs.sh
