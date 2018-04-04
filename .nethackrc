@@ -1,0 +1,8 @@
+OPTIONS=!autopickup
+OPTIONS=name:tarnas, catname:Ser, dogname:Pixel
+OPTIONS=showexp, time, color
+OPTIONS=hilite_pet
+OPTIONS=msg_window:r
+OPTIONS=hitpointbar
+
+SYMBOLS=S_boulder:0
