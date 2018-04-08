@@ -13,3 +13,5 @@ for d in ${links[@]}; do
 done
 
 sudo apt-get install -f
+
+snap install spotify

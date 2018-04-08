@@ -8,3 +8,5 @@ rm -f ~/.gitignore_global
 ln -s "$dotfil3s_root".gitignore_global ~/.gitignore_global
 rm -f ~/.zshrc
 ln -s "$dotfil3s_root".zshrc ~/.zshrc
+rm -f ~/.nethackrc
+ln -s "$dotfil3s_root".nethackrc ~/.nethackrc

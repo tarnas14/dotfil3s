@@ -9,3 +9,5 @@
 ./debPackages.sh
 ./nvim.sh
 ./link-configs.sh
+
+snap install spotify
