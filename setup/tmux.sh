@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ../utils.sh
+. ./utils.sh
 
 if ! command_exists tmux ; then
   # mkdir -p ~/apps
@@ -18,7 +18,7 @@ if ! command_exists tmux ; then
   # ./configure && make
   # sudo ln -s ~/apps/tmux/tmux /usr/local/bin/tmux
 
-  snap install tmux
+  snap install tmux --classic
 
   echo "linking tmux conf"
   rm ~/.tmux.conf

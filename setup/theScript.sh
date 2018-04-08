@@ -8,6 +8,5 @@
 ./nvm.sh
 ./debPackages.sh
 ./nvim.sh
+./randomSoftware.sh
 ./link-configs.sh
-
-snap install spotify

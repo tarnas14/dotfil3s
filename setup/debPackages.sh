@@ -6,6 +6,9 @@ links=(
   'https://www.dropbox.com//download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb'
 )
 
+# for dropbox
+sudo apt-get install python-gpgme
+
 for d in ${links[@]}; do
   wget -O package.deb $d
   sudo dpkg -i package.deb
@@ -13,5 +16,3 @@ for d in ${links[@]}; do
 done
 
 sudo apt-get install -f
-
-snap install spotify

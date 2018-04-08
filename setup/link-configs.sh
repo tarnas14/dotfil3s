@@ -10,3 +10,5 @@ rm -f ~/.zshrc
 ln -s "$dotfil3s_root".zshrc ~/.zshrc
 rm -f ~/.nethackrc
 ln -s "$dotfil3s_root".nethackrc ~/.nethackrc
+rm -rf ~/.config/i3
+ln -s "$dotfil3s_root"i3 ~/.config/i3
