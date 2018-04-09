@@ -4,9 +4,18 @@ general {
         interval = 5
 }
 
+order += "volume master"
 order += "wireless wlp5s0"
 order += "battery 0"
 order += "tztime local"
+
+volume master {
+    format = " %volume"
+    format_muted = " %volume"
+    device = "default"
+    mixer = "PCM"
+    mixer_idx = 0
+}
 
 wireless wlp5s0 {
         format_up = "W: (%quality at %essid, %bitrate) %ip"
