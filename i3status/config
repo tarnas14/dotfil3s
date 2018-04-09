@@ -4,9 +4,10 @@ general {
         interval = 5
 }
 
-order += "volume master"
 order += "wireless wlp5s0"
+order += "volume master"
 order += "battery 0"
+order += "tztime cali"
 order += "tztime local"
 
 volume master {
@@ -15,11 +16,13 @@ volume master {
     device = "default"
     mixer = "PCM"
     mixer_idx = 0
+    separator_block_width = 30
 }
 
 wireless wlp5s0 {
         format_up = "W: (%quality at %essid, %bitrate) %ip"
         format_down = "W: down"
+        separator_block_width = 30
 }
 
 battery 0 {
@@ -31,8 +34,17 @@ battery 0 {
         status_full = "☻ FULL"
         path = "/sys/class/power_supply/BAT%d/uevent"
         low_threshold = 10
+        separator_block_width = 30
 }
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
+        separator_block_width = 30
+}
+
+tztime cali {
+        format = "CALI %time"
+        format_time = "%Y-%m-%d %H:%M:%S"
+        timezone = "UTC-7"
+        separator_block_width = 30
 }
