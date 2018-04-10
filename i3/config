@@ -148,12 +148,16 @@ bar {
   status_command i3status
 }
 
+# escape on caps
+exec "xmodmap -e \"keysym Caps_Lock = Escape\""
+
+# reload xrandr options based on HDMI connection
+# first parameter laptop output, second monitor output
+bindsym $mod+Shift+q exec "$HOME/.config/i3/setOutputs.sh $LAPTOP_X_OUTPUT $MONITOR_X_OUTPUT"
+
 # startup
 exec --no-startup-id dropbox start &
 
 exec franz
 exec konsole
 exec google-chrome
-
-# escape on caps
-exec "xmodmap -e \"keysym Caps_Lock = Escape\""
