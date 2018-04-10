@@ -7,7 +7,6 @@ general {
 order += "wireless wlp5s0"
 order += "volume master"
 order += "battery 0"
-order += "tztime cali"
 order += "tztime local"
 
 volume master {
@@ -39,12 +38,5 @@ battery 0 {
 
 tztime local {
         format = "%Y-%m-%d %H:%M:%S"
-        separator_block_width = 30
-}
-
-tztime cali {
-        format = "CALI %time"
-        format_time = "%Y-%m-%d %H:%M:%S"
-        timezone = "UTC-7"
         separator_block_width = 30
 }
