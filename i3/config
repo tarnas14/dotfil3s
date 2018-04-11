@@ -149,6 +149,7 @@ bar {
 }
 
 # escape on caps
+exec "xmodmap -e \"clear lock\""
 exec "xmodmap -e \"keysym Caps_Lock = Escape\""
 
 # reload xrandr options based on HDMI connection
