@@ -25,8 +25,6 @@ font pango:monospace 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-workspace_auto_back_and_forth yes
-
 focus_follows_mouse no
 
 # lock screen
@@ -80,6 +78,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+c focus child
 
+# workspaces
+workspace_auto_back_and_forth yes
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -103,6 +104,17 @@ bindsym $mod+Shift+7 move container to workspace 7; workspace 7
 bindsym $mod+Shift+8 move container to workspace 8; workspace 8
 bindsym $mod+Shift+9 move container to workspace 9; workspace 9
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+
+workspace 1 output $LAPTOP_X_OUTPUT
+workspace 2 output $LAPTOP_X_OUTPUT
+workspace 3 output $LAPTOP_X_OUTPUT
+workspace 4 output $LAPTOP_X_OUTPUT
+workspace 5 output $LAPTOP_X_OUTPUT
+workspace 6 output $HDMI_X_OUTPUT
+workspace 7 output $HDMI_X_OUTPUT
+workspace 8 output $HDMI_X_OUTPUT
+workspace 9 output $HDMI_X_OUTPUT
+workspace 10 output $HDMI_X_OUTPUT
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -149,12 +161,13 @@ bar {
 }
 
 # escape on caps
-exec "xmodmap -e \"clear lock\""
-exec "xmodmap -e \"keysym Caps_Lock = Escape\""
+# exec "xmodmap -e \"clear lock\""
+# exec "xmodmap -e \"keysym Caps_Lock = Escape\""
+exec "setxkbmap -option caps:escape"
 
 # reload xrandr options based on HDMI connection
 # first parameter laptop output, second monitor output
-bindsym $mod+Shift+q exec "$HOME/.config/i3/setOutputs.sh $LAPTOP_X_OUTPUT $MONITOR_X_OUTPUT"
+bindsym $mod+Shift+q exec "$HOME/.config/i3/setOutputs.sh $LAPTOP_X_OUTPUT $HDMI_X_OUTPUT"
 
 # startup
 exec --no-startup-id dropbox start &
