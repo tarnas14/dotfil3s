@@ -28,7 +28,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # lock screen
-bindsym Control+Shift+Mod1+l exec "i3lock -n"
+bindsym Control+Shift+Mod1+l exec "i3lock -n -i $HOME/dotfil3s/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
