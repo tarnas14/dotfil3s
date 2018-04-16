@@ -103,6 +103,22 @@ if _has fzf && _has ag; then
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
+# java [*]
+
+export JAVA_HOME=~/devtools/java/jdk1.8.0_162
+export PATH=$PATH:~/devtools/java/jdk1.8.0_162/bin
+
+export ANT_HOME=~/devtools/ant/apache-ant-1.9.11
+export PATH=$PATH:~/devtools/ant/apache-ant-1.9.11/bin
+
+# https://stackoverflow.com/questions/47150410/failed-to-run-sdkmanager-list-android-sdk-with-java-9
+# WTF I hate java
+export ANDROID_HOME=~/devtools/android/
+export PATH=$PATH:~/devtools/android/platform-tools
+export PATH=$PATH:~/devtools/android/tools
+
+export PATH=$PATH:~/devtools/gradle-4.6/bin
+
 # PYTHON
 
 alias pytong=python

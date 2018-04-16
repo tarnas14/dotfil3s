@@ -1,9 +1,0 @@
-#!/bin/bash
-DEVICE_ID=$(xinput list | grep $1 | awk -F 'id=' '{print $2}' | awk '{print $1}')
-IS_ENABLED=$(xinput list-props $DEVICE_ID | grep 139 | awk -F ':' '{print $2}')
-if [ $IS_ENABLED -eq 1 ]
-then
-  xinput disable $DEVICE_ID
-else
-  xinput enable $DEVICE_ID
-fi
