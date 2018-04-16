@@ -150,6 +150,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
+# player controls (required playerctl)
+bindcode $mod+117 exec playerctl play-pause
+bindsym $mod+Control+Left exec playerctl previous
+bindsym $mod+Control+Right exec playerctl next
+
 # brightness control
 bindsym XF86MonBrightnessUp exec --no-startup-id "$HOME/.config/i3/brightness.sh 0.1"
 bindsym XF86MonBrightnessDown exec --no-startup-id "$HOME/.config/i3/brightness.sh -0.1"
@@ -163,8 +168,6 @@ bar {
 }
 
 # escape on caps
-# exec "xmodmap -e \"clear lock\""
-# exec "xmodmap -e \"keysym Caps_Lock = Escape\""
 exec "setxkbmap -option caps:escape"
 
 # reload xrandr options based on HDMI connection
