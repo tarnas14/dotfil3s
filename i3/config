@@ -123,7 +123,12 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# capture all displays
 bindsym Print exec "scrot -z -m -e 'mv $f ~/Pictures/screenshots'"
+# capture focused window
+bindsym Shift+Print exec "scrot -z -m -u -e 'mv $f ~/Pictures/screenshots'"
+# choose rectangle - doesnt work because the process doesn't live long enough
+# bindsym Control+Print exec "scrot -z -s -e 'mv $f ~/Pictures/screenshots'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
