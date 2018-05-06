@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 10
+font pango:monospace 0 
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -28,7 +28,9 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # lock screen
-bindsym Control+Shift+Mod1+l exec "i3lock -n -i $HOME/dotfil3s/images/roller-coaster.png"
+bindsym Control+Shift+Mod1+l exec "i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
+# this would be great, but if there is no player `playerctl pause` throws, so it won't lock your screen lol
+# bindsym Control+Shift+Mod1+l exec "playerctl pause && i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -168,7 +170,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "$HOME/.config/i3/brightness.
 # finds out, if available)
 bar {
   # output eDP-1
-  font pango:DejaVu Sans Mono 11
+  font pango:DejaVu Sans Mono 9
   status_command i3status
 }
 
