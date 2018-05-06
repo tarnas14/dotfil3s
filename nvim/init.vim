@@ -25,6 +25,8 @@ set foldlevelstart=20
 set splitbelow
 set splitright
 
+let mapleader=","
+
 nnoremap <leader>\| :vsplit<CR>
 nnoremap <leader>- :split<CR>
 
@@ -53,7 +55,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
+
 Plug 'tpope/vim-fugitive'
+
 Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 
@@ -114,6 +118,7 @@ set background=dark
 map <leader>f <Plug>(easymotion-bd-f)
 
 " PLUGIN itchyny/lightline.vim
+" to hide lightline do `set laststatus=1`
 let g:lightline = {
       \ 'colorscheme': 'one'
       \ }
@@ -128,6 +133,7 @@ map <leader>/ :Ag<CR>
 map <leader>l :BLines<CR>
 
 " Default fzf layout
+"
 " - down / up / left / right
 let g:fzf_layout = { 'down': '~40%' }
 
