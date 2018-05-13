@@ -5,7 +5,7 @@
 ./omzsh.sh
 ./tlp.sh
 ./tmux.sh
-./nvm.sh
+./asdf.sh
 ./debPackages.sh
 ./nvim.sh
 ./randomSoftware.sh

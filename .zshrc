@@ -82,9 +82,6 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$PATH:/snap/bin"
 
-export NVM_DIR="$HOME/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 if [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
