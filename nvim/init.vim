@@ -101,6 +101,12 @@ Plug 'tpope/vim-surround'
 Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'elmcast/elm-vim'
 
+Plug 'sbdchd/neoformat'
+
+" elixir
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
 call plug#end()
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with

@@ -132,4 +132,10 @@ export LAPTOP_X_OUTPUT='eDP-1'
 export HDMI_X_OUTPUT='HDMI-1'
 
 # vimode
-bindkey -v
+# bindkey -v
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+
+# elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
