@@ -28,10 +28,8 @@ floating_modifier $mod
 focus_follows_mouse no
 mouse_warping none
 
-# lock screen
-bindsym Control+Shift+Mod1+l exec "i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
-# this would be great, but if there is no player `playerctl pause` throws, so it won't lock your screen lol
-# bindsym Control+Shift+Mod1+l exec "playerctl pause && i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
+# lock screen (and pause player; unpause on unlock)
+bindsym Control+Shift+Mod1+l exec "$(playerctl pause || true) && i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png; (playerctl play || true)"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
