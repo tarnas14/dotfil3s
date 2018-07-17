@@ -261,3 +261,6 @@ nnoremap <left> <nop>
 nnoremap <right> <nop>
 
 command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
+
+" remove trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
