@@ -105,7 +105,6 @@ Plug 'sbdchd/neoformat'
 
 " elixir
 Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim'
 
 call plug#end()
 
@@ -200,7 +199,12 @@ let g:move_key_modifier = 'C-A'
 
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
-\  'typescript': ['tslint']
+\  'typescript': ['tslint'],
+\  'elixir': ['mix'],
+\}
+let g:ale_fixers = {
+\  'javascript': ['eslint'],
+\  'elixir': ['mix_format'],
 \}
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_statusline_format = ['X %d', '? %d', '']
@@ -210,6 +214,7 @@ let g:ale_echo_msg_format = '%linter% says %s'
 " Map keys to navigate between lines with errors and warnings.
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+nnoremap <leader>af :ALEFix<cr>
 
 " PLUG Shougo/deoplete
 " let g:deoplete#enable_at_startup=1
