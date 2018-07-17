@@ -81,7 +81,7 @@ bindsym $mod+a focus parent
 bindsym $mod+c focus child
 
 # workspaces
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # switch to workspace
 bindsym $mod+1 workspace 1
