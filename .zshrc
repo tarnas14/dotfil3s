@@ -124,10 +124,6 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-# random environment variables to not pollute i3 configuration
-export LAPTOP_X_OUTPUT='eDP-1'
-export HDMI_X_OUTPUT='HDMI-1'
-
 # vimode
 # bindkey -v
 

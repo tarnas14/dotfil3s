@@ -1,10 +1,16 @@
 #!/bin/bash
 
-LAPTOP_OUTPUT=${1:-"eDP-1"}
-MONITOR_OUTPUT=${2:-"HDMI-1"}
+MONITOR_OUTPUT=$1
+LAPTOP_OUTPUT=$2
+MODE=$3
+
 
 function connect(){
-  xrandr --output $MONITOR_OUTPUT --right-of $LAPTOP_OUTPUT --auto
+  if [ $MODE = "right" ]; then
+    xrandr --output $MONITOR_OUTPUT --right-of $LAPTOP_OUTPUT --auto
+  else
+    xrandr --output $MONITOR_OUTPUT --above $LAPTOP_OUTPUT --auto
+  fi
 }
   
 function disconnect(){
