@@ -26,6 +26,7 @@ font pango:monospace 0
 floating_modifier $mod
 
 focus_follows_mouse no
+mouse_warping none
 
 # lock screen
 bindsym Control+Shift+Mod1+l exec "i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
