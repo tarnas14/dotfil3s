@@ -29,7 +29,7 @@ focus_follows_mouse no
 mouse_warping none
 
 # lock screen (and pause player; unpause on unlock)
-bindsym Control+Shift+Mod1+l exec "$(playerctl pause || true) && i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png; (playerctl play || true)"
+bindsym Control+Shift+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/dotfil3s/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
