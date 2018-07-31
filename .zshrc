@@ -132,3 +132,5 @@ eval "$(pyenv virtualenv-init -)"
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+alias docker-compose=docker.compose
