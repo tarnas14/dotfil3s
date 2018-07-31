@@ -122,7 +122,6 @@ workspace 10 output $monitorOutput
 assign [class="Rambox"] 2
 assign [class="Franz"] 2
 assign [class="Google-chrome"] 6
-assign [class="konsole"] 1
 for_window [class="Spotify"] move container to workspace 10
 
 # reload the configuration file
