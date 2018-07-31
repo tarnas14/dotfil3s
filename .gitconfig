@@ -3,15 +3,6 @@
     email = tarnas14@gmail.com
     signingkey = 6B2CA3A1FAC5B137
 [alias]
-    rs = remote update origin --prune
-    ci = commit -m
-    cia = commit -am
-    co = checkout
-    br = branch
-    st = status
-    amend = commit --amend -m
-    A = add -A :/
-    firstPush = push --set-upstream origin
     hpush = !git push && git push heroku master
 [core]
     excludesfile = ~/.gitignore_global
