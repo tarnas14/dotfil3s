@@ -1,0 +1,3 @@
+[submodule "i3/light"]
+	path = i3/light
+	url = git@github.com:haikarainen/light.git
