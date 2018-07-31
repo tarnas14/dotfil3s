@@ -123,6 +123,7 @@ assign [class="Rambox"] 2
 assign [class="Franz"] 2
 assign [class="Google-chrome"] 6
 for_window [class="Spotify"] move container to workspace 10
+for_window [class="Google-chrome" title="Skype"] move container to workspace 2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
