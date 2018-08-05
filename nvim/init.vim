@@ -101,8 +101,6 @@ Plug 'tpope/vim-surround'
 Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'elmcast/elm-vim'
 
-Plug 'sbdchd/neoformat'
-
 " elixir
 Plug 'elixir-editors/vim-elixir'
 
@@ -248,8 +246,6 @@ nnoremap <leader>p :P<CR>
 nnoremap <leader>a :A<CR>
 nnoremap <leader>T :Today<CR>
 nnoremap <leader>R :Tomorrow<CR>
-
-" PLUG sbdchd/neoformat
 
 " map file reload
 nnoremap <leader>e :e!<CR>
