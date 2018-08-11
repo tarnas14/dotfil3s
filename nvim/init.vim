@@ -260,3 +260,10 @@ command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
 
 " remove trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
+
+" netrw (https://shapeshed.com/vim-netrw/)
+let g:netrw_winsize = 17
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+let g:netrw_browse_split = 4
