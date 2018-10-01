@@ -14,6 +14,7 @@ if ! command_exists nvim ; then
   sudo apt-get update
   sudo apt-get install -y neovim
 
+  sudo apt-get intsall -y curl
   sudo curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
