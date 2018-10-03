@@ -218,9 +218,6 @@ nnoremap <leader>af :ALEFix<cr>
 " let g:deoplete#enable_at_startup=1
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" PLUG peitalin/vim-jsx-typescript
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript.jsx
-
 " PLUG itchyny/calendar.vim
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
@@ -267,3 +264,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_altv = 1
 let g:netrw_browse_split = 4
+
+" set filetypes
+au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
+au BufRead,BufNewFile *.tsx set filetype=typescript.jsx " PLUG peitalin/vim-jsx-typescript
