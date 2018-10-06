@@ -187,8 +187,8 @@ exec "setxkbmap -option caps:escape"
 
 # reload xrandr options based on HDMI connection
 # first parameter laptop output, second monitor output
-bindsym $mod+Shift+q exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 right"
-bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1"
+bindsym $mod+Shift+q exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 right; i3-msg restart"
+bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart"
 
 # startup
 exec --no-startup-id dropbox start &

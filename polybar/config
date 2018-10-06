@@ -29,6 +29,7 @@ alert = #bd2c40
 
 [bar/example]
 monitor = ${env:MONITOR:}
+monitor-strict = false
 width = 100%
 bottom = true
 radius = 0.0
