@@ -179,13 +179,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
 bindsym $mod+F6 exec --no-startup-id "light -A 5"
 bindsym $mod+F5 exec --no-startup-id "light -U 5"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-  # output eDP-1
-  font pango:DejaVu Sans Mono 9
-  status_command i3status
-}
+# polybar config
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # escape on caps
 exec "setxkbmap -option caps:escape"

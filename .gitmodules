@@ -1,3 +1,6 @@
 [submodule "i3/light"]
 	path = i3/light
 	url = git@github.com:haikarainen/light.git
+[submodule "polybar/repo"]
+	path = polybar/repo
+	url = git@github.com:jaagr/polybar.git
