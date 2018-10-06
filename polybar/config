@@ -57,14 +57,22 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3 memory cpu
-modules-center = wlan eth
-modules-right = filesystem backlight pulseaudio battery date
+modules-left = bspwm i3 memory cpu backlight
+modules-center = pulseaudio spotify
+modules-right = wlan eth battery date
 
 tray-position = right
 tray-padding = 2
 
 cursor-click = pointer
+
+[module/spotify]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = python ~/.config/polybar/polybar-spotify/spotify_status.py -f '{play_pause} {artist}: {song}' -p '>,||'
+format-underline = #1db954
 
 [module/bspwm]
 type = internal/bspwm
