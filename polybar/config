@@ -165,9 +165,9 @@ type = internal/network
 interface = ${env:WLAN_INTERFACE:}
 interval = 3.0
 
+label-connected = %essid% %local_ip%
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
