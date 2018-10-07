@@ -192,6 +192,7 @@ bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; 
 
 # startup
 exec --no-startup-id dropbox start &
+exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 
 exec franz
 exec konsole
