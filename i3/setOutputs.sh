@@ -8,11 +8,13 @@ MODE=$3
 function connect(){
   if [ $MODE = "right" ]; then
     xrandr --output $MONITOR_OUTPUT --right-of $LAPTOP_OUTPUT --auto
+  elif [ $MODE = "left" ]; then
+    xrandr --output $MONITOR_OUTPUT --left-of $LAPTOP_OUTPUT --auto
   else
     xrandr --output $MONITOR_OUTPUT --above $LAPTOP_OUTPUT --auto
   fi
 }
-  
+
 function disconnect(){
   xrandr --output $MONITOR_OUTPUT --off
 }
