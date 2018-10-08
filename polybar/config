@@ -33,7 +33,7 @@ monitor-strict = false
 width = 100%
 bottom = true
 radius = 0.0
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
