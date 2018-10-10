@@ -209,8 +209,8 @@ label = %time%
 type = internal/date
 interval = 5
 
-date = " %Y-%m-%d"
-date-alt = " %Y-%m-%d"
+date = "%a %Y-%m-%d"
+date-alt = "%a %Y-%m-%d"
 
 label = %date%
 
