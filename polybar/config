@@ -248,13 +248,11 @@ full-at = 98
 time-format = %H:%M
 
 label-charging = %percentage%% ~%time%
-format-charging-prefix = "charging: "
 format-charging-prefix-foreground = ${colors.foreground-alt}
 format-charging = <label-charging>
 format-charging-underline = #ff7f00
 
 label-discharging = %percentage%% ~%time%
-format-discharging-prefix = "bat: "
 format-discharging-prefix-foreground = ${colors.foreground-alt}
 format-discharging = <label-discharging>
 format-discharging-underline = #f90000
