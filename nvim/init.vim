@@ -82,8 +82,6 @@ Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
-Plug 'Valloric/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --tern-completer' }
-
 Plug 'w0rp/ale'
 
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
@@ -106,6 +104,11 @@ Plug 'elixir-editors/vim-elixir'
 
 " writing prose
 Plug 'junegunn/goyo.vim'
+
+" completions
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --tern-completer; npm install -g tern' }
 
 call plug#end()
 
@@ -271,3 +274,7 @@ let g:netrw_browse_split = 4
 " set filetypes
 au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
 au BufRead,BufNewFile *.tsx set filetype=typescript.jsx " PLUG peitalin/vim-jsx-typescript
+
+" completions
+let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
+let g:UltiSnipsExpandTrigger="<C-j>"

@@ -1,0 +1,20 @@
+snippet formik "formik file"
+<Formik
+	initialValues={}
+	onSubmit={(values, {setSubmitting, resetForm}) => {
+		// submit here
+	}}
+>
+{({
+	values,
+	handleChange,
+	handleSubmit,
+	isSubmitting,
+	errors,
+	touched
+}) => (
+	// form here
+)
+}
+</Formik>
+endsnippet
