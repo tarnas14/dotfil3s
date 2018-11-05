@@ -12,7 +12,7 @@ wlan_interace=$(ip link show | awk -F ':' '{print $2}' | grep 'wl' | xargs)
 # Launch polybar named example
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m LAN_INTERFACE=$lan_interface WLAN_INTERFACE=$wlan_interace polybar --reload example &
+    MONITOR=$m LAN_INTERFACE=$lan_interface WLAN_INTERFACE=$wlan_interace polybar --reload $1 &
   done
 else
   polybar --reload example &

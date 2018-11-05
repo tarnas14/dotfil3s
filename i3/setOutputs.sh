@@ -10,6 +10,8 @@ function connect(){
     xrandr --output $MONITOR_OUTPUT --right-of $LAPTOP_OUTPUT --auto
   elif [ $MODE = "left" ]; then
     xrandr --output $MONITOR_OUTPUT --left-of $LAPTOP_OUTPUT --auto
+  elif [ $MODE = "mirror" ]; then
+    xrandr --output $MONITOR_OUTPUT --same-as $LAPTOP_OUTPUT --auto
   else
     xrandr --output $MONITOR_OUTPUT --above $LAPTOP_OUTPUT --auto
   fi
