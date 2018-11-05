@@ -278,3 +278,5 @@ au BufRead,BufNewFile *.tsx set filetype=typescript.jsx " PLUG peitalin/vim-jsx-
 " completions
 let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
 let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-l>"
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
