@@ -56,7 +56,6 @@ font-2 = siji:pixelsize=12;1
 
 modules-center = presentation
 modules-left = dostarczajwartosc
-modules-right = 4developers
 
 tray-position =
 
@@ -74,13 +73,6 @@ interval = 99999999
 format = <label>
 exec = echo 'dostarczajwartosc.pl'
 format-underline = #aa0027
-
-[module/4developers]
-type = custom/script
-interval = 99999999
-format = <label>
-exec = echo 'katowice.4developers.pl'
-format-underline = #833d9d
 
 [bar/example]
 monitor = ${env:MONITOR:}
