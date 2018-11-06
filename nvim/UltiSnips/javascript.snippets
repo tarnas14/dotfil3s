@@ -30,7 +30,7 @@ snippet semuiselect "semantic-ui select"
 	onChange={(e, {value}) => $7}
 	${8:required}
 	${9:search}
-	error={Boolean($10)}
+	error={Boolean(${10:false})}
 />
 endsnippet
 
@@ -46,7 +46,7 @@ snippet semuiinput "semantic-ui input"
 	${10:list="$11"}
 	onChange={${12:handleChange}}
 	${13:required}
-	error={Boolean($14)}
+	error={Boolean(${14:false})}
 />
 endsnippet
 
