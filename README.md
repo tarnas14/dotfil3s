@@ -1,3 +1,10 @@
+# always work in progress
+
+Every time I ask somebody about their dotfiles repo I hear something along the lines of "I've been planning to clean it up a bit"
+
+Yes, I've also been planning to clean my dotfiles a bit... And I will get round to it eventually...
+Oh and I just noticed that I already said that in the last line of this readme... smh
+
 # tarnas14 dockerized environment
 
 This holds my tmux/nvim setup that I use for development. Along with node version manager and some stuff like that which I use on a daily basis.
@@ -5,7 +12,7 @@ This dockerized environment is useful mainly for web/front/server development.
 
 The entrypoint is just zsh, because I want to have the flexibility between running just nvim inside host tmux session or an entire tmux session inside host terminal.
 
-The goal is to reach a solution that will allow seamless switching between host and dockerized tools and processes, probably via some binding magic I don't yet know how to use... 
+The goal is to reach a solution that will allow seamless switching between host and dockerized tools and processes, probably via some binding magic I don't yet know how to use...
 
 ## how to use
 
