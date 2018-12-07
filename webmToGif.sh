@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
-ffmpeg -i $1 -pix_fmt rgb24 $2
+source=$1
+target=${1%.*}.gif
 
-rm -rf $1
+ffmpeg -i $source -pix_fmt rgb24 $target
+
+rm -rf $source
