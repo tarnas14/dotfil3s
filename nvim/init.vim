@@ -110,6 +110,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --tern-completer; npm install -g tern' }
 
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
+
 call plug#end()
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
@@ -250,6 +253,10 @@ nnoremap <leader>a :A<CR>
 nnoremap <leader>T :Today<CR>
 nnoremap <leader>R :Tomorrow<CR>
 
+" Plug 'francoiscabrol/ranger.vim'
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1 " open ranger when vim open a direct
+
 " map file reload
 nnoremap <leader>e :e!<CR>
 
@@ -258,6 +265,9 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+
+imap jj <C-BS>
+imap kk <Del>
 
 command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
 
