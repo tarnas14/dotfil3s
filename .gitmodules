@@ -7,3 +7,6 @@
 [submodule "polybar/polybar-spotify"]
 	path = polybar/polybar-spotify
 	url = git@github.com:Jvanrhijn/polybar-spotify.git
+[submodule "tmux-helpers/pomodoro"]
+	path = tmux-helpers/pomodoro
+	url = git@github.com:poorsquinky/pomodoro.git
