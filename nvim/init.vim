@@ -266,9 +266,6 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-imap jj <C-BS>
-imap kk <Del>
-
 command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
 
 " remove trailing whitespace
