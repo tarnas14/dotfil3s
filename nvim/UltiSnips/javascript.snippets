@@ -1,3 +1,25 @@
+snippet reactApp "initial react app component"
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  render() {
+    return (
+      <main className="App">
+        <p>hello world</p>$1
+      </main>
+    )
+  }
+}
+endsnippet
+
+snippet cl "console log without ;"
+console.log($1)
+endsnippet
+
 snippet formik "formik form"
 <Formik
 	initialValues={$1}
@@ -10,6 +32,7 @@ snippet formik "formik form"
 	handleChange,
 	handleSubmit,
 	isSubmitting,
+	setFieldValue,
 	errors,
 	touched
 }) => (
@@ -54,7 +77,7 @@ snippet semuicheckbox "semantic-ui checkbox"
 <Checkbox
 	checked={$1}
 	label="$2"
-	onChange={(e, {checked}) => $3}
+	onChange={(e, {checked}) => setFieldValue($3, checked)}
 />
 endsnippet
 
@@ -68,12 +91,6 @@ snippet semuibutton "semantic-ui button"
 >
 	${9:OK}
 </Button>
-endsnippet
-
-snippet fun "react fun"
-${1:name} = ${2:async }($3) => {
-	$4
-}
 endsnippet
 
 snippet spaexpress "express thing started with cookie session and morgan"
