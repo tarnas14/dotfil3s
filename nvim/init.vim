@@ -25,7 +25,6 @@ set foldlevelstart=20
 set splitbelow
 set splitright
 
-
 " system clipboard
 set clipboard+=unnamedplus
 
@@ -96,7 +95,6 @@ Plug 'digitaltoad/vim-pug'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
-Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'elmcast/elm-vim'
 
 " elixir
@@ -241,9 +239,6 @@ map <leader>gt :Git! diff --staged<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gl :Commits<CR>
 map <leader>gp :Gpush<CR>
-
-" PLUG thiagoalessio/rainbow_levels.vim
-map <leader>g :RainbowLevelsToggle<CR>
 
 " PLUG tarnas14/workflowish
 nnoremap <leader>t :TT<CR>

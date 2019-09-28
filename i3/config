@@ -38,8 +38,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+x kill
 
 # start rofi (a program launcher)
-# bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec "rofi -combi-modi window,drun -show combi -modi combi -theme gruvbox-dark"
+bindsym $mod+d exec "rofi -combi-modi window,run -show combi -modi combi -theme gruvbox-dark"
 
 # change focus
 bindsym $mod+h focus left

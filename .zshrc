@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="$PATH:/snap/bin"
+export PATH=$PATH:/snap/bin
 
 if [ -z "$TMUX" ]; then
   tmux attach || tmux new
@@ -132,5 +132,3 @@ eval "$(pyenv virtualenv-init -)"
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
-
-alias docker-compose=docker.compose

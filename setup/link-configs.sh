@@ -8,6 +8,9 @@ rm -f ~/.gitignore_global
 ln -s "$dotfil3s_root".gitignore_global ~/.gitignore_global
 rm -f ~/.zshrc
 ln -s "$dotfil3s_root".zshrc ~/.zshrc
+# because kubuntu distro does not source ~/.profile and we need some things in PATH on i3
+rm -f ~/.xsessionrc
+ln -s "$dotfil3s_root".xsessionrc ~/.xsessionrc
 rm -f ~/.nethackrc
 ln -s "$dotfil3s_root".nethackrc ~/.nethackrc
 rm -rf ~/.config/i3
