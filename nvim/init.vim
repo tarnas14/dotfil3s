@@ -88,8 +88,6 @@ Plug 'peitalin/vim-jsx-typescript'
 
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 
-Plug 'itchyny/calendar.vim'
-
 Plug 'digitaltoad/vim-pug'
 
 Plug 'tpope/vim-eunuch'
@@ -108,8 +106,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Valloric/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --tern-completer; npm install -g tern' }
 
-Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
+
+Plug 'evanleck/vim-svelte'
 
 call plug#end()
 
@@ -211,6 +210,7 @@ let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \  'elixir': ['mix_format'],
 \}
+
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_statusline_format = ['X %d', '? %d', '']
 " %linter% is the name of the linter that provided the message
@@ -220,17 +220,6 @@ let g:ale_echo_msg_format = '%linter% says %s'
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 nnoremap <leader>af :ALEFix<cr>
-
-" PLUG Shougo/deoplete
-" let g:deoplete#enable_at_startup=1
-" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" PLUG itchyny/calendar.vim
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-command! Calm Calendar -view=month
-command! Calw Calendar -view=week
-command! Cald Calendar -view=day
 
 " PLUG tpope/vim-fugitive
 map <leader>gs :Gstatus<CR>
