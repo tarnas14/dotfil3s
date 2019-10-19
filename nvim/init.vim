@@ -64,6 +64,7 @@ Plug 'rakr/vim-one'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdcommenter'
@@ -112,6 +113,10 @@ Plug 'evanleck/vim-svelte'
 
 call plug#end()
 
+" nmap <leader>/ <Plug>AgRawSearch
+" vmap <leader>/ <Plug>AgRawVisualSelection
+" nmap <leader>. <Plug>AgRawWordUnderCursor
+
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
 " line wrapping on, this can cause the cursor to actually skip a few lines on the screen because
 " it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down'
@@ -151,6 +156,7 @@ let g:lightline = {
 " fzf
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'), <bang>0)
+map <leader>* "ayiw:call fzf#vim#ag('<C-r>a', fzf#vim#with_preview('right:50%'))<CR>
 map <C-p> :Files<CR>
 map <C-k> :Files<CR>
 map <C-space> :Buffers<CR>
