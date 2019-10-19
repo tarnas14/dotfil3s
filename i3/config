@@ -38,7 +38,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+x kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec "rofi -combi-modi window,run -show combi -modi combi -theme gruvbox-dark"
+bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi -theme gruvbox-dark"
 
 # change focus
 bindsym $mod+h focus left
@@ -118,8 +118,9 @@ workspace 8 output $monitorOutput
 workspace 9 output $monitorOutput
 workspace 10 output $monitorOutput
 
+assign [class="discord"] 2
+assign [class="Caprine"] 2
 assign [class="Rambox"] 2
-assign [class="Franz"] 2
 # assign [class="Google-chrome"] 6
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
