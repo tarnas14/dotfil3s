@@ -83,7 +83,7 @@ workspace_auto_back_and_forth no
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
+bindsym $mod+2 exec --no-startup-id yap outside-pomodoro && i3-msg workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -162,6 +162,25 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+mode "pomodoro" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # restart
+        bindsym r exec "yap reset"; mode "default"
+        # next
+        bindsym n exec "yap next"; workspace 1; mode "default"
+        # stop
+        bindsym s exec "yap stop"; mode "default"
+        # start
+        bindsym Shift+s exec "yap start"; workspace 1; mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "pomodoro"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
