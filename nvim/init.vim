@@ -84,20 +84,10 @@ Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 Plug 'w0rp/ale'
 
-Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'peitalin/vim-jsx-typescript'
-
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
-
-Plug 'digitaltoad/vim-pug'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
-
-Plug 'elmcast/elm-vim'
-
-" elixir
-Plug 'elixir-editors/vim-elixir'
 
 " writing prose
 Plug 'junegunn/goyo.vim'
@@ -105,9 +95,11 @@ Plug 'junegunn/goyo.vim'
 " completions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', { 'do': '/usr/bin/python ./install.py --tern-completer; npm install -g tern' }
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer' }
 
+" file explorer
 Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 Plug 'evanleck/vim-svelte'
 
@@ -260,13 +252,6 @@ command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
 
 " remove trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
-
-" netrw (https://shapeshed.com/vim-netrw/)
-let g:netrw_winsize = 17
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_altv = 1
-let g:netrw_browse_split = 4
 
 " set filetypes
 au BufRead,BufNewFile *.jsx set filetype=javascript.jsx

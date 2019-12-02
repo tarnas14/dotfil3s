@@ -15,7 +15,7 @@ if ! command_exists nvim ; then
   mv ./nvim.appimage ~/apps/nvim
   sudo ln -s ~/apps/nvim /usr/local/bin
 
-  sudo apt-get intsall -y curl
+  sudo apt-get install -y curl
   sudo curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
