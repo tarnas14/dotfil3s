@@ -8,6 +8,8 @@ rm -f ~/.gitignore_global
 ln -s "$dotfil3s_root".gitignore_global ~/.gitignore_global
 rm -f ~/.zshrc
 ln -s "$dotfil3s_root".zshrc ~/.zshrc
+rm -f ~/.onedark-theme.rasi
+ln -s "$dotfil3s_root".i3/onedark-theme.rasi ~/onedark-theme.rasi
 # because kubuntu distro does not source ~/.profile and we need some things in PATH on i3
 rm -f ~/.xsessionrc
 ln -s "$dotfil3s_root".xsessionrc ~/.xsessionrc
