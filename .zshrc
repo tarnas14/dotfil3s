@@ -132,3 +132,8 @@ eval "$(pyenv virtualenv-init -)"
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# FUNCTIONS
+function d_rmi () {
+  docker images | grep $1 | awk '{print $3}' | xargs -r docker rmi
+}
