@@ -241,6 +241,7 @@ let g:ranger_replace_netrw = 1 " open ranger when vim open a direct
 
 " map file reload
 nnoremap <leader>e :e!<CR>
+nnoremap <leader>E :Ranger<CR>
 
 " disable arrows
 nnoremap <up> <nop>
