@@ -82,10 +82,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 
-" Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 Plug 'w0rp/ale'
 
@@ -100,13 +98,11 @@ Plug 'junegunn/goyo.vim'
 " completions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer --go-completer' }
 
 " file explorer
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
-
-Plug 'evanleck/vim-svelte'
 
 call plug#end()
 
@@ -208,10 +204,12 @@ let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
 \  'typescript': ['tslint'],
 \  'elixir': ['mix'],
+\  'go': ['golint']
 \}
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \  'elixir': ['mix_format'],
+\  'go': ['gofmt'],
 \}
 
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
