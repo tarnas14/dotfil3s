@@ -17,6 +17,9 @@ set list
 set nobackup
 set noswapfile
 
+" adds padding to the buffer display (so cursor will not reach the end)
+set scrolloff=3
+
 " folds
 set foldmethod=syntax
 set foldlevelstart=20
@@ -72,15 +75,17 @@ Plug 'matze/vim-move'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/vim-cursorword'
 
+Plug 'sheerun/vim-polyglot'
+
 Plug 'tpope/vim-fugitive'
 
 Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+" Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 Plug 'w0rp/ale'
 
