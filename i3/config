@@ -67,7 +67,7 @@ bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+q floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -83,7 +83,7 @@ workspace_auto_back_and_forth no
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-bindsym $mod+2 exec --no-startup-id /home/tarnas/projects/yet-another-pomodoro/go-yap/main outside-pomodoro && i3-msg workspace 2
+bindsym $mod+2 exec --no-startup-id /home/tarnas/projects/yet-another-pomodoro/go-yap/go-yap outside-pomodoro && i3-msg workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -201,9 +201,11 @@ bindsym $mod+F5 exec --no-startup-id "light -U 5"
 # reload xrandr options based on HDMI connection
 # first parameter laptop output, second monitor output
 bindsym $mod+Shift+a exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 left; i3-msg restart"
-bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart"
+bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 above; i3-msg restart"
 bindsym $mod+Shift+d exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 right; i3-msg restart"
 bindsym $mod+Shift+m exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 mirror; i3-msg restart"
+bindsym $mod+Shift+f exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 onlyMonitor; i3-msg restart"
+bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart"
 
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/launch.sh presentation
 
