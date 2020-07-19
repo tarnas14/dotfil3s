@@ -104,6 +104,8 @@ Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer --go
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
+Plug 'kshenoy/vim-signature'
+
 call plug#end()
 
 " nmap <leader>/ <Plug>AgRawSearch
