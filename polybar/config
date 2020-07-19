@@ -67,12 +67,6 @@ interval = 99999999
 format = <label>
 exec = echo 'aplikacja %{u#ffffff}live%{-u} pod adresem %{u#1db954}prezentacja-4developers.now.sh%{-u}'
 
-[module/pomodoro]
-type = custom/script
-interval = 5
-format = <label>
-exec = yap state | awk '{print $2}'
-
 [module/dostarczajwartosc]
 type = custom/script
 interval = 99999999
@@ -108,7 +102,7 @@ font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=11;1
 
 modules-left = bspwm i3 memory cpu backlight
-modules-center = pomodoro pulseaudio spotify
+modules-center = pulseaudio spotify
 modules-right = wlan eth battery time date
 
 tray-position = right
