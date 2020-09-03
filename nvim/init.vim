@@ -1,18 +1,19 @@
 " general settings
 
-syntax on
+syntax enable
 set number
 set hidden
 set nocompatible
 
 set expandtab
 set tabstop=2
+set softtabstop=2
 set shiftwidth=0
 set autoindent
 set smartindent
 
-set listchars+=space:.
-set list
+" set listchars+=space:.
+" set list
 
 set nobackup
 set noswapfile
@@ -63,7 +64,7 @@ set noshowmode
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'rakr/vim-one'
+Plug 'sainnhe/sonokai'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -135,7 +136,7 @@ nmap k gk
     set termguicolors
   endif
 
-colorscheme one
+colorscheme sonokai
 set background=dark
 
 " PLUGIN easymotion/vim-easymotion
@@ -145,7 +146,7 @@ map <leader>f <Plug>(easymotion-bd-f)
 " PLUGIN itchyny/lightline.vim
 " to hide lightline do `set laststatus=1`
 let g:lightline = {
-      \ 'colorscheme': 'one'
+      \ 'colorscheme': 'sonokai'
       \ }
 
 " fzf
