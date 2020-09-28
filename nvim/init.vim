@@ -86,7 +86,7 @@ Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'tarnas14/workflowish', {'for': 'workflowish'}
 
@@ -99,7 +99,8 @@ Plug 'junegunn/goyo.vim'
 " completions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer --omnisharp-completer' }
+" Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer --omnisharp-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer' }
 
 " file explorer
 Plug 'francoiscabrol/ranger.vim'
@@ -108,13 +109,9 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'kshenoy/vim-signature'
 
 " dotnet core
-Plug 'OmniSharp/omnisharp-vim'
+" Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
-
-" nmap <leader>/ <Plug>AgRawSearch
-" vmap <leader>/ <Plug>AgRawVisualSelection
-" nmap <leader>. <Plug>AgRawWordUnderCursor
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
 " line wrapping on, this can cause the cursor to actually skip a few lines on the screen because
@@ -205,14 +202,6 @@ let g:move_key_modifier = 'C-A'
 
 " PLUGIN w0rp/ale
 
-call ale#linter#Define('dart', {
-\ 'name': 'test-dart-linter',
-\ 'lsp': 'stdio',
-\ 'executable': '',
-\ 'command': '/home/tarnas/projects/time-tracker/client-mobile/start-dart-lsp-on-docker.sh',
-\ 'project_root': '/home/tarnas/projects/time-tracker/client-mobile'
-\ })
-
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
 \  'typescript': ['eslint'],
@@ -283,67 +272,3 @@ let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-l>"
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-
-" DOT NET CORE
-
-" Don't autoselect first omnicomplete option, show options even if there is only
-" one (so the preview documentation is accessible). Remove 'preview', 'popup'
-" and 'popuphidden' if you don't want to see any documentation whatsoever.
-" Note that neovim does not support `popuphidden` or `popup` yet:
-" https://github.com/neovim/neovim/issues/10996
-if has('patch-8.1.1880')
-  set completeopt=longest,menuone,popuphidden
-  " Highlight the completion documentation popup background/foreground the same as
-  " the completion menu itself, for better readability with highlighted
-  " documentation.
-  set completepopup=highlight:Pmenu,border:off
-else
-  set completeopt=longest,menuone,preview
-  " Set desired preview window height for viewing documentation.
-  set previewheight=5
-endif
-
-augroup omnisharp_commands
-  autocmd!
-
-  " set tabstop to 2
-  autocmd Filetype cs setlocal tabstop=2
-
-  " Show type information automatically when the cursor stops moving.
-  " Note that the type is echoed to the Vim command line, and will overwrite
-  " any other messages in this space including e.g. ALE linting messages.
-  autocmd CursorHold *.cs OmniSharpTypeLookup
-
-  " The following commands are contextual, based on the cursor position.
-  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfu <Plug>(omnisharp_find_usages)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfi <Plug>(omnisharp_find_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ospd <Plug>(omnisharp_preview_definition)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ospi <Plug>(omnisharp_preview_implementations)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_type_lookup)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osd <Plug>(omnisharp_documentation)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfs <Plug>(omnisharp_find_symbol)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osfx <Plug>(omnisharp_fix_usings)
-  autocmd FileType cs nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-  autocmd FileType cs imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-
-  " Navigate up and down by method/property/field
-  autocmd FileType cs nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
-  autocmd FileType cs nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
-  " Find all code errors/warnings for the current solution and populate the quickfix window
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osgcc <Plug>(omnisharp_global_code_check)
-  " Contextual code actions (uses fzf, CtrlP or unite.vim when available)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-  autocmd FileType cs xmap <silent> <buffer> <Leader>osca <Plug>(omnisharp_code_actions)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>os= <Plug>(omnisharp_code_format)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osnm <Plug>(omnisharp_rename)
-
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
-  autocmd FileType cs nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
-augroup END
-
-" Enable snippet completion, using the ultisnips plugin
-" let g:OmniSharp_want_snippet=1
