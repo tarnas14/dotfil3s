@@ -88,6 +88,7 @@ fi
 
 alias vtop="vtop --theme wizard"
 export EDITOR="nvim"
+export MYVIMRC="~/.config/nvim/init.vim"
 
 _has() {
   return $( whence $1 >/dev/null )
