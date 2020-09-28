@@ -5,11 +5,27 @@ Every time I ask somebody about their dotfiles repo I hear something along the l
 Yes, I've also been planning to clean my dotfiles a bit... And I will get round to it eventually...
 Oh and I just noticed that I already said that in the last line of this readme... smh
 
+# dockerized setup
+
+I setup a dockerized dev environment to learn some arch and avoid installing multiple stupid dependencies on host.
+If you want to check it out, you can build it with
+```bash
+cd tarnas-dev-env
+docker build -t tarnas-dev-env:core -f Dockerfile.core ../
+```
+Then I run it in the project directory like this:
+```bash
+docker run -it --rm -v ${PWD}:/home/tarnas/code tarnas-dev-env:core
+```
+
+## known issues
+
+- when running it in tmux, neovim colors are sometimes lost when navigating files
+- still investigating why there's a `q` character in weird places when running the docker
+
 # other stuff
 
 also included but probably not easily reusable:
-`.cvimrc` (my settings for cvim addon for google chrome)
-some scripts I use, gnome settings (not sure if reusable)
 some install scripts for the 'other stuff'
 
 // might clean this up more if I have time or some actual reason :D
