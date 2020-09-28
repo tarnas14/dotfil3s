@@ -141,3 +141,6 @@ function d_rmi () {
 function gcoB () {
   gco $(gb | grep $1)
 }
+
+# srsly, microsoft? (.net core required to not be spied on)
+export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
