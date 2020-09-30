@@ -64,6 +64,16 @@ RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
 # COPY CONFIGS AND INSTALL DEPENDENCIES
 RUN cd /home/tarnas/ && mkdir .config
 COPY --chown=tarnas:tarnas nvim /home/tarnas/.config/nvim
+
+# prepend settings to disable gui cursor in vim (this led to weird `q` artifacts etc)
+# see https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
+RUN cp /home/tarnas/.config/nvim/init.vim /home/tarnas/.config/nvim/tmp_init.vim
+RUN echo ':set guicursor=' > /home/tarnas/.config/nvim/init.vim
+RUN echo ':autocmd OptionSet guicursor noautocmd set guicursor=' >> /home/tarnas/.config/nvim/init.vim
+RUN cat /home/tarnas/.config/nvim/tmp_init.vim >> /home/tarnas/.config/nvim/init.vim
+RUN rm /home/tarnas/.config/nvim/tmp_init.vim
+RUN chown tarnas:tarnas /home/tarnas/.config/nvim/init.vim
+
 # can't use -es (silent), because it returns 1 for some reason
 RUN nvim -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
 COPY --chown=tarnas:tarnas .gitconfig /home/tarnas/.gitconfig
@@ -84,4 +94,4 @@ RUN usermod --shell /bin/zsh tarnas
 RUN cd /home/tarnas && mkdir code
 WORKDIR /home/tarnas/code
 USER tarnas
-CMD /bin/zsh
+ENTRYPOINT /bin/zsh

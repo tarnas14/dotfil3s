@@ -20,8 +20,8 @@ docker run -it --rm -v ${PWD}:/home/tarnas/code tarnas-dev-env:core
 
 ## known issues
 
-- when running it in tmux, neovim colors are sometimes lost when navigating files
-- still investigating why there's a `q` character in weird places when running the docker
+- [ ] when running it in tmux, neovim colors are sometimes lost when navigating files
+- [x] still investigating why there's a `q` character in weird places when running the docker - this comes up when you start vim in docker, like maybe it's doing something weird with the cursor? :: [SOLVED] (disabling gui cursor in Dockerfile) drawback: no nice cursor in insert mode, but hey...
 
 # other stuff
 
