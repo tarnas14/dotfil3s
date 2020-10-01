@@ -5,31 +5,31 @@ RUN pacman -Sy
 # install base-devel package group
 RUN pacman -S --needed --noconfirm base-devel
 
-RUN useradd -m tarnas
-# remove tarnas password (only for build)
-RUN passwd -d tarnas
-# add tarnas to sudoers
+RUN useradd -m tarnas-dev-env
+# remove tarnas-dev-env password (only for build)
+RUN passwd -d tarnas-dev-env
+# add tarnas-dev-env to sudoers
 # FROM https://www.reddit.com/r/archlinux/comments/6qu4jt/how_to_run_makepkg_in_docker_container_yes_as_root/
-RUN printf 'tarnas ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+RUN printf 'tarnas-dev-env ALL=(ALL) ALL\n' | tee -a /etc/sudoers
 
 # install utils
 RUN pacman -S --needed --noconfirm git
 RUN pacman -S --needed --noconfirm the_silver_searcher
 
-# impersonate tarnas
-USER tarnas
+# impersonate tarnas-dev-env
+USER tarnas-dev-env
 # create /builds directory
-RUN cd /home/tarnas && mkdir builds
+RUN cd /home/tarnas-dev-env && mkdir builds
 
 # OH-MY-ZSH
-RUN cd /home/tarnas/builds && \
+RUN cd /home/tarnas-dev-env/builds && \
   git clone https://aur.archlinux.org/oh-my-zsh-git.git && \
   cd oh-my-zsh-git && \
   makepkg -sirc --noconfirm
 RUN /usr/share/oh-my-zsh/tools/install.sh
 
 # install asdf
-RUN cd /home/tarnas/builds && \
+RUN cd /home/tarnas-dev-env/builds && \
   git clone https://aur.archlinux.org/asdf-vm.git && \
   cd asdf-vm && \
   makepkg -sirc --noconfirm
@@ -42,12 +42,12 @@ RUN pacman -S --needed --noconfirm python-neovim
 # needed by YouCompleteMe
 RUN pacman -S --needed --noconfirm cmake
 
-USER tarnas
+USER tarnas-dev-env
 # # install vim-plug
 RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # used in vim-ranger
-RUN cd /home/tarnas/builds && \
+RUN cd /home/tarnas-dev-env/builds && \
   git clone https://aur.archlinux.org/ranger-git.git && \
   cd ranger-git && \
   makepkg -sirc --noconfirm
@@ -62,36 +62,36 @@ RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
   asdf global nodejs $(/bin/zsh -c '. /opt/asdf-vm/asdf.sh && asdf latest nodejs 12')"
 
 # COPY CONFIGS AND INSTALL DEPENDENCIES
-RUN cd /home/tarnas/ && mkdir .config
-COPY --chown=tarnas:tarnas nvim /home/tarnas/.config/nvim
+RUN cd /home/tarnas-dev-env/ && mkdir .config
+COPY --chown=tarnas-dev-env:tarnas-dev-env nvim /home/tarnas-dev-env/.config/nvim
 
 # prepend settings to disable gui cursor in vim (this led to weird `q` artifacts etc)
 # see https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
-RUN cp /home/tarnas/.config/nvim/init.vim /home/tarnas/.config/nvim/tmp_init.vim
-RUN echo ':set guicursor=' > /home/tarnas/.config/nvim/init.vim
-RUN echo ':autocmd OptionSet guicursor noautocmd set guicursor=' >> /home/tarnas/.config/nvim/init.vim
-RUN cat /home/tarnas/.config/nvim/tmp_init.vim >> /home/tarnas/.config/nvim/init.vim
-RUN rm /home/tarnas/.config/nvim/tmp_init.vim
-RUN chown tarnas:tarnas /home/tarnas/.config/nvim/init.vim
+RUN cp /home/tarnas-dev-env/.config/nvim/init.vim /home/tarnas-dev-env/.config/nvim/tmp_init.vim
+RUN echo ':set guicursor=' > /home/tarnas-dev-env/.config/nvim/init.vim
+RUN echo ':autocmd OptionSet guicursor noautocmd set guicursor=' >> /home/tarnas-dev-env/.config/nvim/init.vim
+RUN cat /home/tarnas-dev-env/.config/nvim/tmp_init.vim >> /home/tarnas-dev-env/.config/nvim/init.vim
+RUN rm /home/tarnas-dev-env/.config/nvim/tmp_init.vim
+RUN chown tarnas-dev-env:tarnas-dev-env /home/tarnas-dev-env/.config/nvim/init.vim
 
 # can't use -es (silent), because it returns 1 for some reason
 RUN nvim -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
-COPY --chown=tarnas:tarnas .gitconfig /home/tarnas/.gitconfig
-COPY --chown=tarnas:tarnas .gitignore_global /home/tarnas/.gitignore_global
-COPY --chown=tarnas:tarnas .zshrc /home/tarnas/.zshrc
+COPY --chown=tarnas-dev-env:tarnas-dev-env .gitconfig /home/tarnas-dev-env/.gitconfig
+COPY --chown=tarnas-dev-env:tarnas-dev-env .gitignore_global /home/tarnas-dev-env/.gitignore_global
+COPY --chown=tarnas-dev-env:tarnas-dev-env .zshrc /home/tarnas-dev-env/.zshrc
 # DIRTY FIX for .zshrc that assumes debian, this will stay here
 # until we bite the bullet and have arch on host, as well xD
-RUN sed -i 's/\$HOME\/\.asdf/\/opt\/asdf-vm/g' /home/tarnas/.zshrc
+RUN sed -i 's/\$HOME\/\.asdf/\/opt\/asdf-vm/g' /home/tarnas-dev-env/.zshrc
 
 USER root
-RUN usermod --shell /bin/zsh tarnas
+RUN usermod --shell /bin/zsh tarnas-dev-env
 
 # TODO install tmux ??
 
-# remove tarnas from sudoers
-# add sudo password for tarnas
+# remove tarnas-dev-env from sudoers
+# add sudo password for tarnas-dev-env
 
-RUN cd /home/tarnas && mkdir code
-WORKDIR /home/tarnas/code
-USER tarnas
-ENTRYPOINT /bin/zsh
+RUN cd /home/tarnas-dev-env && mkdir code
+WORKDIR /home/tarnas-dev-env/code
+USER tarnas-dev-env
+CMD /bin/zsh
