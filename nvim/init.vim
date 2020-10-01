@@ -1,5 +1,4 @@
 " general settings
-
 syntax enable
 set number
 set hidden
@@ -138,6 +137,10 @@ nmap k gk
 
 colorscheme sonokai
 set background=dark
+
+" PLUGIN YouCompleteMe
+" prevents preview window from popping up
+set completeopt=menuone
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
