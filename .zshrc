@@ -147,18 +147,18 @@ function gcoB () {
 function denv () {
   if (( $# == 0 ))
   then
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:core
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:core
   else
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:$1
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:$1
   fi
 }
 
 function dvim () {
   if (( $# == 0 ))
   then
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:core /bin/zsh -c "nvim"
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:core /bin/zsh -c "nvim"
   else
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
   fi
 }
 
