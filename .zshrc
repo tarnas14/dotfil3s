@@ -142,5 +142,25 @@ function gcoB () {
   gco $(gb | grep $1)
 }
 
+# dockerized environment
+
+function denv () {
+  if (( $# == 0 ))
+  then
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:core
+  else
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:$1
+  fi
+}
+
+function dvim () {
+  if (( $# == 0 ))
+  then
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:core /bin/zsh -c "nvim"
+  else
+    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
+  fi
+}
+
 # srsly, microsoft? (.net core required to not be spied on)
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
