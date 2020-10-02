@@ -87,8 +87,6 @@ Plug 'pangloss/vim-javascript'
 
 Plug 'dense-analysis/ale'
 
-Plug 'tarnas14/workflowish', {'for': 'workflowish'}
-
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
@@ -98,7 +96,6 @@ Plug 'junegunn/goyo.vim'
 " completions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer --omnisharp-completer' }
 Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer' }
 
 " file explorer
@@ -106,9 +103,6 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'kshenoy/vim-signature'
-
-" dotnet core
-" Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
 
@@ -138,9 +132,12 @@ nmap k gk
 colorscheme sonokai
 set background=dark
 
-" PLUGIN YouCompleteMe
+" PLUGIN YouCompleteMe ycm
 " prevents preview window from popping up
 set completeopt=menuone
+map <leader>g :YcmCompleter GoToDefinition<CR>
+map <leader>c :YcmCompleter GoToDeclaration<CR>
+map <leader>r :YcmCompleter GoToReferences<CR>
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
@@ -238,14 +235,6 @@ map <leader>gt :Git! diff --staged<CR>
 map <leader>gc :Gcommit<CR>
 map <leader>gl :Commits<CR>
 map <leader>gp :Gpush<CR>
-
-" PLUG tarnas14/workflowish
-nnoremap <leader>t :TT<CR>
-nnoremap <leader>r :TTr<CR>
-nnoremap <leader>p :P<CR>
-nnoremap <leader>a :A<CR>
-nnoremap <leader>T :Today<CR>
-nnoremap <leader>R :Tomorrow<CR>
 
 " Plug 'francoiscabrol/ranger.vim'
 let g:ranger_map_keys = 0
