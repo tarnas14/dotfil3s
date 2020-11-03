@@ -28,8 +28,10 @@ floating_modifier $mod
 focus_follows_mouse no
 mouse_warping none
 
-# lock screen (and pause player; unpause on unlock)
-bindsym Control+Shift+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+# lock screen (and pause player; unpause on unlock?)
+bindsym Shift+Control+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+# lock screen (and pause player; and set only laptop as output)
+bindsym Shift+Control+$mod+l exec "playerctl pause; $HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
