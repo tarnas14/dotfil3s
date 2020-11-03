@@ -138,6 +138,7 @@ set completeopt=menuone
 map <leader>g :YcmCompleter GoToDefinition<CR>
 map <leader>c :YcmCompleter GoToDeclaration<CR>
 map <leader>r :YcmCompleter GoToReferences<CR>
+map <leader>R :YcmCompleter RefactorRename<Space>
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
