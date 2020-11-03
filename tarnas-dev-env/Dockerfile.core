@@ -57,6 +57,10 @@ RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
   ${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring && \
   asdf install nodejs latest:12"
+# there is a problem with gpg locking which prevents us from installing nodejs versions with asdf
+# so we set lock-never in the gpg.conf
+RUN echo "lock-never" >> /home/tarnas-dev-env/.gnupg/gpg.conf
+# install default language runtimes via ASDF
 # full zsh inception with that global nodejs setting
 RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
   asdf global nodejs $(/bin/zsh -c '. /opt/asdf-vm/asdf.sh && asdf latest nodejs 12')"
@@ -72,6 +76,11 @@ RUN echo ':set guicursor=' > /home/tarnas-dev-env/.config/nvim/init.vim
 RUN echo ':autocmd OptionSet guicursor noautocmd set guicursor=' >> /home/tarnas-dev-env/.config/nvim/init.vim
 RUN cat /home/tarnas-dev-env/.config/nvim/tmp_init.vim >> /home/tarnas-dev-env/.config/nvim/init.vim
 RUN rm /home/tarnas-dev-env/.config/nvim/tmp_init.vim
+# oh god why have you forsaken me
+# we're changing the post-install script hook for YouCompleteMe
+# we need to change that command to source the asdf inside the shell so that npm is visible when post-install hook is run on PlugInstall
+# (and we are just grepping by python3, because this is the only place where that is used, at the moment of writing)
+RUN sed -i 's/python3 \.\/install\.py --ts-completer/\/bin\/zsh -c \\". \/opt\/asdf-vm\/asdf\.sh \&\& python3 \.\/install\.py --ts-completer\\"/g' /home/tarnas-dev-env/.config/nvim/init.vim
 RUN chown tarnas-dev-env:tarnas-dev-env /home/tarnas-dev-env/.config/nvim/init.vim
 
 # can't use -es (silent), because it returns 1 for some reason
