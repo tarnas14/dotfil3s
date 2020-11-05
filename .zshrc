@@ -142,23 +142,39 @@ function gcoB () {
   gco $(gb | grep $1)
 }
 
+function groot () {
+  if (( $# == 0 ))
+  then
+    git rev-parse --show-toplevel
+  else
+    cd $1
+    git rev-parse --show-toplevel
+  fi
+}
+
 # dockerized environment
 
 function denv () {
+  gitRoot=$(groot $PWD)
+  name=$(basename $gitRoot)
+
   if (( $# == 0 ))
   then
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:core
+    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core
   else
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:$1
+    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
   fi
 }
 
 function dvim () {
+  gitRoot=$(groot $PWD)
+  name="$(basename $gitRoot)-name"
+
   if (( $# == 0 ))
   then
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:core /bin/zsh -c "nvim"
+    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core /bin/zsh -c "nvim"
   else
-    docker run -it --rm --hostname $PWD -v ${PWD}:/home/tarnas-dev-env/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
+    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
   fi
 }
 
