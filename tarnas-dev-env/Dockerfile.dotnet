@@ -1,0 +1,8 @@
+FROM tarnas-dev-env:core
+
+RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
+  asdf plugin-add dotnet-core https://github.com/emersonsoares/asdf-dotnet-core.git && \
+  asdf install dotnet-core 3.1.403 && \
+  asdf global dotnet-core 3.1.403"
+
+RUN nvim -u ~/.config/nvim/init.vim -i NONE -c "call plug#load('omnisharp-vim') | :OmniSharpInstall" -c "qa"

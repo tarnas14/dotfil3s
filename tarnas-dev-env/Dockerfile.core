@@ -56,7 +56,8 @@ RUN cd /home/tarnas-dev-env/builds && \
 RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
   ${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring && \
-  asdf install nodejs latest:12"
+  asdf install nodejs latest:12 && \
+  asdf install nodejs 10.19.0" # needed by one of the projects I frequently work on
 # there is a problem with gpg locking which prevents us from installing nodejs versions with asdf
 # so we set lock-never in the gpg.conf
 RUN echo "lock-never" >> /home/tarnas-dev-env/.gnupg/gpg.conf

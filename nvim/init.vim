@@ -1,3 +1,5 @@
+:filetype plugin on
+
 " general settings
 syntax enable
 set number
@@ -104,6 +106,9 @@ Plug 'rbgrouleff/bclose.vim'
 
 Plug 'kshenoy/vim-signature'
 
+" omnisharp
+Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs'}
+
 call plug#end()
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
@@ -202,7 +207,6 @@ noremap <C-/> :call NERDComment(0,"toggle")<CR>
 let g:move_key_modifier = 'C-A'
 
 " PLUGIN w0rp/ale
-
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
 \  'typescript': ['eslint'],
