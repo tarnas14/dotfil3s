@@ -108,6 +108,7 @@ Plug 'kshenoy/vim-signature'
 
 " omnisharp
 Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'cs' }
 
 call plug#end()
 
@@ -144,6 +145,11 @@ map <leader>g :YcmCompleter GoToDefinition<CR>
 map <leader>c :YcmCompleter GoToDeclaration<CR>
 map <leader>r :YcmCompleter GoToReferences<CR>
 map <leader>R :YcmCompleter RefactorRename<Space>
+
+" we are using omnisharp with deoplete for c#
+let g:ycm_filetype_blacklist = {
+  \ 'cs': 1,
+  \ }
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
