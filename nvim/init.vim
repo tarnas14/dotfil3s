@@ -275,3 +275,7 @@ let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-l>"
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
+
+" in honor of master Wq
+" https://sanctum.geek.nz/arabesque/vim-koans/
+command! Wq wq
