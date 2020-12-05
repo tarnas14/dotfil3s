@@ -1,10 +1,9 @@
-:filetype plugin on
-
 " general settings
 syntax enable
 set number
 set hidden
 set nocompatible
+filetype plugin on
 
 set expandtab
 set tabstop=2
@@ -279,3 +278,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 " in honor of master Wq
 " https://sanctum.geek.nz/arabesque/vim-koans/
 command! Wq wq
+
+" close all buffers except the current one
+command! Q :%bd|e#
