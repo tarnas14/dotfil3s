@@ -14,59 +14,66 @@ RUN printf 'tarnas-dev-env ALL=(ALL) ALL\n' | tee -a /etc/sudoers
 
 # install utils
 RUN pacman -S --needed --noconfirm git
+RUN pacman -S --needed --noconfirm wget
 RUN pacman -S --needed --noconfirm the_silver_searcher
+
+# NEOVIM (and dependencies)
+RUN pacman -S --needed --noconfirm neovim
+RUN pacman -S --needed --noconfirm python-pynvim
+
+# needed by YouCompleteMe
+RUN pacman -S --needed --noconfirm cmake
 
 # impersonate tarnas-dev-env
 USER tarnas-dev-env
 # create /builds directory
 RUN cd /home/tarnas-dev-env && mkdir builds
 
-# OH-MY-ZSH
 RUN cd /home/tarnas-dev-env/builds && \
-  git clone https://aur.archlinux.org/oh-my-zsh-git.git && \
-  cd oh-my-zsh-git && \
+  git clone https://aur.archlinux.org/yay.git && \
+  cd yay && \
   makepkg -sirc --noconfirm
-RUN /usr/share/oh-my-zsh/tools/install.sh
+
+RUN yes | yay
+
+# OH-MY-ZSH
+RUN yay -S --noconfirm oh-my-zsh-git
+RUN echo 'n' | /usr/share/oh-my-zsh/tools/install.sh
 
 # install asdf
-RUN cd /home/tarnas-dev-env/builds && \
-  git clone https://aur.archlinux.org/asdf-vm.git && \
-  cd asdf-vm && \
-  makepkg -sirc --noconfirm
+RUN yay -S --noconfirm asdf-vm
 
-# NEOVIM (and dependencies)
 USER root
-RUN pacman -S --needed --noconfirm neovim
-RUN pacman -S --needed --noconfirm python-neovim
-
-# needed by YouCompleteMe
-RUN pacman -S --needed --noconfirm cmake
-
+RUN chown tarnas-dev-env:tarnas-dev-env -R /opt/asdf-vm
+RUN chmod +x /opt/asdf-vm/bin/asdf
 USER tarnas-dev-env
-# # install vim-plug
+
+# install vim-plug
 RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # used in vim-ranger
-RUN cd /home/tarnas-dev-env/builds && \
-  git clone https://aur.archlinux.org/ranger-git.git && \
-  cd ranger-git && \
-  makepkg -sirc --noconfirm
+RUN yay -S --noconfirm ranger-git
 
+COPY --chown=tarnas-dev-env:tarnas-dev-env .zshrc /home/tarnas-dev-env/.zshrc
+# DIRTY FIX for .zshrc that assumes debian, this will stay here
+# until we bite the bullet and have arch on host, as well xD
+RUN sed -i 's/\$HOME\/\.asdf/\/opt\/asdf-vm/g' /home/tarnas-dev-env/.zshrc
+
+# install default language runtimes via ASDF
+# there is a problem with gpg locking which prevents us from installing nodejs versions with asdf
+# so we set lock-never in the gpg.conf
+RUN mkdir /home/tarnas-dev-env/.gnupg
+RUN echo "lock-never" >> /home/tarnas-dev-env/.gnupg/gpg.conf
 # install default language runtimes via ASDF
 RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
   ${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring && \
-  asdf install nodejs latest:12 && \
-  asdf install nodejs 10.19.0" # needed by one of the projects I frequently work on
-# there is a problem with gpg locking which prevents us from installing nodejs versions with asdf
-# so we set lock-never in the gpg.conf
-RUN echo "lock-never" >> /home/tarnas-dev-env/.gnupg/gpg.conf
-# install default language runtimes via ASDF
+  asdf install nodejs latest:14"
 # full zsh inception with that global nodejs setting
 RUN /bin/zsh -c ". /opt/asdf-vm/asdf.sh && \
-  asdf global nodejs $(/bin/zsh -c '. /opt/asdf-vm/asdf.sh && asdf latest nodejs 12')"
+  asdf global nodejs $(/bin/zsh -c '. /opt/asdf-vm/asdf.sh && asdf latest nodejs 14')"
 
-# COPY CONFIGS AND INSTALL DEPENDENCIES
+# # COPY nvim CONFIGS AND INSTALL DEPENDENCIES
 RUN cd /home/tarnas-dev-env/ && mkdir .config
 COPY --chown=tarnas-dev-env:tarnas-dev-env nvim /home/tarnas-dev-env/.config/nvim
 
@@ -88,10 +95,6 @@ RUN chown tarnas-dev-env:tarnas-dev-env /home/tarnas-dev-env/.config/nvim/init.v
 RUN nvim -u ~/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
 COPY --chown=tarnas-dev-env:tarnas-dev-env .gitconfig /home/tarnas-dev-env/.gitconfig
 COPY --chown=tarnas-dev-env:tarnas-dev-env .gitignore_global /home/tarnas-dev-env/.gitignore_global
-COPY --chown=tarnas-dev-env:tarnas-dev-env .zshrc /home/tarnas-dev-env/.zshrc
-# DIRTY FIX for .zshrc that assumes debian, this will stay here
-# until we bite the bullet and have arch on host, as well xD
-RUN sed -i 's/\$HOME\/\.asdf/\/opt\/asdf-vm/g' /home/tarnas-dev-env/.zshrc
 
 USER root
 RUN usermod --shell /bin/zsh tarnas-dev-env
@@ -104,4 +107,5 @@ RUN usermod --shell /bin/zsh tarnas-dev-env
 RUN cd /home/tarnas-dev-env && mkdir code
 WORKDIR /home/tarnas-dev-env/code
 USER tarnas-dev-env
+
 CMD /bin/zsh
