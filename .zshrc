@@ -161,9 +161,18 @@ function denv () {
 
   if (( $# == 0 ))
   then
-    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core
+    docker run -it --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core
   else
-    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
+    case $1 in
+
+    dotnet)
+        docker run -it --env-file .env --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
+        ;;
+
+      *)
+        docker run -it --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
+        ;;
+    esac
   fi
 }
 
