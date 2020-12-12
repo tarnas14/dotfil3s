@@ -190,3 +190,5 @@ function dvim () {
 
 # srsly, microsoft? (.net core required to not be spied on)
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+
+export GPG_TTY=$(tty)
