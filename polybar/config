@@ -101,8 +101,7 @@ font-0 = fixed:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=11;1
 
-; modules-left = bspwm i3 memory cpu backlight
-modules-left = bspwm i3 memory cpu
+modules-left = bspwm i3 memory cpu backlight
 ; modules-center = pulseaudio spotify
 modules-center = pulseaudio
 modules-right = wlan eth battery time date
@@ -176,11 +175,8 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/backlight]
 type = custom/script
-interval = 1
+interval = 2
 exec = light
-
-scroll-up = exec light -A 5
-scroll-down = exec light -U 5
 
 format-prefix = " backlight: "
 format-prefix-foreground = ${colors.foreground-alt}
