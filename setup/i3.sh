@@ -5,6 +5,8 @@ sudo pacman -S --needed --noconfirm scrot
 sudo pacman -S --needed --noconfirm rofi
 sudo pacman -S --needed --noconfirm dmenu
 sudo pacman -S --needed --noconfirm feh
+sudo pacman -S --needed --noconfirm playerctl
+sudo pacman -S --needed --noconfirm polybar
 #!/bin/bash
 
 . ./utils.sh
