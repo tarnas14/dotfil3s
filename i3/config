@@ -29,9 +29,10 @@ focus_follows_mouse no
 mouse_warping none
 
 # lock screen (and pause player; unpause on unlock?)
-bindsym Shift+Control+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+# bindsym Shift+Control+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+bindsym Shift+Control+Mod1+l exec "i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
 # lock screen (and pause player; and set only laptop as output)
-bindsym Shift+Control+$mod+l exec "playerctl pause; $HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+# bindsym Shift+Control+$mod+l exec "playerctl pause; $HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -85,7 +86,7 @@ workspace_auto_back_and_forth no
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-bindsym $mod+2 exec --no-startup-id /home/tarnas/projects/yet-another-pomodoro/go-yap/go-yap outside-pomodoro && i3-msg workspace 2
+bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -109,21 +110,17 @@ bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 
 set $laptopOutput eDP-1
 set $monitorOutput HDMI-1
-workspace 1 output $laptopOutput
-workspace 2 output $laptopOutput
-workspace 3 output $laptopOutput
-workspace 4 output $laptopOutput
-workspace 5 output $laptopOutput
-workspace 6 output $monitorOutput
-workspace 7 output $monitorOutput
-workspace 8 output $monitorOutput
-workspace 9 output $monitorOutput
-workspace 10 output $monitorOutput
+# workspace 1 output $laptopOutput
+# workspace 2 output $laptopOutput
+# workspace 3 output $laptopOutput
+# workspace 4 output $laptopOutput
+# workspace 5 output $laptopOutput
+# workspace 6 output $monitorOutput
+# workspace 7 output $monitorOutput
+# workspace 8 output $monitorOutput
+# workspace 9 output $monitorOutput
+# workspace 10 output $monitorOutput
 
-assign [class="discord"] 2
-assign [class="Caprine"] 2
-assign [class="Rambox"] 2
-# assign [class="Google-chrome"] 6
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
 
@@ -165,25 +162,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-mode "pomodoro" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # restart
-        bindsym r exec "yap reset"; mode "default"
-        # next
-        bindsym n exec "yap next"; workspace 1; mode "default"
-        # stop
-        bindsym s exec "yap stop"; mode "default"
-        # start
-        bindsym Shift+s exec "yap start"; workspace 1; mode "default"
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+p mode "pomodoro"
-
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
@@ -222,9 +200,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh example
 exec "setxkbmap -option caps:escape"
 
 # startup
-exec --no-startup-id dropbox start &
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 
-exec konsole
-exec google-chrome
+# exec konsole
+exec google-chrome-stable

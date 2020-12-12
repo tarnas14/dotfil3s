@@ -1,18 +1,17 @@
 #!/bin/bash
 
 # dependencies
-sudo apt-get install scrot -y
-sudo apt-get install rofi -y
-sudo apt-get install help2man -y
+sudo pacman -S --needed --noconfirm scrot
+sudo pacman -S --needed --noconfirm rofi
+sudo pacman -S --needed --noconfirm dmenu
+sudo pacman -S --needed --noconfirm feh
+#!/bin/bash
 
-# light
-echo "to install light:"
-echo "git submodule update"
-echo "cd i3/light"
-echo "make && sudo make install"
+. ./utils.sh
 
-wget -O package.deb "https://github.com/acrisci/playerctl/releases/download/v0.6.0/playerctl-0.6.0_amd64.deb"
-sudo dpkg -i package.deb
-rm package.deb
-
-sudo apt-get install -f
+rm -f ~/.onedark-theme.rasi
+ln -s ~/dotfil3s/i3/onedark-theme.rasi ~/onedark-theme.rasi
+rm -rf ~/.config/i3
+ln -s ~/dotfil3s/i3 ~/.config/i3
+rm -rf ~/.config/polybar
+ln -s ~/dotfil3s/polybar ~/.config/polybar
