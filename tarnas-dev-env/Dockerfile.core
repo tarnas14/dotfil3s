@@ -55,9 +55,6 @@ RUN curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 RUN yay -S --noconfirm ranger-git
 
 COPY --chown=tarnas-dev-env:tarnas-dev-env .zshrc /home/tarnas-dev-env/.zshrc
-# DIRTY FIX for .zshrc that assumes debian, this will stay here
-# until we bite the bullet and have arch on host, as well xD
-RUN sed -i 's/\$HOME\/\.asdf/\/opt\/asdf-vm/g' /home/tarnas-dev-env/.zshrc
 
 # install default language runtimes via ASDF
 # there is a problem with gpg locking which prevents us from installing nodejs versions with asdf

@@ -128,7 +128,7 @@ eval "$(pyenv virtualenv-init -)"
 # vimode
 # bindkey -v
 
-. $HOME/.asdf/asdf.sh
+. /opt/asdf-vm/asdf.sh
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
