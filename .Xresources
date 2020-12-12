@@ -43,9 +43,12 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 *.color7:       #f8f8f2
 *.color15:      #f9f8f5
 
-URxvt.font: xft:noto sans mono:size=9
+! URxvt.font: xft:noto sans mono:size=9
+URxvt.font:             xft:monospace:pixelsize=14:style=regular
+URxvt.boldFont:         xft:monospace:pixelsize=12:style=bold
 
 URxvt*scrollBar:                      false
 URxvt*mouseWheelScrollPage:           false
 URxvt*cursorBlink:                    true
 URxvt*saveLines:                      5000
+URxvt.letterSpace: -1
