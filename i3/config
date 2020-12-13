@@ -201,6 +201,7 @@ exec "setxkbmap -option caps:escape"
 # startup
 # exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
+exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png &
 
 # exec konsole
 exec google-chrome-stable
