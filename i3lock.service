@@ -1,0 +1,22 @@
+# thanks to https://www.jvt.me/posts/2019/12/03/lock-before-suspend-systemd/
+# and https://nparsons.uk/blog/automatic-i3lock-on-suspend
+
+[Unit]
+Description=Lock the screen with i3lock
+# Ensure that we run this service before the machine can actually go to sleep
+Before=sleep.target
+
+[Service]
+User=tarnas
+# Because the i3lock process blocks while it's running, this needs to be
+# `forking`, otherwise systemd would never suspend while `i3lock` is running
+Type=forking
+# There's usually only one interactive Xorg session running, so it's almost
+# certainly going to be the 0th display
+Environment=DISPLAY=:0
+# setting i3lock with standard image
+ExecStart=/usr/bin/i3lock -n -e -i /home/tarnas/.config/i3/images/roller-coaster.png
+
+[Install]
+# Ensure that this is called when we're trying to suspend the machine
+WantedBy=sleep.target
