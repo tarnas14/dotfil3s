@@ -102,8 +102,7 @@ font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=11;1
 
 modules-left = bspwm i3 memory cpu backlight
-; modules-center = pulseaudio spotify
-modules-center = pulseaudio
+modules-center = pulseaudio player
 modules-right = wlan eth battery time date
 
 tray-position = right
@@ -111,11 +110,10 @@ tray-padding = 2
 
 cursor-click = pointer
 
-[module/spotify]
+[module/player]
 type = custom/script
-interval = 1
-format = <label>
-exec = python ~/.config/polybar/polybar-spotify/spotify_status.py -f '{play_pause} {artist}: {song} {play_pause}' -p '>>,||'
+interval = 5
+exec = echo "$(playerctl metadata | grep 'artist' | awk '{$1=$2=""; print $0}' | xargs): $(playerctl metadata | grep 'title' | awk '{$1=$2=""; print $0}' | xargs) ($(playerctl status | xargs))"
 format-underline = #1db954
 
 [module/bspwm]
@@ -289,7 +287,6 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
 time-format = %H:%M
 
 label-charging = %percentage%% ~%time%
