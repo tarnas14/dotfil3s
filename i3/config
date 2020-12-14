@@ -28,10 +28,13 @@ floating_modifier $mod
 focus_follows_mouse no
 mouse_warping none
 
+set $laptopOutput eDP
+set $monitorOutput HDMI-A-0
+
 # lock screen (and pause player; unpause on unlock?)
 bindsym Shift+Control+Mod1+l exec "playerctl pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
 # lock screen (and pause player; and set only laptop as output)
-# bindsym Shift+Control+$mod+l exec "playerctl pause; $HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+bindsym Shift+Control+$mod+l exec "playerctl pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -107,18 +110,16 @@ bindsym $mod+Shift+8 move container to workspace 8; workspace 8
 bindsym $mod+Shift+9 move container to workspace 9; workspace 9
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 
-set $laptopOutput eDP-1
-set $monitorOutput HDMI-1
-# workspace 1 output $laptopOutput
-# workspace 2 output $laptopOutput
-# workspace 3 output $laptopOutput
-# workspace 4 output $laptopOutput
-# workspace 5 output $laptopOutput
-# workspace 6 output $monitorOutput
-# workspace 7 output $monitorOutput
-# workspace 8 output $monitorOutput
-# workspace 9 output $monitorOutput
-# workspace 10 output $monitorOutput
+workspace 1 output $laptopOutput
+workspace 2 output $laptopOutput
+workspace 3 output $laptopOutput
+workspace 4 output $laptopOutput
+workspace 5 output $laptopOutput
+workspace 6 output $monitorOutput
+workspace 7 output $monitorOutput
+workspace 8 output $monitorOutput
+workspace 9 output $monitorOutput
+workspace 10 output $monitorOutput
 
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
@@ -189,12 +190,12 @@ bindsym $mod+F5 exec --no-startup-id "light -U 5"
 
 # reload xrandr options based on HDMI connection
 # first parameter laptop output, second monitor output
-bindsym $mod+Shift+a exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 left; i3-msg restart"
-bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 above; i3-msg restart"
-bindsym $mod+Shift+d exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 right; i3-msg restart"
-bindsym $mod+Shift+m exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 mirror; i3-msg restart"
-bindsym $mod+Shift+f exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1 onlyMonitor; i3-msg restart"
-bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput eDP-1; i3-msg restart"
+bindsym $mod+Shift+a exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput left; i3-msg restart"
+bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput above; i3-msg restart"
+bindsym $mod+Shift+d exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput right; i3-msg restart"
+bindsym $mod+Shift+m exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput mirror; i3-msg restart"
+bindsym $mod+Shift+f exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput onlyMonitor; i3-msg restart"
+bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart"
 
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/launch.sh presentation
 
