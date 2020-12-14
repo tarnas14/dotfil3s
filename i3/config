@@ -196,6 +196,7 @@ bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/launch.sh presen
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh example
 
 # escape on caps
+exec "setxkbmap pl"
 exec "setxkbmap -option caps:escape"
 
 # startup
