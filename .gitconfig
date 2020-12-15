@@ -1,12 +1,18 @@
 [user]
     name = tarnas14
     email = tarnas14@gmail.com
-    signingkey = 6B2CA3A1FAC5B137
+    ; ubuntu gpgp
+    ; signingkey = 6B2CA3A1FAC5B137
+    signingkey = 53638AC0D0732282
 [alias]
     hpush = !git push && git push heroku master
 [core]
     excludesfile = ~/.gitignore_global
+[pull]
+    rebase = false
 [push]
     default = simple
 [commit]
     gpgsign = true
+[gpg]
+	program = gpg
