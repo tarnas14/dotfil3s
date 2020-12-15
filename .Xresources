@@ -42,9 +42,9 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 *.color7:       #f8f8f2
 *.color15:      #f9f8f5
 
-URxvt.font: xft:dejavu sans mono:size=11
+URxvt.font: xft:Liberation Mono:style=Regular:size=11
 ! URxvt.font:             xft:monospace:pixelsize=12:style=regular
-URxvt.boldFont:         xft:monospace:pixelsize=12:style=bold
+! URxvt.boldFont:         xft:monospace:pixelsize=12:style=bold
 
 URxvt*scrollBar:                      false
 URxvt*mouseWheelScrollPage:           false
