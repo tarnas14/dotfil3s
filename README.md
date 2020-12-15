@@ -5,6 +5,14 @@ Every time I ask somebody about their dotfiles repo I hear something along the l
 Yes, I've also been planning to clean my dotfiles a bit... And I will get round to it eventually...
 Oh and I just noticed that I already said that in the last line of this readme... smh
 
+# arch
+
+moved to arch-based host 2020-12-15 previous config is on branch `ubuntu`
+
+## uefi boot
+
+refind with [this theme](https://github.com/EvanPurkhiser/rEFInd-minimal)
+
 # dockerized setup
 
 I setup a dockerized dev environment to learn some arch and avoid installing multiple stupid dependencies on host.
