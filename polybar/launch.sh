@@ -12,7 +12,12 @@ wlan_interace=$(ip link show | awk -F ':' '{print $2}' | grep 'wl' | xargs)
 # Launch polybar named example
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m LAN_INTERFACE=$lan_interface WLAN_INTERFACE=$wlan_interace polybar --reload $1 &
+    if [[ "$m" == *"HDMI"* ]]; then
+      MONITOR=$m LAN_INTERFACE=$lan_interface WLAN_INTERFACE=$wlan_interace polybar --reload secondary &
+    fi
+    if [[ "$m" == *"eDP"* ]]; then
+      MONITOR=$m LAN_INTERFACE=$lan_interface WLAN_INTERFACE=$wlan_interace polybar --reload main &
+    fi
   done
 else
   polybar --reload example &
