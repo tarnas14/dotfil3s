@@ -201,7 +201,7 @@ bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptop
 bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/launch.sh presentation
 
 # polybar config
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh example
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # escape on caps
 exec "setxkbmap pl"
