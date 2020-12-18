@@ -124,6 +124,9 @@ workspace 10 output $monitorOutput
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Conky"] move container to workspace 3
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
+for_window [class="Brave"] move container to workspace 2
+for_window [class="Ferdi"] move container to workspace 2
+for_window [class="Microsoft Teams - Preview"] move container to workspace 2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -212,5 +215,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png
 
-# exec konsole
+exec urxvt
 exec google-chrome-stable
+exec conky
+exec brave
