@@ -146,7 +146,7 @@ cursor-click = pointer
 [module/player]
 type = custom/script
 interval = 5
-exec = echo "$(playerctl metadata | grep 'artist' | awk '{$1=$2=""; print $0}' | xargs): $(playerctl metadata | grep 'title' | awk '{$1=$2=""; print $0}' | xargs) ($(playerctl status | xargs))"
+exec = echo "$(playerctl -p spotify metadata | grep 'artist' | awk '{$1=$2=""; print $0}' | awk '{$1=$1};1'): $(playerctl -p spotify metadata | grep 'title' | awk '{$1=$2=""; print $0}' | awk '{$1=$1};1') ($(playerctl -p spotify status | awk '{$1=$1};1'))"
 format-underline = #1db954
 
 [module/bspwm]
