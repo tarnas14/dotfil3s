@@ -1,9 +1,10 @@
 " general settings
 syntax enable
+filetype plugin on
+
 set number
 set hidden
 set nocompatible
-filetype plugin on
 
 set expandtab
 set tabstop=2
@@ -264,10 +265,6 @@ command! -nargs=1 R :silent !tmux send-keys -t right <f-args> <C-m>
 
 " remove trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
-
-" set filetypes
-au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
-au BufRead,BufNewFile *.tsx set filetype=typescript.jsx " PLUG peitalin/vim-jsx-typescript
 
 " completions
 let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips", "UltiSnips"]
