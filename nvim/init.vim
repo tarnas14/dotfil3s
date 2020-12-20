@@ -215,15 +215,18 @@ let g:move_key_modifier = 'C-A'
 " PLUGIN w0rp/ale
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint'],
-\  'typescript': ['eslint'],
+\  'typescript': ['eslint', 'tsserver'],
+\  'typescriptreact': ['eslint', 'tsserver'],
 \  'elixir': ['mix'],
 \  'go': ['golint'],
 \  'cs': ['OmniSharp'],
 \  'dart': ['test-dart-linter']
 \}
 let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\  'typescript': ['prettier', 'eslint'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\  'javascript': ['prettier', 'eslint'],
+\  'typescript': ['prettier', 'eslint', 'tsserver'],
+\  'typescriptreact': ['prettier', 'eslint', 'tsserver'],
 \  'elixir': ['mix_format'],
 \  'go': ['gofmt'],
 \  'scss': ['stylelint']
