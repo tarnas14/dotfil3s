@@ -138,6 +138,10 @@ function gcoB () {
   gco $(gb | grep $1)
 }
 
+function gcdt () {
+  gco development
+}
+
 # find git root directory
 function groot () {
   if (( $# == 0 ))
