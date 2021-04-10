@@ -58,3 +58,6 @@ nmap <silent> <buffer> <Leader>R <Plug>(omnisharp_rename)
 nmap <silent> <buffer> <Leader>osre <Plug>(omnisharp_restart_server)
 nmap <silent> <buffer> <Leader>osst <Plug>(omnisharp_start_server)
 nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
+
+nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_run_test)
+nmap <silent> <buffer> <Leader>ostf <Plug>(omnisharp_run_tests_in_file)
