@@ -32,7 +32,6 @@ function connect(){
     alwaysTwo
   elif [ $MODE = "onlyMonitor" ]; then
     xrandr --output $MONITOR_OUTPUT --auto --output $LAPTOP_OUTPUT --off
-    onlyOne
   elif [ $MODE = "above" ]; then
     xrandr --output $MONITOR_OUTPUT --auto --above $LAPTOP_OUTPUT --auto
     alwaysTwo
