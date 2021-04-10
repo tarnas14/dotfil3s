@@ -61,3 +61,5 @@ nmap <silent> <buffer> <Leader>ossp <Plug>(omnisharp_stop_server)
 
 nmap <silent> <buffer> <Leader>ost <Plug>(omnisharp_run_test)
 nmap <silent> <buffer> <Leader>ostf <Plug>(omnisharp_run_tests_in_file)
+
+:iabbrev const var
