@@ -225,8 +225,8 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \  'javascript': ['prettier', 'eslint'],
-\  'typescript': ['prettier', 'eslint', 'tsserver'],
-\  'typescriptreact': ['prettier', 'eslint', 'tsserver'],
+\  'typescript': ['prettier', 'eslint'],
+\  'typescriptreact': ['prettier', 'eslint'],
 \  'elixir': ['mix_format'],
 \  'go': ['gofmt'],
 \  'scss': ['stylelint']
