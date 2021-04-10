@@ -32,9 +32,9 @@ set $laptopOutput eDP
 set $monitorOutput HDMI-A-0
 
 # lock screen (and pause player; unpause on unlock?)
-bindsym Shift+Control+Mod1+l exec "playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+bindsym Shift+Control+Mod1+l exec "playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 # lock screen (and pause player; and set only laptop as output)
-bindsym Shift+Control+$mod+l exec "playerctl -p spotify pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png"
+bindsym Shift+Control+$mod+l exec "playerctl -p spotify pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -211,9 +211,10 @@ exec "setxkbmap pl"
 exec "setxkbmap -option caps:escape"
 
 # startup
+exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
-exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/roller-coaster.png
+exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
 
 exec urxvt
 exec google-chrome-stable
