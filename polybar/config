@@ -102,10 +102,8 @@ font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = pulseaudio
+modules-center = pulseaudioplayer
 modules-right = time date
-
-cursor-click = pointer
 
 [bar/main]
 monitor = ${env:MONITOR:}
@@ -133,7 +131,6 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=11;1
-font-3 = Liberation Mono:style=Regular
 
 modules-left = i3 memory cpu backlight
 modules-center = pulseaudio player
@@ -147,7 +144,7 @@ cursor-click = pointer
 [module/player]
 type = custom/script
 interval = 5
-exec = echo "$(playerctl -p spotify metadata | grep 'artist' | awk '{$1=$2=""; print $0}' | awk '{$1=$1};1'): $(playerctl -p spotify metadata | grep 'title' | awk '{$1=$2=""; print $0}' | awk '{$1=$1};1') ($(playerctl -p spotify status | awk '{$1=$1};1'))"
+exec = echo "$(playerctl -p spotify metadata | grep 'artist' | awk '{$1=$2=""; print $0}' | xargs): $(playerctl -p spotify metadata | grep 'title' | awk '{$1=$2=""; print $0}' | xargs) ($(playerctl -p spotify status))"
 format-underline = #1db954
 
 [module/bspwm]
