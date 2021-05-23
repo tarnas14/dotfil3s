@@ -50,10 +50,14 @@ let mapleader=","
 nnoremap <leader>\| :vsplit<CR>
 nnoremap <leader>- :split<CR>
 
-nnoremap <A-L> <C-W><C-L>
-nnoremap <A-H> <C-W><C-H>
-nnoremap <A-K> <C-W><C-K>
-nnoremap <A-J> <c-W><C-J>
+" moving between splits and tmux panes with the same A-l bindings
+let g:tmux_navigator_no_mappings = 1
+" terminal mode
+nnoremap <silent> <A-z> :TmuxNavigatePrevious<cr>
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 
 " buffer movement/control
 nnoremap <C-h> :bprevious<CR>
@@ -94,6 +98,8 @@ Plug 'tpope/vim-surround'
 
 " writing prose
 Plug 'junegunn/goyo.vim'
+
+Plug 'christoomey/vim-tmux-navigator'
 
 " completions
 Plug 'SirVer/ultisnips'
