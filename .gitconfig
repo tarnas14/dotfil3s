@@ -1,8 +1,8 @@
 [user]
     name = tarnas14
     email = tarnas14@gmail.com
+    ; https://sites.lafayette.edu/newquisk/archives/504
     signingkey = 53638AC0D0732282
-    ; signingkey = A56D98F14106E51D
 [alias]
     hpush = !git push && git push heroku master
 [core]
