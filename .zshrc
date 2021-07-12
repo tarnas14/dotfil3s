@@ -192,3 +192,7 @@ function dvim () {
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 
 export GPG_TTY=$(tty)
+
+function catMode () {
+  $HOME/.config/i3/catMode.sh $1;
+}

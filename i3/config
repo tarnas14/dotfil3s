@@ -32,9 +32,9 @@ set $laptopOutput eDP
 set $monitorOutput HDMI-A-0
 
 # lock screen (and pause player; unpause on unlock?)
-bindsym Shift+Control+Mod1+l exec "playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
+bindsym Shift+Control+Mod1+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 # lock screen (and pause player; and set only laptop as output)
-bindsym Shift+Control+$mod+l exec "playerctl -p spotify pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
+bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -168,8 +168,17 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
+
+mode "cat" {
+        bindsym t exec --no-startup-id "$HOME/.config/i3/catMode.sh toggle"
+        bindsym 1 exec --no-startup-id "$HOME/.config/i3/catMode.sh"
+        bindsym 0 exec --no-startup-id "$HOME/.config/i3/catMode.sh off"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+t mode "cat"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -179,6 +188,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # bluetooth headset connection
 # nuraphone
 bindsym $mod+Shift+n exec "echo 'power on' | bluetoothctl; echo 'connect 74:1A:E0:21:78:32' | bluetoothctl"
+
+# toggle cat mode
 
 # player controls (required playerctl)
 bindcode $mod+117 exec playerctl -p spotify play-pause
@@ -210,7 +221,7 @@ exec "setxkbmap pl"
 exec "setxkbmap -option caps:escape"
 
 # startup
-exec --no-startup-id dunst
+# exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
