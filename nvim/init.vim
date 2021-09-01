@@ -211,8 +211,8 @@ let g:buftabline_indicators = 1
 let g:NERDSpaceDelims = 1
 " DONT EVEN GET ME STARTED
 " apparently command-line vim gets <C-_> when you press ctrl+/
-noremap <C-_> :call NERDComment(0,"toggle")<CR>
-noremap <C-/> :call NERDComment(0,"toggle")<CR>
+noremap <C-_> :call nerdcommenter#Comment(0,"toggle")<CR>
+noremap <C-/> :call nerdcommenter#Comment(0,"toggle")<CR>
 
 " PLUGIN matze/vim-move
 
