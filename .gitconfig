@@ -3,6 +3,8 @@
     email = tarnas14@gmail.com
     ; https://sites.lafayette.edu/newquisk/archives/504
     signingkey = 53638AC0D0732282
+[includeIf "gitdir:~/projects/fp/"]
+    path = ~/.gitconfig-fp
 [alias]
     hpush = !git push && git push heroku master
 [core]
@@ -14,4 +16,4 @@
 [commit]
     gpgsign = true
 [gpg]
-	program = gpg
+    program = gpg
