@@ -80,6 +80,19 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# unalias from .zhsrc git plugin
+unalias gcmsg
+function gcmsg () {
+  branchName=$(git rev-parse --abbrev-ref HEAD)
+
+  if [[ "$branchName" =~ ^[A-Za-z]+-[0-9]+ ]]; then
+    jiraNumber=$(echo $branchName | grep -Eo '^[A-Za-z]+-[0-9]+' | tr a-z A-Z)
+    git commit -m "$jiraNumber $1"
+  else
+    git commit -m "$1"
+  fi
+}
+
 export PATH=$PATH:/snap/bin
 
 if [ -z "$TMUX" ]; then
