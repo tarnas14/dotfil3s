@@ -71,6 +71,16 @@ set noshowmode
 call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/sonokai'
 
+" completions
+Plug 'neovim/nvim-lspconfig', { 'do': 'npm i -g typescript typescript-language-server vscode-langservers-extracted' }
+Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-cmdline', { 'branch': 'main' }
+Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
+" for completions from ultisnip
+Plug 'quangnguyen30192/cmp-nvim-ultisnips', { 'branch': 'main' }
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -104,7 +114,6 @@ Plug 'christoomey/vim-tmux-navigator'
 " completions
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 ./install.py --ts-completer' }
 
 " file explorer
 Plug 'francoiscabrol/ranger.vim'
@@ -146,18 +155,89 @@ nmap k gk
 colorscheme sonokai
 set background=dark
 
-" PLUGIN YouCompleteMe ycm
-" prevents preview window from popping up
-set completeopt=menuone
-map <leader>g :YcmCompleter GoToDefinition<CR>
-map <leader>c :YcmCompleter GoToDeclaration<CR>
-map <leader>r :YcmCompleter GoToReferences<CR>
-map <leader>R :YcmCompleter RefactorRename<Space>
+" completions magic
+set completeopt=menu,menuone,noselect
 
-" we are using omnisharp with deoplete for c#
-let g:ycm_filetype_blacklist = {
-  \ 'cs': 1,
-  \ }
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+  local types = require'cmp.types'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }), { 'i', 'c' }),
+      ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }), { 'i', 'c' }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  -- tsserver
+  require'lspconfig'.tsserver.setup{}
+
+  -- css, depends on vscode-langservers-extracted
+  local snippetCapabilities = vim.lsp.protocol.make_client_capabilities()
+  snippetCapabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  require'lspconfig'.cssls.setup {
+    capabilities = snippetCapabilities,
+  }
+
+  -- eslint, depends on vscode-langservers-extracted
+  require'lspconfig'.eslint.setup{}
+
+  -- json, depends on vscode-langservers-extracted
+  require'lspconfig'.jsonls.setup {
+    capabilities = snippetCapabilities,
+  }
+
+  -- FOR MORE:
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+EOF
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
