@@ -125,6 +125,7 @@ for_window [class="Spotify"] move container to workspace 10
 for_window [class="Conky"] move container to workspace 3
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
 for_window [class="Caprine"] move container to workspace 2
+for_window [class="Signal"] move container to workspace 2
 for_window [class="Microsoft Teams - Preview"] move container to workspace 2
 
 # reload the configuration file
@@ -230,3 +231,4 @@ exec urxvt
 exec google-chrome-stable
 exec conky
 exec caprine
+exec signal-desktop-beta
