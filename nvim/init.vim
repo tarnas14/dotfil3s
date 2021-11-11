@@ -116,6 +116,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'cs' }
 
+Plug 'elixir-editors/vim-elixir'
+
 call plug#end()
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with
@@ -220,17 +222,20 @@ let g:move_key_modifier = 'C-A'
 
 " PLUGIN w0rp/ale
 let g:ale_linters = {
-\  'javascript': ['flow', 'eslint'],
+\  'javascript': ['eslint'],
+\  'json': ['eslint'],
 \  'typescript': ['eslint', 'tsserver'],
 \  'typescriptreact': ['eslint', 'tsserver'],
 \  'elixir': ['mix'],
 \  'go': ['golint'],
 \  'cs': ['OmniSharp'],
-\  'dart': ['test-dart-linter']
+\  'dart': ['test-dart-linter'],
+\  'python': ['flake8', 'pylint']
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \  'javascript': ['prettier', 'eslint'],
+\  'json': ['eslint'],
 \  'typescript': ['prettier', 'eslint'],
 \  'typescriptreact': ['prettier', 'eslint'],
 \  'elixir': ['mix_format'],
