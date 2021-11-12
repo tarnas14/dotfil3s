@@ -73,6 +73,7 @@ Plug 'sainnhe/sonokai'
 
 " completions
 Plug 'neovim/nvim-lspconfig', { 'do': 'npm i -g typescript typescript-language-server vscode-langservers-extracted' }
+Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
@@ -101,8 +102,6 @@ Plug 'ap/vim-buftabline'
 Plug 'mattn/emmet-vim'
 Plug 'pangloss/vim-javascript'
 
-Plug 'dense-analysis/ale'
-
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
@@ -117,6 +116,8 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'kshenoy/vim-signature'
+
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 call plug#end()
 
@@ -210,55 +211,54 @@ lua <<EOF
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
-  local on_attach = function(client, bufnr)
+  local cmmon_on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings.
-    local opts = { noremap=true, silent=true }
-
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', '<leader>g', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<leader>td', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    -- TODO this needs to be remapped for specific languages (e.g. wherever eslint is applicable, EslintFixAll should be bound here)
-    buf_set_keymap('n', '<leader>af', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-    -- what is this?
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- not sure this works, honestly
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
   end
 
-  -- Use a loop to conveniently call 'setup' on multiple servers and
-  -- map buffer local keybindings when the language server attaches
-  local servers = { 'tsserver', 'cssls', 'eslint', 'jsonls' }
-  for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-      on_attach = on_attach,
-      flags = {
-        debounce_text_changes = 150,
+  local lsp_installer = require("nvim-lsp-installer")
+
+  lsp_installer.on_server_ready(function (server)
+      local opts = {
+          on_attach = common_on_attach,
       }
-    }
-  end
 
-  -- FOR MORE:
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+      if server.name == "eslint" then
+          opts.on_attach = function (client, bufnr)
+              -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
+              -- the resolved capabilities of the eslint server ourselves!
+              client.resolved_capabilities.document_formatting = true
+              common_on_attach(client, bufnr)
+          end
+          opts.settings = {
+              format = { enable = true }, -- this will enable formatting
+          }
+      end
+
+      server:setup(opts)
+  end)
+
+  vim.cmd [[highlight IndentBlanklineIndent4 guifg=#383838 gui=nocombine]]
+  require("indent_blankline").setup {
+      show_end_of_line = false,
+      char_highlight_list = {
+        "IndentBlanklineIndent4",
+    },
+  }
 EOF
+
+nmap <silent> <leader>g :lua vim.lsp.buf.definition()<CR>
+nmap <silent> <leader>i :lua vim.lsp.buf.implementation()<CR>
+nmap <silent> K :lua vim.lsp.buf.hover()<CR>
+nmap <silent> <C-k> :lua vim.lsp.buf.signature_help()<CR>
+nmap <silent> <leader>td :lua vim.lsp.buf.type_definition()<CR>
+nmap <silent> <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nmap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
+nmap <silent> <leader>R :lua vim.lsp.buf.rename()<CR>
+nmap <silent> <leader>af :lua vim.lsp.buf.formatting()<CR>
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
@@ -320,39 +320,6 @@ noremap <C-/> :call nerdcommenter#Comment(0,"toggle")<CR>
 " PLUGIN matze/vim-move
 
 let g:move_key_modifier = 'C-A'
-
-" PLUGIN w0rp/ale
-let g:ale_linters = {
-\  'javascript': ['eslint'],
-\  'json': ['eslint'],
-\  'typescript': ['eslint', 'tsserver'],
-\  'typescriptreact': ['eslint', 'tsserver'],
-\  'elixir': ['mix'],
-\  'go': ['golint'],
-\  'cs': ['OmniSharp'],
-\  'dart': ['test-dart-linter'],
-\  'python': ['flake8', 'pylint']
-\}
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\  'javascript': ['prettier', 'eslint'],
-\  'json': ['eslint'],
-\  'typescript': ['prettier', 'eslint'],
-\  'typescriptreact': ['prettier', 'eslint'],
-\  'elixir': ['mix_format'],
-\  'go': ['gofmt'],
-\  'scss': ['stylelint']
-\}
-
-highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
-let g:ale_statusline_format = ['X %d', '? %d', '']
-" %linter% is the name of the linter that provided the message
-" %s is the error or warning message
-let g:ale_echo_msg_format = '%linter% says %s'
-" Map keys to navigate between lines with errors and warnings.
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
-nnoremap <leader>af :ALEFix<cr>
 
 " PLUG tpope/vim-fugitive
 map <leader>gs :Gstatus<CR>
