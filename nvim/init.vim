@@ -106,9 +106,6 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
-" writing prose
-Plug 'junegunn/goyo.vim'
-
 Plug 'christoomey/vim-tmux-navigator'
 
 " completions
@@ -120,12 +117,6 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'kshenoy/vim-signature'
-
-" omnisharp
-Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': 'cs' }
-
-Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
