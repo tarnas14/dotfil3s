@@ -72,7 +72,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/sonokai'
 
 " completions
-Plug 'neovim/nvim-lspconfig', { 'do': 'npm i -g typescript typescript-language-server vscode-langservers-extracted' }
+Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
@@ -259,6 +259,7 @@ nmap <silent> <leader>ca :lua vim.lsp.buf.code_action()<CR>
 nmap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
 nmap <silent> <leader>R :lua vim.lsp.buf.rename()<CR>
 nmap <silent> <leader>af :lua vim.lsp.buf.formatting()<CR>
+nmap <silent> <leader>ld :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
