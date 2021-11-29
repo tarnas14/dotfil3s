@@ -203,9 +203,46 @@ function dvim () {
 
 # srsly, microsoft? (.net core required to not be spied on)
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+# export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/3.1.404/sdk/3.1.404/Sdks
+export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/5.0.400/sdk/5.0.400/Sdks
+
+# https://github.com/OmniSharp/omnisharp-roslyn/issues/2131#issuecomment-848584926
+export MSBuildEnableWorkloadResolver=false
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED=1
+
+# ENV FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
+# export NUGET_PAT=zmfr3a5b3npxrgq6yvvo2dd6ygxer2ccyqf6sfreg7ewmkdqzo5q
+# export VSS_NUGET_EXTERNAL_FEED_ENDPOINTS='{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/fincastly/functions/_packaging/Fincastly-nuget/nuget/v3/index.json", "username":"build-docker", "password":"zmfr3a5b3npxrgq6yvvo2dd6ygxer2ccyqf6sfreg7ewmkdqzo5q"}]}'
 
 export GPG_TTY=$(tty)
+# export VSTEST_HOST_DEBUG=1
+
+# erlang
+export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
+
+# for entity framework core
+export PATH="$PATH:~/.dotnet/tools"
 
 function catMode () {
   $HOME/.config/i3/catMode.sh $1;
+}
+
+function cleancache() {
+  echo 'cleaning yarn'
+  yarn cache clean --all
+  echo 'done'
+  echo 'cleaning spotify'
+  rm -rf ~/.cache/spotify/Data/
+  mkdir ~/.cache/spotify/Data
+  echo 'done'
+  echo 'next are sudo commands (journal and yay)'
+  echo 'press anything to continue, ^c to stop'
+  read -n 1
+  echo 'cleaning journalctl'
+  sudo journalctl --vacuum-size=100M
+  echo 'done'
+  echo 'cleaning yay cache'
+  yay -Sc
+  echo 'done'
 }
