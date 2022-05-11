@@ -72,13 +72,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/sonokai'
 
 " completions
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer', { 'branch': 'main' }
+Plug 'neovim/nvim-lspconfig', { 'do': 'yay -S vscode-langservers-extracted; npm i -g typescript-language-server'}
 Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-cmdline', { 'branch': 'main' }
 Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
+Plug 'nvim-lua/plenary.nvim'
 " for completions from ultisnip
 Plug 'quangnguyen30192/cmp-nvim-ultisnips', { 'branch': 'main' }
 
@@ -157,12 +157,8 @@ lua <<EOF
 
   cmp.setup({
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-        -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
       end,
     },
     mapping = {
@@ -180,10 +176,7 @@ lua <<EOF
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      -- { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
       { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
     })
@@ -209,37 +202,20 @@ lua <<EOF
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   local nvim_lsp = require('lspconfig')
 
-  -- Use an on_attach function to only map the following keys
-  -- after the language server attaches to the current buffer
-  local cmmon_on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  end
-
-  local lsp_installer = require("nvim-lsp-installer")
-
-  lsp_installer.on_server_ready(function (server)
-      local opts = {
-          on_attach = common_on_attach,
-      }
-
-      if server.name == "eslint" then
-          opts.on_attach = function (client, bufnr)
-              -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
-              -- the resolved capabilities of the eslint server ourselves!
-              client.resolved_capabilities.document_formatting = true
-              common_on_attach(client, bufnr)
-          end
-          opts.settings = {
-              format = { enable = true }, -- this will enable formatting
-          }
-      end
-
-      server:setup(opts)
-  end)
+  require'lspconfig'.eslint.setup{}
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  require'lspconfig'.cssls.setup {
+    capabilities = capabilities,
+  }
+  require'lspconfig'.dockerls.setup{}
+  require'lspconfig'.html.setup{
+    capabilities = capabilities,
+  }
+  require'lspconfig'.jsonls.setup {
+    capabilities = capabilities,
+  }
+  require'lspconfig'.tsserver.setup{}
 
   vim.cmd [[highlight IndentBlanklineIndent4 guifg=#383838 gui=nocombine]]
   require("indent_blankline").setup {
@@ -250,16 +226,18 @@ lua <<EOF
   }
 EOF
 
-nmap <silent> <leader>g :lua vim.lsp.buf.definition()<CR>
-nmap <silent> <leader>i :lua vim.lsp.buf.implementation()<CR>
-nmap <silent> K :lua vim.lsp.buf.hover()<CR>
-nmap <silent> <C-k> :lua vim.lsp.buf.signature_help()<CR>
-nmap <silent> <leader>td :lua vim.lsp.buf.type_definition()<CR>
-nmap <silent> <leader>ca :lua vim.lsp.buf.code_action()<CR>
-nmap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
-nmap <silent> <leader>R :lua vim.lsp.buf.rename()<CR>
-nmap <silent> <leader>af :lua vim.lsp.buf.formatting()<CR>
-nmap <silent> <leader>ld :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>g :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>i :lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <C-k> :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> <leader>td :lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <leader>ca :lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>r :lua vim.lsp.buf.references()<CR>
+nnoremap <silent> <leader>R :lua vim.lsp.buf.rename()<CR>
+" EslintFixAll is a kinda dirty hack because eslint language server is
+" not recognized by vim.lsp.buf.format()
+nnoremap <silent> <leader>af :lua vim.lsp.buf.format({ async = true })<CR> :EslintFixAll<CR>
+nnoremap <silent> <leader>ld :lua vim.diagnostic.open_float()<CR>
 
 " PLUGIN easymotion/vim-easymotion
 " bidirectional character search
@@ -312,6 +290,7 @@ let g:buftabline_indicators = 1
 " PLUGIN scrooloose/nerdcommenter
 "
 " Add spaces after comment delimiters by default
+let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 " DONT EVEN GET ME STARTED
 " apparently command-line vim gets <C-_> when you press ctrl+/

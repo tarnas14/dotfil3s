@@ -3,7 +3,9 @@
     email = tarnas14@gmail.com
     ; https://sites.lafayette.edu/newquisk/archives/504
     signingkey = 53638AC0D0732282
-[includeIf "gitdir:~/projects/fp/"]
+[includeIf "gitdir:~/projects/fp/gridflow"]
+    path = ~/.gitconfig-fp
+[includeIf "gitdir:~/projects/fp/project-income-forecast"]
     path = ~/.gitconfig-fp
 [alias]
     hpush = !git push && git push heroku master
@@ -17,3 +19,8 @@
     gpgsign = true
 [gpg]
     program = gpg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
