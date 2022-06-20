@@ -70,9 +70,12 @@ set noshowmode
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/sonokai'
+" good light
+Plug 'wimstefan/vim-artesanal'
 
 " completions
-Plug 'neovim/nvim-lspconfig', { 'do': 'yay -S vscode-langservers-extracted; npm i -g typescript-language-server'}
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
 Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
@@ -144,6 +147,9 @@ nmap k gk
     set termguicolors
   endif
 
+" colorscheme artesanal
+" set background=light
+
 colorscheme sonokai
 set background=dark
 
@@ -198,24 +204,32 @@ lua <<EOF
     })
   })
 
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  local nvim_lsp = require('lspconfig')
+  require("nvim-lsp-installer").setup {}
 
-  require'lspconfig'.eslint.setup{}
+  require'lspconfig'.dockerls.setup{}
+
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  require'lspconfig'.eslint.setup{
+    capabilities = capabilities
+  }
+
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   require'lspconfig'.cssls.setup {
     capabilities = capabilities,
   }
-  require'lspconfig'.dockerls.setup{}
   require'lspconfig'.html.setup{
     capabilities = capabilities,
   }
   require'lspconfig'.jsonls.setup {
     capabilities = capabilities,
   }
-  require'lspconfig'.tsserver.setup{}
+  require'lspconfig'.tsserver.setup{
+    capabilities = capabilities,
+  }
+  require'lspconfig'.omnisharp.setup{
+    capabilities = capabilities,
+  }
 
   vim.cmd [[highlight IndentBlanklineIndent4 guifg=#383838 gui=nocombine]]
   require("indent_blankline").setup {
@@ -224,6 +238,8 @@ lua <<EOF
         "IndentBlanklineIndent4",
     },
   }
+
+  -- vim.lsp.set_log_level("debug")
 EOF
 
 nnoremap <silent> <leader>g :lua vim.lsp.buf.definition()<CR>
@@ -244,7 +260,8 @@ nnoremap <silent> <leader>ld :lua vim.diagnostic.open_float()<CR>
 map <leader>f <Plug>(easymotion-bd-f)
 
 " PLUGIN itchyny/lightline.vim
-" to hide lightline do `set laststatus=1`
+" to hide lightline do
+" set laststatus=1
 let g:lightline = {
       \ 'colorscheme': 'sonokai'
       \ }
