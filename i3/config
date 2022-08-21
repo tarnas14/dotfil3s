@@ -127,6 +127,7 @@ for_window [class="Google-chrome" title="Skype"] move container to workspace 2
 for_window [class="Caprine"] move container to workspace 2
 for_window [class="Signal"] move container to workspace 2
 for_window [class="Microsoft Teams - Preview"] move container to workspace 2
+for_window [class="Discord"] move container to workspace 2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -139,6 +140,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym Print exec "scrot -z -m -e 'mv $f ~/Pictures/screenshots'"
 # capture focused window
 bindsym Shift+Print exec "scrot -z -m -u -e 'mv $f ~/Pictures/screenshots'"
+bindsym Control+Print exec "maim -s | xclip -selection clipboard -t image/png"
 # choose rectangle - doesnt work because the process doesn't live long enough
 # bindsym Control+Print exec "scrot -z -s -e 'mv $f ~/Pictures/screenshots'"
 
@@ -182,9 +184,10 @@ mode "cat" {
 bindsym $mod+Shift+t mode "cat"
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pactl get-default-sink) +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl get-default-sink) -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl get-default-sink) toggle # toggle sound
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute $(pactl get-default-source) toggle # toggle mic
 
 # bluetooth headset connection
 # nuraphone
@@ -222,7 +225,6 @@ exec "setxkbmap pl"
 exec "setxkbmap -option caps:escape"
 
 # startup
-# exec --no-startup-id dunst
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
@@ -230,5 +232,5 @@ exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscr
 exec urxvt
 exec google-chrome-stable
 exec conky
-exec caprine
 exec signal-desktop-beta
+exec discord
