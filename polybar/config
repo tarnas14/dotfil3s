@@ -61,6 +61,12 @@ tray-position =
 
 cursor-click = pointer
 
+[module/presenting]
+type = custom/script
+interval = 2
+format = <label>
+exec = [ -f ~/.presentationMode ] && echo 'SCREEN SHARING'
+
 [module/presentation]
 type = custom/script
 interval = 99999999
@@ -101,7 +107,7 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = i3
+modules-left = i3 presenting
 modules-center = pulseaudioplayer
 modules-right = time date
 
@@ -132,7 +138,7 @@ font-0 = fixed:pixelsize=11;1
 font-1 = unifont:fontformat=truetype:size=9:antialias=false;0
 font-2 = siji:pixelsize=11;1
 
-modules-left = i3 memory cpu backlight
+modules-left = i3 memory cpu backlight presenting
 modules-center = pulseaudio player
 modules-right = wlan eth battery catmode time date
 

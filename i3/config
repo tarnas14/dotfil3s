@@ -88,7 +88,7 @@ workspace_auto_back_and_forth no
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
+bindsym $mod+2 exec "if test -f ~/.presentationMode; then notify-send presenting -t 500 -i /usr/share/icons/Adwaita/16x16/status/dialog-warning-symbolic.symbolic.png; else i3-msg workspace 2; fi"
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -100,7 +100,7 @@ bindsym $mod+0 workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
-bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+2 move container to workspace 2; exec "if test -f ~/.presentationMode; then notify-send -t 500 presenting -i /usr/share/icons/Adwaita/16x16/status/dialog-warning-symbolic.symbolic.png; else i3-msg workspace 2; fi"
 bindsym $mod+Shift+3 move container to workspace 3; workspace 3
 bindsym $mod+Shift+4 move container to workspace 4; workspace 4
 bindsym $mod+Shift+5 move container to workspace 5; workspace 5
@@ -215,7 +215,7 @@ bindsym $mod+Shift+m exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptop
 bindsym $mod+Shift+f exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput onlyMonitor; i3-msg restart"
 bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart"
 
-bindsym $mod+Shift+p exec --no-startup-id $HOME/.config/polybar/launch.sh presentation
+bindsym $mod+Shift+p exec "if test -f ~/.presentationMode; then notify-send 'EXITING presentation mode' -t 500 && rm ~/.presentationMode && i3-msg '[class=Slack] move container to workspace 2'; else notify-send 'ENTERING presentation mode' -t 500 && echo 1 > ~/.presentationMode && i3-msg '[class=Slack] move container to workspace 1' && i3-msg 'workspace 8; workspace 1'; fi"
 
 # polybar config
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
