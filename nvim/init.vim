@@ -69,9 +69,11 @@ set noshowmode
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'sainnhe/sonokai'
+Plug 'patstockwell/vim-monokai-tasty'
+" Plug 'sainnhe/sonokai'
 " good light
 Plug 'wimstefan/vim-artesanal'
+Plug 'endel/vim-github-colorscheme'
 
 " completions
 Plug 'williamboman/nvim-lsp-installer'
@@ -149,11 +151,15 @@ nmap k gk
     set termguicolors
   endif
 
+" colorscheme sonokai
+colorscheme vim-monokai-tasty
+set background=dark
+
 " colorscheme artesanal
 " set background=light
 
-colorscheme sonokai
-set background=dark
+" colorscheme github
+" set background=light
 
 " completions magic
 set completeopt=menu,menuone,noselect
@@ -295,8 +301,9 @@ map <leader>f <Plug>(easymotion-bd-f)
 " PLUGIN itchyny/lightline.vim
 " to hide lightline do
 " set laststatus=1
+"      \ 'colorscheme': 'sonokai'
 let g:lightline = {
-      \ 'colorscheme': 'sonokai'
+      \ 'colorscheme': 'monokai_tasty'
       \ }
 
 " fzf
