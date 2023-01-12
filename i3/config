@@ -29,7 +29,8 @@ focus_follows_mouse no
 mouse_warping none
 
 set $laptopOutput eDP
-set $monitorOutput HDMI-A-0
+# set $monitorOutput HDMI-A-0
+set $monitorOutput DisplayPort-0
 
 # lock screen (and pause player; unpause on unlock?)
 bindsym Shift+Control+Mod1+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
@@ -44,6 +45,7 @@ bindsym $mod+Shift+x kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi -theme onedark-theme"
+bindsym $mod+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' -theme onedark-theme"
 
 # change focus
 bindsym $mod+h focus left
@@ -74,14 +76,11 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+q floating toggle
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+c focus child
+# bindsym $mod+c focus child
 
 # workspaces
 workspace_auto_back_and_forth no
@@ -124,10 +123,13 @@ workspace 10 output $monitorOutput
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Conky"] move container to workspace 3
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
-for_window [class="Caprine"] move container to workspace 2
+for_window [class="Google-chrome" title="WhatsApp"] move container to workspace 2
+for_window [class="Google-chrome" title="Messenger"] move container to workspace 2
 for_window [class="Signal"] move container to workspace 2
 for_window [class="Microsoft Teams - Preview"] move container to workspace 2
 for_window [class="Discord"] move container to workspace 2
+for_window [class="Slack"] move container to workspace 2
+for_window [class="Google-chrome" title="Vowel"] move container to workspace 4
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -189,12 +191,6 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pactl 
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pactl get-default-sink) toggle # toggle sound
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute $(pactl get-default-source) toggle # toggle mic
 
-# bluetooth headset connection
-# nuraphone
-bindsym $mod+Shift+n exec "echo 'power on' | bluetoothctl; echo 'connect 74:1A:E0:21:78:32' | bluetoothctl"
-
-# toggle cat mode
-
 # player controls (required playerctl)
 bindcode $mod+117 exec playerctl -p spotify play-pause
 bindsym $mod+Control+Left exec playerctl -p spotify previous
@@ -226,8 +222,10 @@ exec "setxkbmap -option caps:escape"
 
 # startup
 exec --no-startup-id nm-applet
+exec --no-startup-id mpris-proxy
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.jpg
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
+exec --no-startup-id greenclip daemon
 
 exec urxvt
 exec google-chrome-stable
