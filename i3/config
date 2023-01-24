@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -28,14 +29,33 @@ floating_modifier $mod
 focus_follows_mouse no
 mouse_warping none
 
+# xrandr --listmonitors
+# xrandr -q
 set $laptopOutput eDP
-# set $monitorOutput HDMI-A-0
-set $monitorOutput DisplayPort-0
+set $primaryMonitorOutput DisplayPort-3
+set $secondaryMonitorOutput DisplayPort-4
+
+# MONITOR MANAGEMENT
+bindsym Shift+$mod+s exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off"; mode "default"
+bindsym Shift+$mod+m exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --same-as $laptopOutput --auto --output $secondaryMonitorOutput --same-as $laptopOutput --auto"; mode "default"; mode "default"
+
+bindsym Shift+$mod+w exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --off"; mode "default"
+bindsym Shift+$mod+e exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --right-of $primaryMonitorOutput --auto"; mode "default"
+bindsym Shift+$mod+d exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --right-of $laptopOutput --auto"; mode "default"
+bindsym Shift+$mod+a exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --left-of $laptopOutput --auto"; mode "default"
+bindsym Shift+$mod+q exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --left-of $primaryMonitorOutput --auto"; mode "default"
+
+bindsym Shift+Control+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate left"; mode "default"
+bindsym Shift+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate normal"; mode "default"
+
+# MIGHT BE USEFUL
+# xrandr --output DisplayPort-3 --auto --above eDP --auto --output DisplayPort-4 --auto --right-of DisplayPort-3
+# xrandr -q | grep " connected" | awk '{print $1}'
 
 # lock screen (and pause player; unpause on unlock?)
-bindsym Shift+Control+Mod1+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
+bindsym Shift+Control+$alt+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 # lock screen (and pause player; and set only laptop as output)
-bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; $HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
+bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -74,7 +94,7 @@ bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+q floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # focus the parent container
 # bindsym $mod+a focus parent
@@ -96,6 +116,11 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod+Control+6 workspace 11
+bindsym $mod+Control+7 workspace 12
+bindsym $mod+Control+8 workspace 13
+bindsym $mod+Control+9 workspace 14
+bindsym $mod+Control+0 workspace 15
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
@@ -108,17 +133,27 @@ bindsym $mod+Shift+7 move container to workspace 7; workspace 7
 bindsym $mod+Shift+8 move container to workspace 8; workspace 8
 bindsym $mod+Shift+9 move container to workspace 9; workspace 9
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+Control+Shift+6 move container to workspace 11; workspace 11
+bindsym $mod+Control+Shift+7 move container to workspace 12; workspace 12
+bindsym $mod+Control+Shift+8 move container to workspace 13; workspace 13
+bindsym $mod+Control+Shift+9 move container to workspace 14; workspace 14
+bindsym $mod+Control+Shift+0 move container to workspace 15; workspace 15
 
 workspace 1 output $laptopOutput
 workspace 2 output $laptopOutput
 workspace 3 output $laptopOutput
 workspace 4 output $laptopOutput
 workspace 5 output $laptopOutput
-workspace 6 output $monitorOutput
-workspace 7 output $monitorOutput
-workspace 8 output $monitorOutput
-workspace 9 output $monitorOutput
-workspace 10 output $monitorOutput
+workspace 6 output $primaryMonitorOutput
+workspace 7 output $primaryMonitorOutput
+workspace 8 output $primaryMonitorOutput
+workspace 9 output $primaryMonitorOutput
+workspace 10 output $secondaryMonitorOutput
+workspace 11 output $secondaryMonitorOutput
+workspace 12 output $secondaryMonitorOutput
+workspace 13 output $secondaryMonitorOutput
+workspace 14 output $secondaryMonitorOutput
+workspace 15 output $secondaryMonitorOutput
 
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Conky"] move container to workspace 3
@@ -136,7 +171,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym Shift+$mod+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # capture all displays
 bindsym Print exec "scrot -z -m -e 'mv $f ~/Pictures/screenshots'"
@@ -201,15 +236,6 @@ bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
 bindsym $mod+F6 exec --no-startup-id "light -A 5"
 bindsym $mod+F5 exec --no-startup-id "light -U 5"
-
-# reload xrandr options based on HDMI connection
-# first parameter laptop output, second monitor output
-bindsym $mod+Shift+a exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput left; i3-msg restart"
-bindsym $mod+Shift+w exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput above; i3-msg restart"
-bindsym $mod+Shift+d exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput right; i3-msg restart"
-bindsym $mod+Shift+m exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput mirror; i3-msg restart"
-bindsym $mod+Shift+f exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput onlyMonitor; i3-msg restart"
-bindsym $mod+Shift+z exec "$HOME/.config/i3/setOutputs.sh $monitorOutput $laptopOutput; i3-msg restart"
 
 bindsym $mod+Shift+p exec "if test -f ~/.presentationMode; then notify-send 'EXITING presentation mode' -t 500 && rm ~/.presentationMode && i3-msg '[class=Slack] move container to workspace 2'; else notify-send 'ENTERING presentation mode' -t 500 && echo 1 > ~/.presentationMode && i3-msg '[class=Slack] move container to workspace 1' && i3-msg 'workspace 8; workspace 1'; fi"
 
