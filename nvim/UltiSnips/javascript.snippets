@@ -1,3 +1,14 @@
+snippet it "jest test"
+it('should $1', async () => {
+	// given
+
+	// when
+	$2
+
+	// then
+})
+endsnippet
+
 snippet reactApp "initial react app component"
 class App extends Component {
   constructor(props) {
@@ -127,4 +138,8 @@ endsnippet
 
 snippet semuiopt "option in options"
 {key: '$1', text: '$2', value: '$3'},
+endsnippet
+
+snippet useState "react usestate"
+const [${1:state}, ${2:setState}] = useState($3:false)
 endsnippet

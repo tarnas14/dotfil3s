@@ -37,3 +37,7 @@ also included but probably not easily reusable:
 some install scripts for the 'other stuff'
 
 // might clean this up more if I have time or some actual reason :D
+
+## gpg password prompt inline
+
+https://stackoverflow.com/questions/41052538/git-error-gpg-failed-to-sign-data#answer-61314861

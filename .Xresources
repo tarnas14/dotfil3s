@@ -1,49 +1,24 @@
+! to refresh colorscheme:
+! `$ xrdb ~./Xresources`
+! and restart terminal
+
+! good dark
+#include "/home/tarnas/iterm2-color-schemes-master/Xresources/Afterglow"
+! good light
+! #include "/home/tarnas/iterm2-color-schemes-master/Xresources/Spring"
+
 ! rebinding copy/paste
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
-! copied from the internet for monokai color scheme
-! special
-*.foreground:   #d1d1d1
-*.background:   #221e2d
-*.cursorColor:  #d1d1d1
-
-! black
-*.color0:       #272822
-*.color8:       #75715e
-
-! red
-*.color1:       #f92672
-*.color9:       #f92672
-
-! green
-*.color2:       #a6e22e
-*.color10:      #a6e22e
-
-! yellow
-*.color3:       #f4bf75
-*.color11:      #f4bf75
-
-! blue
-*.color4:       #66d9ef
-*.color12:      #66d9ef
-
-! magenta
-*.color5:       #ae81ff
-*.color13:      #ae81ff
-
-! cyan
-*.color6:       #a1efe4
-*.color14:      #a1efe4
-
-! white
-*.color7:       #f8f8f2
-*.color15:      #f9f8f5
-
-URxvt.font: xft:Liberation Mono:style=Regular:size=11
-! URxvt.font:             xft:monospace:pixelsize=12:style=regular
+! to list fonts:
+! $ fc-list
+! URxvt.font: xft:RobotoMono Nerd Font:style=Light,Regular:pixelsize=10
+URxvt.font: xft:FiraCode Nerd Font Mono:style=Regular:pixelsize=15
+! URxvt.font: xft:Liberation Mono:style=Regular:size=11
+! URxvt.font:             xft:monospace:pixelsize=13:style=regular
 ! URxvt.boldFont:         xft:monospace:pixelsize=12:style=bold
 
 URxvt*scrollBar:                      false

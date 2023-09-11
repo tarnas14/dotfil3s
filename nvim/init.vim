@@ -33,6 +33,8 @@ set splitright
 " system clipboard
 set clipboard+=unnamedplus
 
+set relativenumber
+
 " Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
@@ -70,7 +72,6 @@ set noshowmode
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'patstockwell/vim-monokai-tasty'
-" Plug 'sainnhe/sonokai'
 " good light
 Plug 'wimstefan/vim-artesanal'
 Plug 'endel/vim-github-colorscheme'
@@ -86,6 +87,10 @@ Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
 Plug 'nvim-lua/plenary.nvim'
 " for completions from ultisnip
 Plug 'quangnguyen30192/cmp-nvim-ultisnips', { 'branch': 'main' }
+Plug 'onsails/lspkind.nvim'
+
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -101,11 +106,13 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'tpope/vim-fugitive'
 
-Plug 'itchyny/lightline.vim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons' " icons for lualine etc
+
 Plug 'ap/vim-buftabline'
 
 Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
@@ -125,6 +132,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate'}
+
+Plug 'prisma/vim-prisma'
 
 call plug#end()
 
@@ -151,23 +160,25 @@ nmap k gk
     set termguicolors
   endif
 
-" colorscheme sonokai
 colorscheme vim-monokai-tasty
 set background=dark
 
 " colorscheme artesanal
 " set background=light
 
-" colorscheme github
-" set background=light
-
-" completions magic
-set completeopt=menu,menuone,noselect
-
+" set completeopt=menu,menuone,noselect
 lua <<EOF
   -- Setup nvim-cmp.
   local cmp = require'cmp'
   local types = require'cmp.types'
+
+  local lspkind = require('lspkind')
+  local source_mapping = {
+    buffer = "[Buff]",
+    nvim_lsp = "[LSP]",
+    path = "[Path]",
+    copilot = "[Cop]",
+  }
 
   cmp.setup({
     snippet = {
@@ -189,13 +200,35 @@ lua <<EOF
       ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }), { 'i', 'c' }),
     },
     sources = cmp.config.sources({
+      -- { name = 'copilot' },
       { name = 'nvim_lsp' },
       { name = 'ultisnips' }, -- For ultisnips users.
     }, {
-      { name = 'buffer' },
-    })
-  })
+      { name = 'buffer'}
+    }),
+    formatting = {
+      format = function(entry, vim_item)
+        -- if you have lspkind installed, you can use it like
+        -- in the following line:
+        vim_item.kind = lspkind.symbolic(vim_item.kind, {mode = "symbol"})
+        vim_item.menu = source_mapping[entry.source.name]
+        if entry.source.name == "copilot" then
+          local detail = (entry.completion_item.data or {}).detail
+          vim_item.kind = "✞"
+          if detail and detail:find('.*%%.*') then
+            vim_item.kind = vim_item.kind .. ' ' .. detail
+          end
 
+          if (entry.completion_item.data or {}).multiline then
+            vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
+          end
+        end
+        local maxwidth = 80
+        vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+        return vim_item
+      end,
+    },
+  })
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
     sources = {
@@ -217,9 +250,8 @@ lua <<EOF
   require'lspconfig'.dockerls.setup{}
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   require'lspconfig'.eslint.setup{
-    capabilities = capabilities
+   capabilities = capabilities
   }
 
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -237,6 +269,10 @@ lua <<EOF
   }
   require'lspconfig'.omnisharp.setup{
     capabilities = capabilities,
+  }
+  require'lspconfig'.elixirls.setup{
+      -- cmd = { "/path/to/language_server.sh" };
+      cmd = { "/home/tarnas/tools/elixir-ls" };
   }
 
   vim.cmd [[highlight IndentBlanklineIndent4 guifg=#383838 gui=nocombine]]
@@ -301,7 +337,6 @@ map <leader>f <Plug>(easymotion-bd-f)
 " PLUGIN itchyny/lightline.vim
 " to hide lightline do
 " set laststatus=1
-"      \ 'colorscheme': 'sonokai'
 let g:lightline = {
       \ 'colorscheme': 'monokai_tasty'
       \ }
@@ -355,16 +390,7 @@ noremap <C-_> :call nerdcommenter#Comment(0,"toggle")<CR>
 noremap <C-/> :call nerdcommenter#Comment(0,"toggle")<CR>
 
 " PLUGIN matze/vim-move
-
 let g:move_key_modifier = 'C-A'
-
-" PLUG tpope/vim-fugitive
-map <leader>gs :Gstatus<CR>
-map <leader>gf :Git! diff<CR>
-map <leader>gt :Git! diff --staged<CR>
-map <leader>gc :Gcommit<CR>
-map <leader>gl :Commits<CR>
-map <leader>gp :Gpush<CR>
 
 " Plug 'francoiscabrol/ranger.vim'
 let g:ranger_map_keys = 0
@@ -397,3 +423,90 @@ command! Wq wq
 
 " close all buffers except the current one
 command! Q :%bd|e#
+
+augroup js_as_ts
+  au!
+  autocmd BufNewFile,BufRead *.js   set syntax=typescriptreact
+augroup END
+
+augroup env_files
+  au!
+  autocmd BufNewFile,BufRead .env*   set filetype=sh
+augroup END
+
+augroup json_files
+  au!
+  autocmd BufNewFile,BufRead .parcelrc   set syntax=json
+augroup END
+
+lua <<EOF
+require('lualine').setup({
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {
+      {
+        'buffers',
+        show_filename_only = true,   -- Shows shortened relative path when set to false.
+        hide_filename_extension = false,   -- Hide filename extension when set to true.
+        show_modified_status = true, -- Shows indicator when the buffer is modified.
+
+        mode = 0, -- 0: Shows buffer name
+        -- 1: Shows buffer index
+        -- 2: Shows buffer name + buffer index
+        -- 3: Shows buffer number
+        -- 4: Shows buffer name + buffer number
+
+        max_length = vim.o.columns * 2, -- Maximum width of buffers component,
+        -- it can also be a function that returns
+        -- the value of `max_length` dynamically.
+        filetype_names = {
+          TelescopePrompt = 'Telescope',
+          dashboard = 'Dashboard',
+          packer = 'Packer',
+          fzf = 'FZF',
+          alpha = 'Alpha'
+        }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+
+        -- Automatically updates active buffer color to match color of other components (will be overidden if buffers_color is set)
+        use_mode_colors = false,
+        buffers_color = {
+          -- Same values as the general color option can be used here.
+          active = 'DiagnosticWarn',     -- Color for active buffer.
+        },
+
+        symbols = {
+          modified = '[+]',      -- Text to show when the buffer is modified
+          alternate_file = '', -- Text to show to identify the alternate file
+          directory =  '',     -- Text to show when the buffer is a directory
+        },
+      }
+    }
+  },
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {'fzf'}
+})
+EOF
+
+" lua <<EOF
+" require("copilot").setup({
+  " suggestion = { enabled = false },
+  " panel = { enabled = false },
+" })
+" require("copilot_cmp").setup()
+" EOF

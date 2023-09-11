@@ -32,17 +32,19 @@ mouse_warping none
 # xrandr --listmonitors
 # xrandr -q
 set $laptopOutput eDP
-set $primaryMonitorOutput DisplayPort-3
-set $secondaryMonitorOutput DisplayPort-4
+set $primaryMonitorOutput DisplayPort-0
+set $secondaryMonitorOutput HDMI-A-0
 
 # MONITOR MANAGEMENT
-bindsym Shift+$mod+s exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off"; mode "default"
-bindsym Shift+$mod+m exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --same-as $laptopOutput --auto --output $secondaryMonitorOutput --same-as $laptopOutput --auto"; mode "default"; mode "default"
+bindsym Shift+$mod+s exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off"; mode "default"; restart
+bindsym Shift+$mod+m exec "xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --same-as $laptopOutput --auto --output $secondaryMonitorOutput --same-as $laptopOutput --auto"; mode "default"; restart
+bindsym Shift+$mod+o exec "xrandr --output $laptopOutput --off --output $primaryMonitorOutput --auto --output $secondaryMonitorOutput --off"; mode "default"; restart
+
+bindsym Shift+$mod+a exec "xrandr --output $primaryMonitorOutput --left-of $laptopOutput --auto"; mode "default"; restart
+bindsym Shift+$mod+d exec "xrandr --output $primaryMonitorOutput --right-of $laptopOutput --auto"; mode "default"; restart
 
 bindsym Shift+$mod+w exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --off"; mode "default"
 bindsym Shift+$mod+e exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --right-of $primaryMonitorOutput --auto"; mode "default"
-bindsym Shift+$mod+d exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --right-of $laptopOutput --auto"; mode "default"
-bindsym Shift+$mod+a exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --left-of $laptopOutput --auto"; mode "default"
 bindsym Shift+$mod+q exec "xrandr --output $primaryMonitorOutput --above $laptopOutput --auto --output $secondaryMonitorOutput --left-of $primaryMonitorOutput --auto"; mode "default"
 
 bindsym Shift+Control+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate left"; mode "default"
@@ -52,11 +54,6 @@ bindsym Shift+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate norm
 # xrandr --output DisplayPort-3 --auto --above eDP --auto --output DisplayPort-4 --auto --right-of DisplayPort-3
 # xrandr -q | grep " connected" | awk '{print $1}'
 
-# lock screen (and pause player; unpause on unlock?)
-bindsym Shift+Control+$alt+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
-# lock screen (and pause player; and set only laptop as output)
-bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
-
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
@@ -64,7 +61,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+x kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi -theme onedark-theme"
+bindsym $mod+d exec "rofi -combi-modi window,drun,run -show combi -modi combi"
 bindsym $mod+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' -theme onedark-theme"
 
 # change focus
@@ -148,13 +145,14 @@ workspace 6 output $primaryMonitorOutput
 workspace 7 output $primaryMonitorOutput
 workspace 8 output $primaryMonitorOutput
 workspace 9 output $primaryMonitorOutput
-workspace 10 output $secondaryMonitorOutput
+workspace 10 output $primaryMonitorOutput
 workspace 11 output $secondaryMonitorOutput
 workspace 12 output $secondaryMonitorOutput
 workspace 13 output $secondaryMonitorOutput
 workspace 14 output $secondaryMonitorOutput
 workspace 15 output $secondaryMonitorOutput
 
+# xprop WM_CLASS
 for_window [class="Spotify"] move container to workspace 10
 for_window [class="Conky"] move container to workspace 3
 for_window [class="Google-chrome" title="Skype"] move container to workspace 2
@@ -162,7 +160,7 @@ for_window [class="Google-chrome" title="WhatsApp"] move container to workspace 
 for_window [class="Google-chrome" title="Messenger"] move container to workspace 2
 for_window [class="Signal"] move container to workspace 2
 for_window [class="Microsoft Teams - Preview"] move container to workspace 2
-for_window [class="Discord"] move container to workspace 2
+for_window [class="discord"] move container to workspace 2
 for_window [class="Slack"] move container to workspace 2
 for_window [class="Google-chrome" title="Vowel"] move container to workspace 4
 
@@ -174,9 +172,9 @@ bindsym $mod+Shift+r restart
 bindsym Shift+$mod+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # capture all displays
-bindsym Print exec "scrot -z -m -e 'mv $f ~/Pictures/screenshots'"
+bindsym Print exec "scrot -z -m - | xclip -selection clipboard -t image/png"
 # capture focused window
-bindsym Shift+Print exec "scrot -z -m -u -e 'mv $f ~/Pictures/screenshots'"
+bindsym Shift+Print exec "scrot -z -m -u - | xclip -selection clipboard -t image/png"
 bindsym Control+Print exec "maim -s | xclip -selection clipboard -t image/png"
 # choose rectangle - doesnt work because the process doesn't live long enough
 # bindsym Control+Print exec "scrot -z -s -e 'mv $f ~/Pictures/screenshots'"
@@ -257,4 +255,3 @@ exec urxvt
 exec google-chrome-stable
 exec conky
 exec signal-desktop-beta
-exec discord

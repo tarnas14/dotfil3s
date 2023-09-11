@@ -5,3 +5,5 @@ dev.sh
 elm-stuff
 .env.template*
 .editorconfig
+.tool-versions
+yarn-error.log

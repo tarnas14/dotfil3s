@@ -3,14 +3,9 @@
     email = tarnas14@gmail.com
     ; https://sites.lafayette.edu/newquisk/archives/504
     signingkey = 53638AC0D0732282
-[includeIf "gitdir:~/projects/fp/gridflow"]
-    path = ~/.gitconfig-fp
-[includeIf "gitdir:~/projects/fp/project-income-forecast"]
-    path = ~/.gitconfig-fp
-[alias]
-    hpush = !git push && git push heroku master
 [core]
     excludesfile = ~/.gitignore_global
+	autocrlf = input
 [pull]
     rebase = false
 [push]

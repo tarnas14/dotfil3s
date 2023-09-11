@@ -100,7 +100,7 @@ if [ -z "$TMUX" ]; then
 fi
 
 alias vtop="vtop --theme wizard"
-export EDITOR="nvim"
+export EDITOR="vim"
 export MYVIMRC="~/.config/nvim/init.vim"
 
 _has() {
@@ -113,22 +113,6 @@ if _has fzf && _has ag; then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
   export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
-
-# java [*]
-
-export JAVA_HOME=~/devtools/java/jdk1.8.0_162
-export PATH=$PATH:~/devtools/java/jdk1.8.0_162/bin
-
-export ANT_HOME=~/devtools/ant/apache-ant-1.9.11
-export PATH=$PATH:~/devtools/ant/apache-ant-1.9.11/bin
-
-# https://stackoverflow.com/questions/47150410/failed-to-run-sdkmanager-list-android-sdk-with-java-9
-# WTF I hate java
-export ANDROID_HOME=~/devtools/android/
-export PATH=$PATH:~/devtools/android/platform-tools
-export PATH=$PATH:~/devtools/android/tools
-
-export PATH=$PATH:~/devtools/gradle-4.6/bin
 
 # PYTHON
 
@@ -144,7 +128,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 # FUNCTIONS
 function d_rmi () {
-  docker images | grep $1 | awk '{print $3}' | xargs -r docker rmi
+  docker images | grep $1 | awk '{print $3}' | xargs -r docker rmi $@
 }
 
 function gcoB () {
@@ -166,45 +150,11 @@ function groot () {
   fi
 }
 
-# dockerized environment
-
-function denv () {
-  gitRoot=$(groot $PWD)
-  name=$(basename $gitRoot)
-
-  if (( $# == 0 ))
-  then
-    docker run -it --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core
-  else
-    case $1 in
-
-    dotnet)
-        docker run -it --env-file .env --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
-        ;;
-
-      *)
-        docker run -it --rm --hostname $name --name $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1
-        ;;
-    esac
-  fi
-}
-
-function dvim () {
-  gitRoot=$(groot $PWD)
-  name="$(basename $gitRoot)-name"
-
-  if (( $# == 0 ))
-  then
-    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:core /bin/zsh -c "nvim"
-  else
-    docker run -it --rm --name $name --hostname $name -v $gitRoot:/home/tarnas-dev-env/code tarnas-dev-env:$1 /bin/zsh -c "nvim"
-  fi
-}
-
 # srsly, microsoft? (.net core required to not be spied on)
 export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 # export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/3.1.404/sdk/3.1.404/Sdks
-export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/5.0.400/sdk/5.0.400/Sdks
+# export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/5.0.400/sdk/5.0.400/Sdks
+export MSBuildSDKsPath=/home/tarnas/.asdf/installs/dotnet-core/6.0.201/sdk/6.0.201/Sdks
 
 # https://github.com/OmniSharp/omnisharp-roslyn/issues/2131#issuecomment-848584926
 export MSBuildEnableWorkloadResolver=false
@@ -216,7 +166,6 @@ export NUGET_CREDENTIALPROVIDER_SESSIONTOKENCACHE_ENABLED=1
 # export VSS_NUGET_EXTERNAL_FEED_ENDPOINTS='{"endpointCredentials": [{"endpoint":"https://pkgs.dev.azure.com/fincastly/functions/_packaging/Fincastly-nuget/nuget/v3/index.json", "username":"build-docker", "password":"zmfr3a5b3npxrgq6yvvo2dd6ygxer2ccyqf6sfreg7ewmkdqzo5q"}]}'
 
 export GPG_TTY=$(tty)
-# export VSTEST_HOST_DEBUG=1
 
 # erlang
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
@@ -224,14 +173,22 @@ export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 # for entity framework core
 export PATH="$PATH:~/.dotnet/tools"
 
-function catMode () {
-  $HOME/.config/i3/catMode.sh $1;
-}
-
 function cleancache() {
+  echo 'cleaning docker containers'
+  docker ps -a | grep -v Up | awk '{print $1}' | xargs docker rm -f
+  echo 'cleaning docker system'
+  docker system prune -f
+  echo 'cleaning docker volumes'
+  docker volume prune -f
+  echo 'clean yarn cache?'
+  echo 'press anything to continue, ^c to stop'
+  read -n 1
   echo 'cleaning yarn'
   yarn cache clean --all
   echo 'done'
+  echo 'clean spotify cache?'
+  echo 'press anything to continue, ^c to stop'
+  read -n 1
   echo 'cleaning spotify'
   rm -rf ~/.cache/spotify/Data/
   mkdir ~/.cache/spotify/Data
@@ -246,3 +203,7 @@ function cleancache() {
   yay -Sc
   echo 'done'
 }
+
+export NEXT_TELEMETRY_DISABLED=1
+
+eval "$(direnv hook zsh)"

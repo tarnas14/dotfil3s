@@ -140,16 +140,12 @@ font-2 = siji:pixelsize=11;1
 
 modules-left = i3 memory cpu backlight presenting
 modules-center = pulseaudio player
-modules-right = wlan eth battery catmode time date
+modules-right = wlan eth battery time date
 
 tray-position = right
 tray-padding = 2
 
 cursor-click = pointer
-
-[module/catmode]
-type = custom/script
-exec = $HOME/.config/i3/catMode.sh check
 
 [module/player]
 type = custom/script
