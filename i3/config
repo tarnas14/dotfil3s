@@ -50,9 +50,10 @@ bindsym Shift+$mod+q exec "xrandr --output $primaryMonitorOutput --above $laptop
 bindsym Shift+Control+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate left"; mode "default"
 bindsym Shift+$mod+f exec "xrandr --output $secondaryMonitorOutput --rotate normal"; mode "default"
 
-# MIGHT BE USEFUL
-# xrandr --output DisplayPort-3 --auto --above eDP --auto --output DisplayPort-4 --auto --right-of DisplayPort-3
-# xrandr -q | grep " connected" | awk '{print $1}'
+# lock screen (and pause player; unpause on unlock?)
+bindsym Shift+Control+$alt+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
+# lock screen (and pause player; and set only laptop as output)
+bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
