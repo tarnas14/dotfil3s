@@ -19,5 +19,5 @@ rm -rf ~/.config/i3
 ln -s "$dotfil3s_root"i3 ~/.config/i3
 rm -rf ~/.config/polybar
 ln -s "$dotfil3s_root"polybar ~/.config/polybar
-rm -rf ~/.config/pomodoro
-ln -s "$dotfil3s_root"tmux-helpers/pomodoro ~/.config/pomodoro
+rm -rf ~/.config/kitty
+ln -s "$dotfil3s_root"kitty ~/.config/kitty

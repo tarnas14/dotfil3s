@@ -95,10 +95,6 @@ function gcmsg () {
 
 export PATH=$PATH:/snap/bin
 
-if [ -z "$TMUX" ]; then
-  tmux attach || tmux new
-fi
-
 alias vtop="vtop --theme wizard"
 export EDITOR="vim"
 export MYVIMRC="~/.config/nvim/init.vim"

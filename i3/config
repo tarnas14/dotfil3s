@@ -252,7 +252,7 @@ exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
 exec --no-startup-id greenclip daemon
 
-exec urxvt
+exec kitty
 exec google-chrome-stable
 exec conky
 exec signal-desktop-beta

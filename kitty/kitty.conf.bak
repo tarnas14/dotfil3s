@@ -1,0 +1,21 @@
+# BEGIN_KITTY_THEME
+# Tokyo Night Storm
+include current-theme.conf
+# END_KITTY_THEME
+
+enabled_layouts tall:bias=70;full_size=1;mirrored=false
+
+map alt+h neighboring_window left
+map alt+l neighboring_window right
+map alt+k neighboring_window up
+map alt+j neighboring_window down
+
+map alt+shift+h move_window left
+map alt+shift+l move_window right
+map alt+shift+k move_window up
+map alt+shift+j move_window down
+
+map alt+a>x close_window
+map alt+a>n launch --cwd=current
+
+map alt+a>r load_config_file
