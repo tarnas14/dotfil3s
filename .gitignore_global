@@ -7,3 +7,4 @@ elm-stuff
 .editorconfig
 .tool-versions
 yarn-error.log
+nohup.out

@@ -57,17 +57,9 @@ require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
 		"mhartington/formatter.nvim",
-		keys = {
-			{
-				"<leader>af",
-				":Format<CR>",
-			},
-			{
-				"<leader>aF",
-				":FormatWrite<CR>",
-			},
-		},
 		config = function()
+			vim.keymap.set("n", "<leader>af", ":Format<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>aF", ":FormatWrite<CR>", { silent = true })
 			local opts = {
 				filetype = {
 					lua = {
@@ -127,14 +119,8 @@ require("lazy").setup({
 	},
 	{
 		"kevinhwang91/rnvimr",
-		keys = {
-			{
-				"<leader>E",
-				":RnvimrToggle<CR>",
-				silent = true,
-			},
-		},
 		config = function()
+			vim.keymap.set("n", "<leader>E", ":RnvimrToggle<CR>", { silent = true })
 			vim.g.rnvimr_enable_ex = 1
 			vim.g.rnvimr_enable_picker = 1
 			vim.g.rnvimr_hide_gitignore = 1
@@ -148,15 +134,16 @@ require("lazy").setup({
 	},
 	{ "junegunn/fzf", build = "fzf#install()" },
 	"junegunn/fzf.vim",
-	{ "rlane/pounce.nvim", keys = {
-		{ "<leader>f", ":Pounce<CR>" },
-	} },
+	{
+		"rlane/pounce.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>f", ":Pounce<CR>", { silent = true })
+		end,
+	},
 	{
 		"preservim/nerdcommenter",
-		keys = {
-			{ "<C-/>", ':call nerdcommenter#Comment(0,"toggle")<CR>', mode = { "n", "v" } },
-		},
 		config = function()
+			vim.keymap.set({ "n", "v" }, "<C-/>", ':call nerdcommenter#Comment(0,"toggle")<CR>', { silent = true })
 			vim.g.NERDSpaceDelims = 1
 		end,
 	},
