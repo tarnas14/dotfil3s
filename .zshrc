@@ -96,7 +96,7 @@ function gcmsg () {
 export PATH=$PATH:/snap/bin
 
 alias vtop="vtop --theme wizard"
-export EDITOR="vim"
+export EDITOR="nvim"
 export MYVIMRC="~/.config/nvim/init.vim"
 
 _has() {
@@ -203,3 +203,9 @@ function cleancache() {
 export NEXT_TELEMETRY_DISABLED=1
 
 eval "$(direnv hook zsh)"
+
+function kittyP() {
+  nohup kitty --session project.conf & disown
+  nohup kitty --session dockers.conf & disown
+  exit
+}
