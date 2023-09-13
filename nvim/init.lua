@@ -95,6 +95,7 @@ require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			"L3MON4D3/LuaSnip",
 		},
 	},
 	{
@@ -177,7 +178,7 @@ require("lazy").setup({
 	},
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
-  'sheerun/vim-polyglot',
+	"sheerun/vim-polyglot",
 })
 
 -- LSP
@@ -227,7 +228,66 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- completions
-require("cmp").setup()
+local cmp = require("cmp")
+local types = require("cmp.types")
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<Tab>"] = cmp.mapping(
+			cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+			{ "i", "c" }
+		),
+		["<S-Tab>"] = cmp.mapping(
+			cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+			{ "i", "c" }
+		),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" }, -- For luasnip users.
+	}, {
+		{ name = "buffer" },
+	}),
+})
+
+cmp.setup.cmdline("/", {
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
+
+-- Set up lspconfig.
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+require("lspconfig").elixirls.setup({
+	capabilities = capabilities,
+})
+-- {
+-- cmd = { "/path/to/language_server.sh" };
+-- cmd = { "/home/tarnas/tools/elixir-ls" };
+-- }
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- require("lspconfig")["<YOUR_LSP_SERVER>"].setup({
+-- capabilities = capabilities,
+-- })
 
 -- statusline / tabline
 require("lualine").setup({
