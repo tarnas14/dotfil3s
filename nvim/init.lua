@@ -177,7 +177,7 @@ require("lazy").setup({
 	},
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
-	-- 'sheerun/vim-polyglot'
+  'sheerun/vim-polyglot',
 })
 
 -- LSP
