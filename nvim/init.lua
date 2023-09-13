@@ -62,10 +62,14 @@ require("lazy").setup({
 			-- options
 		},
 	},
-	{ "williamboman/mason.nvim", config = true },
+	{
+		"williamboman/mason.nvim",
+		config = true,
+	},
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
 		"mhartington/formatter.nvim",
+		ft = { "lua" },
 		config = function()
 			vim.keymap.set("n", "<leader>af", ":Format<CR>", { silent = true })
 			vim.keymap.set("n", "<leader>aF", ":FormatWrite<CR>", { silent = true })
@@ -112,6 +116,7 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "elixir", "heex", "eex" },
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = false,
@@ -162,10 +167,10 @@ require("lazy").setup({
 		"drybalka/tree-climber.nvim",
 		config = function()
 			local keyopts = { noremap = true, silent = true }
-			vim.keymap.set({ "n", "v", "o" }, "H", require("tree-climber").goto_parent, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "L", require("tree-climber").goto_child, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "J", require("tree-climber").goto_next, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "K", require("tree-climber").goto_prev, keyopts)
+			vim.keymap.set({ "n", "v", "o" }, "<leader>h", require("tree-climber").goto_parent, keyopts)
+			vim.keymap.set({ "n", "v", "o" }, "<leader>l", require("tree-climber").goto_child, keyopts)
+			vim.keymap.set({ "n", "v", "o" }, "<leader>j", require("tree-climber").goto_next, keyopts)
+			vim.keymap.set({ "n", "v", "o" }, "<leader>k", require("tree-climber").goto_prev, keyopts)
 			vim.keymap.set("n", "<c-a-s-k>", require("tree-climber").swap_prev, keyopts)
 			vim.keymap.set("n", "<c-a-s-j>", require("tree-climber").swap_next, keyopts)
 			vim.keymap.set("n", "<leader>h", require("tree-climber").highlight_node, keyopts)
@@ -188,7 +193,6 @@ require("lazy").setup({
 	},
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
-	"sheerun/vim-polyglot",
 })
 
 -- LSP
@@ -231,7 +235,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<space>f", function()
+		vim.keymap.set("n", "<leader>af", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts)
 	end,
