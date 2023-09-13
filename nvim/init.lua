@@ -108,8 +108,35 @@ require("lazy").setup({
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
 		},
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		},
+		config = function()
+			local ls = require("luasnip")
+			vim.keymap.set({ "i" }, "<C-k>", function()
+				ls.expand()
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-l>", function()
+				ls.jump(1)
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-h>", function()
+				ls.jump(-1)
+			end, { silent = true })
+
+			vim.keymap.set({ "i", "s" }, "<C-e>", function()
+				if ls.choice_active() then
+					ls.change_choice(1)
+				end
+			end, { silent = true })
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -196,12 +223,7 @@ require("lazy").setup({
 })
 
 -- LSP
-
 require("mason-lspconfig").setup()
-
--- Setup language servers.
-local lspconfig = require("lspconfig")
-lspconfig.tsserver.setup({})
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -232,9 +254,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
 		vim.keymap.set("n", "<leader>af", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts)
@@ -261,7 +283,15 @@ cmp.setup({
 			cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
 			{ "i", "c" }
 		),
+		["<C-j>"] = cmp.mapping(
+			cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+			{ "i", "c" }
+		),
 		["<S-Tab>"] = cmp.mapping(
+			cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+			{ "i", "c" }
+		),
+		["<C-k>"] = cmp.mapping(
 			cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
 			{ "i", "c" }
 		),
@@ -289,19 +319,18 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
--- Set up lspconfig.
+-- Set up lspconfig language servers
+local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-require("lspconfig").elixirls.setup({
+lspconfig.tsserver.setup({
 	capabilities = capabilities,
 })
--- {
--- cmd = { "/path/to/language_server.sh" };
--- cmd = { "/home/tarnas/tools/elixir-ls" };
--- }
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require("lspconfig")["<YOUR_LSP_SERVER>"].setup({
--- capabilities = capabilities,
--- })
+
+local elixir_capabilities = require("cmp_nvim_lsp").default_capabilities()
+elixir_capabilities.textDocument.completion.completionItem.snippetSupport = false
+lspconfig.elixirls.setup({
+	capabilities = elixir_capabilities,
+})
 
 -- statusline / tabline
 require("lualine").setup({
