@@ -53,6 +53,15 @@ require("lazy").setup({
 		end,
 	},
 	"neovim/nvim-lspconfig",
+	-- possibly misconfigured?
+	{
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+		event = "LspAttach",
+		opts = {
+			-- options
+		},
+	},
 	{ "williamboman/mason.nvim", config = true },
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
@@ -131,6 +140,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
+			"arkav/lualine-lsp-progress",
 		},
 	},
 	{ "junegunn/fzf", build = "fzf#install()" },
@@ -294,7 +304,7 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "diagnostics" },
-		lualine_c = { "filename" },
+		lualine_c = { "lsp_progress" },
 		lualine_x = { "encoding", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
