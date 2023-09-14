@@ -173,6 +173,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"arkav/lualine-lsp-progress",
+			"nvim-lua/lsp-status.nvim",
 		},
 	},
 	{ "junegunn/fzf", build = "fzf#install()" },
@@ -338,8 +339,8 @@ require("lualine").setup({
 		lualine_a = { "mode" },
 		lualine_b = { "diagnostics" },
 		lualine_c = { "lsp_progress" },
-		lualine_x = { "encoding", "filetype" },
-		lualine_y = { "progress" },
+		lualine_x = { "encoding", "filetype", "require'lsp-status'.status()"  },
+		lualine_y = {},
 		lualine_z = { "location" },
 	},
 	inactive_sections = {
