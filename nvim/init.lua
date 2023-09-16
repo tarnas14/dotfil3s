@@ -224,11 +224,37 @@ require("lazy").setup({
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
 	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"Issafalcon/neotest-dotnet",
+		},
+		config = function()
+			local neotest = require("neotest")
+			neotest.setup({
+				adapters = {
+					require("neotest-dotnet"),
+				},
+			})
+
+			local keyopts = { noremap = true, silent = true }
+			vim.keymap.set("n", "<leader>ts", neotest.summary.open, keyopts)
+			vim.keymap.set("n", "<leader>tt", neotest.run.run, keyopts)
+			vim.keymap.set("n", "<leader>tf", function()
+				neotest.run.run(vim.fn.expand("%"))
+			end, keyopts)
+			vim.keymap.set("n", "<leader>to", function()
+				neotest.output.open({ enter = true, auto_close = true, last_run = true })
+			end, keyopts)
+			vim.keymap.set("n", "<leader>tO", neotest.output_panel.open, keyopts)
+		end,
+	},
+	{
 		"knubie/vim-kitty-navigator",
 		build = "cp ./*.py ~/.config/kitty/",
 		config = function()
-			vim.g.kitty_navigator_no_mappings = 1
-
 			vim.keymap.set("n", "<a-h>", ":KittyNavigateLeft<cr>", { silent = true })
 			vim.keymap.set("n", "<a-l>", ":KittyNavigateRight<cr>", { silent = true })
 			vim.keymap.set("n", "<a-j>", ":KittyNavigateDown<cr>", { silent = true })
