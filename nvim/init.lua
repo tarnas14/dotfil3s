@@ -229,6 +229,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
+			-- testrunners
 			"Issafalcon/neotest-dotnet",
 		},
 		config = function()
@@ -261,6 +262,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<a-k>", ":KittyNavigateUp<cr>", { silent = true })
 		end,
 	},
+	"tpope/vim-fugitive",
 })
 
 -- Global mappings.
