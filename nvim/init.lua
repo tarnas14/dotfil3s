@@ -52,7 +52,10 @@ require("lazy").setup({
 			vim.cmd("colorscheme onedark")
 		end,
 	},
-	"neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
+		build = "npm install -g dockerfile-language-server-nodejs @microsoft/compose-language-service",
+	},
 	-- possibly misconfigured?
 	{
 		"j-hui/fidget.nvim",
@@ -143,7 +146,7 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "elixir", "heex", "eex" },
+				ensure_installed = { "elixir", "heex", "eex", "yaml" },
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = false,
@@ -222,9 +225,6 @@ require("lazy").setup({
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
 })
-
--- LSP
-require("mason-lspconfig").setup()
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -321,11 +321,23 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
--- Set up lspconfig language servers
+-- Set up lspconfig language servers LSP
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.tsserver.setup({
 	capabilities = capabilities,
+})
+require("lspconfig").dockerls.setup({
+	capabilities = capabilities,
+})
+
+require("lspconfig").docker_compose_language_service.setup({})
+-- set filetype for docker-compose files to load this lsp
+vim.filetype.add({
+  filename = {
+    ['docker-compose.yml'] = 'yaml.docker-compose',
+    ['docker-compose.yaml'] = 'yaml.docker-compose',
+  },
 })
 
 local elixir_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -340,7 +352,7 @@ require("lualine").setup({
 		lualine_a = { "mode" },
 		lualine_b = { "diagnostics" },
 		lualine_c = { "lsp_progress" },
-		lualine_x = { "encoding", "filetype", "require'lsp-status'.status()"  },
+		lualine_x = { "encoding", "filetype", "require'lsp-status'.status()" },
 		lualine_y = {},
 		lualine_z = { "location" },
 	},
