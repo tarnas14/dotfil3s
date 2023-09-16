@@ -231,12 +231,14 @@ require("lazy").setup({
 			"antoinemadec/FixCursorHold.nvim",
 			-- testrunners
 			"Issafalcon/neotest-dotnet",
+      "jfpedroza/neotest-elixir",
 		},
 		config = function()
 			local neotest = require("neotest")
 			neotest.setup({
 				adapters = {
 					require("neotest-dotnet"),
+          require("neotest-elixir"),
 				},
 			})
 
