@@ -21,3 +21,5 @@ rm -rf ~/.config/polybar
 ln -s "$dotfil3s_root"polybar ~/.config/polybar
 rm -rf ~/.config/kitty
 ln -s "$dotfil3s_root"kitty ~/.config/kitty
+rm -rf ~/.config/ranger
+ln -s "$dotfil3s_root"ranger ~/.config/ranger
