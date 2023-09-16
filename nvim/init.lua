@@ -25,8 +25,10 @@ vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<C-w>", ":bdelete<CR>", { silent = true })
 vim.keymap.set("n", "<C-A-w>", ":bdelete!<CR>", { silent = true })
 
--- package manager
+-- for vim-kitty-navigator
+vim.g.kitty_navigator_no_mappings = 1
 
+-- package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -39,8 +41,6 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
-vim.g.move_key_modifier = "A-C"
 
 require("lazy").setup({
 	{
@@ -223,6 +223,18 @@ require("lazy").setup({
 	},
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
+	{
+		"knubie/vim-kitty-navigator",
+		build = "cp ./*.py ~/.config/kitty/",
+		config = function()
+			vim.g.kitty_navigator_no_mappings = 1
+
+			vim.keymap.set("n", "<a-h>", ":KittyNavigateLeft<cr>", { silent = true })
+			vim.keymap.set("n", "<a-l>", ":KittyNavigateRight<cr>", { silent = true })
+			vim.keymap.set("n", "<a-j>", ":KittyNavigateDown<cr>", { silent = true })
+			vim.keymap.set("n", "<a-k>", ":KittyNavigateUp<cr>", { silent = true })
+		end,
+	},
 })
 
 -- Global mappings.
@@ -389,7 +401,7 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "diagnostics" },
-		lualine_c = { },
+		lualine_c = {},
 		lualine_x = { "encoding", "filetype", "require'lsp-status'.status()" },
 		lualine_y = {},
 		lualine_z = { "location" },
