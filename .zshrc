@@ -85,9 +85,12 @@ unalias gcmsg
 function gcmsg () {
   branchName=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$branchName" =~ ^[A-Za-z]+-[0-9]+ ]]; then
-    jiraNumber=$(echo $branchName | grep -Eo '^[A-Za-z]+-[0-9]+' | tr a-z A-Z)
-    git commit -m "$jiraNumber $1"
+  if [[ "$branchName" =~ ^[A-Za-z]+-[0-9]+- ]]; then
+    jiraNumber=$(echo $branchName | grep -Eo '^[A-Za-z]+-[0-9]+-' | tr a-z A-Z)
+    git commit -m "${jiraNumber::-1} $1"
+  elif [[ "$branchName" =~ ^[0-9]+- ]]; then
+    issueNumber=$(echo $branchName | grep -Eo '^[0-9]+-' | tr a-z A-Z)
+    git commit -m "$1"$'\n\n'"issue: #${issueNumber::-1}"
   else
     git commit -m "$1"
   fi
