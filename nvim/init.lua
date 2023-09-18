@@ -9,9 +9,9 @@ vim.g.mapleader = ","
 
 -- in honor of master Wq
 -- https://sanctum.geek.nz/arabesque/vim-koans/
-vim.cmd('command! Wq wq')
+vim.cmd("command! Wq wq")
 -- close all buffers except the current one
-vim.cmd('command! Q :%bd|e#')
+vim.cmd("command! Q :%bd|e#")
 
 -- use global clipboard for vim
 -- TODO check if there is a better one that does not put everything (only y, p)
@@ -41,6 +41,9 @@ vim.keymap.set("n", "<C-A-w>", vimCmd("bdelete!"), { silent = true })
 
 -- for vim-kitty-navigator
 vim.g.kitty_navigator_no_mappings = 1
+
+-- for nerdcommenter
+vim.g.NERDCreateDefaultMappings = 0
 
 -- package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -205,6 +208,7 @@ require("lazy").setup({
 		config = function()
 			vim.keymap.set({ "n", "v" }, "<C-/>", ':call nerdcommenter#Comment(0,"toggle")<CR>', { silent = true })
 			vim.g.NERDSpaceDelims = 1
+      vim.g.NERDDefaultAlign = 'left'
 		end,
 	},
 	{
@@ -279,6 +283,7 @@ require("lazy").setup({
 		end,
 	},
 	"tpope/vim-fugitive",
+	"mattn/emmet-vim",
 })
 
 -- Global mappings.
@@ -311,7 +316,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, opts)
 		vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
 		vim.keymap.set("n", "<leader>af", function()
 			vim.lsp.buf.format({ async = true })
@@ -505,7 +510,7 @@ require("lualine").setup({
 -- fzf
 vim.keymap.set("n", "<M-p>", vimCmd("Files"))
 -- map <C-space> :Buffers<CR>
--- map <leader>/ :Ag<CR>
+vim.keymap.set("n", "<leader>/", vimCmd("Ag"))
 -- map <leader>l :BLines<CR>
 
 -- moving lines
