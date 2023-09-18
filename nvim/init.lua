@@ -7,6 +7,12 @@ vim.opt.smartindent = true
 
 vim.g.mapleader = ","
 
+-- in honor of master Wq
+-- https://sanctum.geek.nz/arabesque/vim-koans/
+vim.cmd('command! Wq wq')
+-- close all buffers except the current one
+vim.cmd('command! Q :%bd|e#')
+
 -- use global clipboard for vim
 -- TODO check if there is a better one that does not put everything (only y, p)
 vim.opt.clipboard:append({ "unnamedplus" })
@@ -375,11 +381,11 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.tsserver.setup({
 	capabilities = capabilities,
 })
-require("lspconfig").dockerls.setup({
+lspconfig.dockerls.setup({
 	capabilities = capabilities,
 })
 
-require("lspconfig").omnisharp.setup({
+lspconfig.omnisharp.setup({
 	-- cmd = { "dotnet", "/path/to/omnisharp/OmniSharp.dll" },
 
 	-- Enables support for reading code style, naming convention and analyzer
@@ -418,7 +424,7 @@ require("lspconfig").omnisharp.setup({
 	analyze_open_documents_only = false,
 })
 
-require("lspconfig").docker_compose_language_service.setup({})
+lspconfig.docker_compose_language_service.setup({})
 -- set filetype for docker-compose files to load this lsp
 vim.filetype.add({
 	filename = {
