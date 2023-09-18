@@ -1,8 +1,8 @@
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 0
 vim.opt.autoindent = true
+vim.opt.shiftwidth = 0
 vim.opt.smartindent = true
 
 vim.g.mapleader = ","
@@ -11,19 +11,27 @@ vim.g.mapleader = ","
 -- TODO check if there is a better one that does not put everything (only y, p)
 vim.opt.clipboard:append({ "unnamedplus" })
 
+function vimCmd(cmd)
+	local handler = function()
+		vim.cmd(cmd)
+	end
+
+	return handler
+end
+
 -- splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.keymap.set("n", "<leader>|", ":vsplit<CR>")
-vim.keymap.set("n", "<leader>-", ":split<CR>")
+vim.keymap.set("n", "<leader>|", vimCmd("vsplit"))
+vim.keymap.set("n", "<leader>-", vimCmd("split"))
 
 vim.opt.relativenumber = true
 
 -- buffer movement / control
-vim.keymap.set("n", "<C-h>", ":bprevious<CR>", { silent = true })
-vim.keymap.set("n", "<C-l>", ":bnext<CR>", { silent = true })
-vim.keymap.set("n", "<C-w>", ":bdelete<CR>", { silent = true })
-vim.keymap.set("n", "<C-A-w>", ":bdelete!<CR>", { silent = true })
+vim.keymap.set("n", "<C-h>", vimCmd("bprevious"), { silent = true })
+vim.keymap.set("n", "<C-l>", vimCmd("bnext"), { silent = true })
+vim.keymap.set("n", "<C-w>", vimCmd("bdelete"), { silent = true })
+vim.keymap.set("n", "<C-A-w>", vimCmd("bdelete!"), { silent = true })
 
 -- for vim-kitty-navigator
 vim.g.kitty_navigator_no_mappings = 1
@@ -74,8 +82,8 @@ require("lazy").setup({
 		"mhartington/formatter.nvim",
 		ft = { "lua" },
 		config = function()
-			vim.keymap.set("n", "<leader>af", ":Format<CR>", { silent = true })
-			vim.keymap.set("n", "<leader>aF", ":FormatWrite<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>af", vimCmd("Format"), { silent = true })
+			vim.keymap.set("n", "<leader>aF", vimCmd("FormatWrite"), { silent = true })
 			local opts = {
 				filetype = {
 					lua = {
@@ -165,7 +173,7 @@ require("lazy").setup({
 	{
 		"kevinhwang91/rnvimr",
 		config = function()
-			vim.keymap.set("n", "<leader>E", ":RnvimrToggle<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>E", vimCmd("RnvimrToggle"), { silent = true })
 			vim.g.rnvimr_enable_ex = 1
 			vim.g.rnvimr_enable_picker = 1
 			vim.g.rnvimr_hide_gitignore = 1
@@ -183,7 +191,7 @@ require("lazy").setup({
 	{
 		"rlane/pounce.nvim",
 		config = function()
-			vim.keymap.set("n", "<leader>f", ":Pounce<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>f", vimCmd("Pounce"), { silent = true })
 		end,
 	},
 	{
@@ -231,14 +239,14 @@ require("lazy").setup({
 			"antoinemadec/FixCursorHold.nvim",
 			-- testrunners
 			"Issafalcon/neotest-dotnet",
-      "jfpedroza/neotest-elixir",
+			"jfpedroza/neotest-elixir",
 		},
 		config = function()
 			local neotest = require("neotest")
 			neotest.setup({
 				adapters = {
 					require("neotest-dotnet"),
-          require("neotest-elixir"),
+					require("neotest-elixir"),
 				},
 			})
 
@@ -258,10 +266,10 @@ require("lazy").setup({
 		"knubie/vim-kitty-navigator",
 		build = "cp ./*.py ~/.config/kitty/",
 		config = function()
-			vim.keymap.set("n", "<a-h>", ":KittyNavigateLeft<cr>", { silent = true })
-			vim.keymap.set("n", "<a-l>", ":KittyNavigateRight<cr>", { silent = true })
-			vim.keymap.set("n", "<a-j>", ":KittyNavigateDown<cr>", { silent = true })
-			vim.keymap.set("n", "<a-k>", ":KittyNavigateUp<cr>", { silent = true })
+			vim.keymap.set("n", "<a-h>", vimCmd("KittyNavigateLeft"), { silent = true })
+			vim.keymap.set("n", "<a-l>", vimCmd("KittyNavigateRight"), { silent = true })
+			vim.keymap.set("n", "<a-j>", vimCmd("KittyNavigateDown"), { silent = true })
+			vim.keymap.set("n", "<a-k>", vimCmd("KittyNavigateUp"), { silent = true })
 		end,
 	},
 	"tpope/vim-fugitive",
@@ -489,13 +497,13 @@ require("lualine").setup({
 })
 
 -- fzf
-vim.keymap.set("n", "<M-p>", ":Files<CR>")
+vim.keymap.set("n", "<M-p>", vimCmd("Files"))
 -- map <C-space> :Buffers<CR>
 -- map <leader>/ :Ag<CR>
 -- map <leader>l :BLines<CR>
 
 -- moving lines
-vim.keymap.set("n", "<C-A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<C-A-k>", ":m .-2<CR>==")
-vim.keymap.set("v", "<C-A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<C-A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<C-A-j>", vimCmd("m .+1<CR>=="))
+vim.keymap.set("n", "<C-A-k>", vimCmd("m .-2<CR>=="))
+vim.keymap.set("v", "<C-A-j>", ":m '>+1<CR>gv=gv") -- cannot use vimCmd because it does not work otherwise :3
+vim.keymap.set("v", "<C-A-k>", ":m '<-2<CR>gv=gv") -- cannot use vimCmd because it does not work otherwise :3
