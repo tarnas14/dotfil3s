@@ -1,3 +1,26 @@
+-- util functions
+
+local function vimCmd(cmd)
+	local handler = function()
+		vim.cmd(cmd)
+	end
+
+	return handler
+end
+
+local function contains(table, val)
+	for i = 1, #table do
+		if table[i] == val then
+			return true
+		end
+	end
+	return false
+end
+
+-- local script settings
+
+local FT_TO_NOT_USE_LSP_FOR_FORMATTING = { "lua", "javascript" }
+
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -16,14 +39,6 @@ vim.cmd("command! Q :%bd|e#")
 -- use global clipboard for vim
 -- TODO check if there is a better one that does not put everything (only y, p)
 vim.opt.clipboard:append({ "unnamedplus" })
-
-function vimCmd(cmd)
-	local handler = function()
-		vim.cmd(cmd)
-	end
-
-	return handler
-end
 
 -- splits
 vim.opt.splitbelow = true
@@ -89,7 +104,7 @@ require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
 		"mhartington/formatter.nvim",
-		ft = { "lua" },
+		ft = FT_TO_NOT_USE_LSP_FOR_FORMATTING,
 		config = function()
 			vim.keymap.set("n", "<leader>af", vimCmd("Format"), { silent = true })
 			vim.keymap.set("n", "<leader>aF", vimCmd("FormatWrite"), { silent = true })
@@ -97,6 +112,9 @@ require("lazy").setup({
 				filetype = {
 					lua = {
 						require("formatter.filetypes.lua").stylua,
+					},
+					javascript = {
+						require("formatter.filetypes.javascript").eslint_d,
 					},
 					["*"] = {
 						require("formatter.filetypes.any").remove_trailing_whitespace,
@@ -108,9 +126,11 @@ require("lazy").setup({
 	},
 	{
 		"mfussenegger/nvim-lint",
+		build = "npm i -g eslint_d",
 		config = function()
 			require("lint").linters_by_ft = {
 				lua = { "luacheck" },
+				javascript = { "eslint_d" },
 			}
 
 			-- not sure if all these events are needed
@@ -208,7 +228,7 @@ require("lazy").setup({
 		config = function()
 			vim.keymap.set({ "n", "v" }, "<C-/>", ':call nerdcommenter#Comment(0,"toggle")<CR>', { silent = true })
 			vim.g.NERDSpaceDelims = 1
-      vim.g.NERDDefaultAlign = 'left'
+			vim.g.NERDDefaultAlign = "left"
 		end,
 	},
 	{
@@ -299,7 +319,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -318,9 +338,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<leader>af", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
+		if not contains(FT_TO_NOT_USE_LSP_FOR_FORMATTING, vim.bo.filetype) then
+			vim.keymap.set("n", "<leader>af", function()
+				vim.lsp.buf.format({ async = true })
+			end, opts)
+		end
 	end,
 })
 
