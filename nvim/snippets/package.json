@@ -1,0 +1,13 @@
+{
+	"name": "tarnas-snippets",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"all"
+				],
+				"path": "./all.json"
+			}
+		]
+	}
+}

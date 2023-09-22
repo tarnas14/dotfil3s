@@ -161,7 +161,7 @@ require("lazy").setup({
 		},
 		config = function()
 			local ls = require("luasnip")
-			vim.keymap.set({ "i" }, "<C-k>", function()
+			vim.keymap.set({ "i" }, "<C-;>", function()
 				ls.expand()
 			end, { silent = true })
 			vim.keymap.set({ "i", "s" }, "<C-l>", function()
@@ -176,6 +176,8 @@ require("lazy").setup({
 					ls.change_choice(1)
 				end
 			end, { silent = true })
+
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
 		end,
 	},
 	{
@@ -319,7 +321,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
