@@ -33,8 +33,6 @@ vim.g.mapleader = ","
 -- in honor of master Wq
 -- https://sanctum.geek.nz/arabesque/vim-koans/
 vim.cmd("command! Wq wq")
--- close all buffers except the current one
-vim.cmd("command! Q :%bd|e#")
 
 -- use global clipboard for vim
 -- TODO check if there is a better one that does not put everything (only y, p)
@@ -45,14 +43,14 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.keymap.set("n", "<leader>|", vimCmd("vsplit"))
 vim.keymap.set("n", "<leader>-", vimCmd("split"))
+vim.keymap.set("n", "C-S-l", vimCmd("vertical-resize -5"))
+vim.keymap.set("n", "C-S-h", vimCmd("vertical-resize +5"))
 
 vim.opt.relativenumber = true
 
 -- buffer movement / control
 vim.keymap.set("n", "<C-h>", vimCmd("bprevious"), { silent = true })
 vim.keymap.set("n", "<C-l>", vimCmd("bnext"), { silent = true })
-vim.keymap.set("n", "<C-w>", vimCmd("bdelete"), { silent = true })
-vim.keymap.set("n", "<C-A-w>", vimCmd("bdelete!"), { silent = true })
 
 -- for vim-kitty-navigator
 vim.g.kitty_navigator_no_mappings = 1
@@ -306,6 +304,17 @@ require("lazy").setup({
 	},
 	"tpope/vim-fugitive",
 	"mattn/emmet-vim",
+	{
+		"ojroques/nvim-bufdel",
+		lazy = false,
+		config = function()
+			require("bufdel").setup()
+			vim.keymap.set("n", "<C-w>", vimCmd("BufDel"), { silent = true })
+			vim.keymap.set("n", "<C-A-w>", vimCmd("BufDel!"), { silent = true })
+			-- close all buffers except the current one
+			vim.cmd("command! Q :BufDelOthers")
+		end,
+	},
 })
 
 -- Global mappings.
@@ -533,7 +542,7 @@ require("lualine").setup({
 
 -- fzf
 vim.keymap.set("n", "<M-p>", vimCmd("Files"))
--- map <C-space> :Buffers<CR>
+vim.keymap.set("n", "<C-space>", vimCmd("Buffers"))
 vim.keymap.set("n", "<leader>/", vimCmd("Ag"))
 -- map <leader>l :BLines<CR>
 
