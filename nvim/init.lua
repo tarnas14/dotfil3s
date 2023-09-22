@@ -80,6 +80,14 @@ require("lazy").setup({
 		config = function()
 			vim.opt.background = "dark"
 			vim.cmd("colorscheme onedark")
+      vim.api.nvim_create_user_command("Light", function()
+        vim.opt.background = ""
+        vim.cmd("colorscheme onelight")
+      end, {})
+      vim.api.nvim_create_user_command("Dark", function()
+        vim.opt.background = "dark"
+        vim.cmd("colorscheme onedark")
+      end, {})
 		end,
 	},
 	{
