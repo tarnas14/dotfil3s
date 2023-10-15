@@ -56,7 +56,7 @@ bindsym Shift+Control+$alt+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p
 bindsym Shift+Control+$mod+l exec "$HOME/.config/i3/catMode.sh off; playerctl -p spotify pause; xrandr --output $laptopOutput --auto --output $primaryMonitorOutput --off --output $secondaryMonitorOutput --off; i3-msg restart; i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png"
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -252,7 +252,7 @@ exec --no-startup-id feh --bg-scale $HOME/.config/i3/images/snowboard_wallpaper.
 exec --no-startup-id xss-lock -- i3lock -n -e -i $HOME/.config/i3/images/lockscreen.png
 exec --no-startup-id greenclip daemon
 
-exec urxvt
+exec kitty
 exec google-chrome-stable
 exec conky
 exec signal-desktop-beta

@@ -85,9 +85,12 @@ unalias gcmsg
 function gcmsg () {
   branchName=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$branchName" =~ ^[A-Za-z]+-[0-9]+ ]]; then
-    jiraNumber=$(echo $branchName | grep -Eo '^[A-Za-z]+-[0-9]+' | tr a-z A-Z)
-    git commit -m "$jiraNumber $1"
+  if [[ "$branchName" =~ ^[A-Za-z]+-[0-9]+- ]]; then
+    jiraNumber=$(echo $branchName | grep -Eo '^[A-Za-z]+-[0-9]+-' | tr a-z A-Z)
+    git commit -m "${jiraNumber::-1} $1"
+  elif [[ "$branchName" =~ ^[0-9]+- ]]; then
+    issueNumber=$(echo $branchName | grep -Eo '^[0-9]+-' | tr a-z A-Z)
+    git commit -m "$1"$'\n\n'"issue: #${issueNumber::-1}"
   else
     git commit -m "$1"
   fi
@@ -95,12 +98,8 @@ function gcmsg () {
 
 export PATH=$PATH:/snap/bin
 
-if [ -z "$TMUX" ]; then
-  tmux attach || tmux new
-fi
-
 alias vtop="vtop --theme wizard"
-export EDITOR="vim"
+export EDITOR="nvim"
 export MYVIMRC="~/.config/nvim/init.vim"
 
 _has() {
@@ -207,3 +206,9 @@ function cleancache() {
 export NEXT_TELEMETRY_DISABLED=1
 
 eval "$(direnv hook zsh)"
+
+function kittyP() {
+  nohup kitty --session project.conf & disown
+  nohup kitty --session dockers.conf & disown
+  exit
+}
