@@ -80,14 +80,14 @@ require("lazy").setup({
 		config = function()
 			vim.opt.background = "dark"
 			vim.cmd("colorscheme onedark")
-      vim.api.nvim_create_user_command("Light", function()
-        vim.opt.background = ""
-        vim.cmd("colorscheme onelight")
-      end, {})
-      vim.api.nvim_create_user_command("Dark", function()
-        vim.opt.background = "dark"
-        vim.cmd("colorscheme onedark")
-      end, {})
+			vim.api.nvim_create_user_command("Light", function()
+				vim.opt.background = ""
+				vim.cmd("colorscheme onelight")
+			end, {})
+			vim.api.nvim_create_user_command("Dark", function()
+				vim.opt.background = "dark"
+				vim.cmd("colorscheme onedark")
+			end, {})
 		end,
 	},
 	{
@@ -223,7 +223,7 @@ require("lazy").setup({
 			"nvim-lua/lsp-status.nvim",
 		},
 	},
-	{ "junegunn/fzf", build = "fzf#install()" },
+	{ "junegunn/fzf", build = ":call fzf#install()" },
 	"junegunn/fzf.vim",
 	{
 		"rlane/pounce.nvim",
@@ -257,16 +257,7 @@ require("lazy").setup({
 		event = "InsertEnter",
 		opts = {}, -- this is eqivualent to setup({}) function
 	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({
-				-- for example, context is off by default, use this to turn it on
-				show_current_context = true,
-				show_current_context_start = true,
-			})
-		end,
-	},
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
 	{
@@ -554,7 +545,7 @@ require("lualine").setup({
 })
 
 -- fzf
-vim.keymap.set("n", "<M-p>", vimCmd("Files"))
+vim.keymap.set("n", "<A-p>", vimCmd("Files"))
 vim.keymap.set("n", "<C-space>", vimCmd("Buffers"))
 vim.keymap.set("n", "<leader>/", vimCmd("Ag"))
 -- map <leader>l :BLines<CR>
