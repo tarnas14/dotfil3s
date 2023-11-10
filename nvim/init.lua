@@ -43,10 +43,11 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.keymap.set("n", "<leader>|", vimCmd("vsplit"))
 vim.keymap.set("n", "<leader>-", vimCmd("split"))
-vim.keymap.set("n", "C-S-l", vimCmd("vertical-resize -5"))
-vim.keymap.set("n", "C-S-h", vimCmd("vertical-resize +5"))
+vim.keymap.set("n", "<leader>u", vimCmd("vertical-resize -10"))
+vim.keymap.set("n", "<leader>i", vimCmd("vertical-resize +10"))
 
 vim.opt.relativenumber = true
+vim.opt.number = true
 
 -- buffer movement / control
 vim.keymap.set("n", "<C-h>", vimCmd("bprevious"), { silent = true })
@@ -208,12 +209,16 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"kevinhwang91/rnvimr",
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		},
 		config = function()
-			vim.keymap.set("n", "<leader>E", vimCmd("RnvimrToggle"), { silent = true })
-			vim.g.rnvimr_enable_ex = 1
-			vim.g.rnvimr_enable_picker = 1
-			vim.g.rnvimr_hide_gitignore = 1
+			vim.keymap.set("n", "<leader>E", vimCmd("Neotree reveal"))
 		end,
 	},
 	{

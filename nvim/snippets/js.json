@@ -1,0 +1,36 @@
+{
+	"console.log": {
+		"prefix": "cl",
+		"body": [
+      "console.log($1)"
+		]
+	},
+	"jest test": {
+		"prefix": "it",
+		"body": [
+      "it(\"$1\", () => {",
+      "  // given",
+      "",
+      "  // when",
+      "  $2",
+      "",
+      "  // then",
+      "})"
+		]
+	},
+	"jest describe": {
+		"prefix": "describe",
+		"body": [
+      "describe(\"$1\", () => {",
+      "  it(\"$2\", () => {",
+      "    // given",
+      "",
+      "    // when",
+      "    $3",
+      "",
+      "    // then",
+      "  })",
+      "})"
+		]
+	}
+}

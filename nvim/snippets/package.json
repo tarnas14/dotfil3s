@@ -7,6 +7,13 @@
 					"all"
 				],
 				"path": "./all.json"
+			},
+			{
+				"language": [
+          "javascript",
+					"typescript"
+				],
+				"path": "./js.json"
 			}
 		]
 	}
