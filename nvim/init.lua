@@ -207,15 +207,19 @@ require("lazy").setup({
 			end, { silent = true })
 		end,
 	},
-	{
-		"kevinhwang91/rnvimr",
-		config = function()
-			vim.keymap.set("n", "<leader>E", vimCmd("RnvimrToggle"), { silent = true })
-			vim.g.rnvimr_enable_ex = 1
-			vim.g.rnvimr_enable_picker = 1
-			vim.g.rnvimr_hide_gitignore = 1
-		end,
-	},
+  {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+        -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+      },
+      config = function()
+        vim.keymap.set("n", "<leader>E", vimCmd("Neotree reveal"))
+      end
+  },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
