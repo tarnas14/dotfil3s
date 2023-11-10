@@ -8,3 +8,4 @@ elm-stuff
 .tool-versions
 yarn-error.log
 nohup.out
+.DS_Store

@@ -49,7 +49,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm)
+plugins=(git npm asdf)
 
 # User configuration
 
@@ -120,7 +120,7 @@ alias pytong=python
 # vimode
 # bindkey -v
 
-. /opt/asdf-vm/asdf.sh
+. "$HOME/.asdf/asdf.sh"
 
 # elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -206,9 +206,3 @@ function cleancache() {
 export NEXT_TELEMETRY_DISABLED=1
 
 eval "$(direnv hook zsh)"
-
-function kittyP() {
-  nohup kitty --session project.conf & disown
-  nohup kitty --session dockers.conf & disown
-  exit
-}

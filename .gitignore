@@ -5,3 +5,5 @@ nvim/.netrwhist
 # copied by vim-kitty-navigator (see init.lua)
 kitty/neighboring_window.py
 kitty/pass_keys.py
+
+karabiner/automatic_backups

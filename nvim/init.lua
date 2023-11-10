@@ -299,10 +299,11 @@ require("lazy").setup({
 		"knubie/vim-kitty-navigator",
 		build = "cp ./*.py ~/.config/kitty/",
 		config = function()
-			vim.keymap.set("n", "<a-h>", vimCmd("KittyNavigateLeft"), { silent = true })
-			vim.keymap.set("n", "<a-l>", vimCmd("KittyNavigateRight"), { silent = true })
-			vim.keymap.set("n", "<a-j>", vimCmd("KittyNavigateDown"), { silent = true })
-			vim.keymap.set("n", "<a-k>", vimCmd("KittyNavigateUp"), { silent = true })
+      -- Cmd+H is remapped in karabiner to send Cmd+Esc to the system, because hiding windows under Cmd+H cannot be disabled
+			vim.keymap.set("n", "<D-Esc>", vimCmd("KittyNavigateLeft"), { silent = true })
+			vim.keymap.set("n", "<D-l>", vimCmd("KittyNavigateRight"), { silent = true })
+			vim.keymap.set("n", "<D-j>", vimCmd("KittyNavigateDown"), { silent = true })
+			vim.keymap.set("n", "<D-k>", vimCmd("KittyNavigateUp"), { silent = true })
 		end,
 	},
 	"tpope/vim-fugitive",
@@ -549,9 +550,10 @@ require("lualine").setup({
 })
 
 -- fzf
-vim.keymap.set("n", "<A-p>", vimCmd("Files"))
+vim.keymap.set("n", "<D-p>", vimCmd("Files"))
 vim.keymap.set("n", "<C-space>", vimCmd("Buffers"))
 vim.keymap.set("n", "<leader>/", vimCmd("Ag"))
+vim.keymap.set("n", "<leader>*", vimCmd(":call fzf#vim#ag('<C-r>a', fzf#vim#with_preview('right:50%'))"))
 -- map <leader>l :BLines<CR>
 
 -- moving lines
