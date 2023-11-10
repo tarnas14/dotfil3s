@@ -49,7 +49,8 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm)
+# https://github.com/grigorii-zander/zsh-npm-scripts-autocomplete
+plugins=(git npm zsh-npm-scripts-autocomplete)
 
 # User configuration
 
@@ -211,4 +212,11 @@ function kittyP() {
   nohup kitty --session project.conf & disown
   nohup kitty --session dockers.conf & disown
   exit
+}
+
+function bluetoothReset() {
+  sudo rfkill block bluetooth
+  sleep 1
+  sudo rfkill unblock bluetooth
+  sudo rfkill unblock all
 }
