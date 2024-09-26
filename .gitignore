@@ -1,3 +1,7 @@
 nvim/plugged
 nvim/autoload
 nvim/.netrwhist
+
+# copied by vim-kitty-navigator (see init.lua)
+kitty/neighboring_window.py
+kitty/pass_keys.py
