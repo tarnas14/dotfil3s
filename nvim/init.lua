@@ -38,6 +38,9 @@ vim.cmd("command! Wq wq")
 -- TODO check if there is a better one that does not put everything (only y, p)
 vim.opt.clipboard:append({ "unnamedplus" })
 
+-- for nvim-lint eslint_d
+vim.env.ESLINT_D_PPID = vim.fn.getpid()
+
 -- splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -121,13 +124,13 @@ require("lazy").setup({
 						require("formatter.filetypes.lua").stylua,
 					},
 					javascript = {
-						require("formatter.filetypes.javascript").eslint_d,
+						require("formatter.filetypes.javascript").prettier,
 					},
 					typescript = {
-						require("formatter.filetypes.typescript").eslint_d,
+						require("formatter.filetypes.typescript").prettier,
 					},
 					typescriptreact = {
-						require("formatter.filetypes.typescriptreact").eslint_d,
+						require("formatter.filetypes.typescriptreact").prettier,
 					},
 					["*"] = {
 						require("formatter.filetypes.any").remove_trailing_whitespace,
@@ -147,13 +150,6 @@ require("lazy").setup({
 				typescript = { "eslint_d" },
 				typescriptreact = { "eslint_d" },
 			}
-
-			-- not sure if all these events are needed
-			vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
-				callback = function()
-					require("lint").try_lint()
-				end,
-			})
 		end,
 	},
 	{
@@ -274,46 +270,15 @@ require("lazy").setup({
 	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
 	{
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-			-- testrunners
-			"Issafalcon/neotest-dotnet",
-			"jfpedroza/neotest-elixir",
-		},
-		config = function()
-			local neotest = require("neotest")
-			neotest.setup({
-				adapters = {
-					require("neotest-dotnet"),
-					require("neotest-elixir"),
-				},
-			})
-
-			local keyopts = { noremap = true, silent = true }
-			vim.keymap.set("n", "<leader>ts", neotest.summary.open, keyopts)
-			vim.keymap.set("n", "<leader>tt", neotest.run.run, keyopts)
-			vim.keymap.set("n", "<leader>tf", function()
-				neotest.run.run(vim.fn.expand("%"))
-			end, keyopts)
-			vim.keymap.set("n", "<leader>to", function()
-				neotest.output.open({ enter = true, auto_close = true, last_run = true })
-			end, keyopts)
-			vim.keymap.set("n", "<leader>tO", neotest.output_panel.open, keyopts)
-		end,
-	},
-	{
 		"knubie/vim-kitty-navigator",
 		build = "cp ./*.py ~/.config/kitty/",
-		config = function()
+    config = function()
       -- Cmd+H is remapped in karabiner to send Cmd+Esc to the system, because hiding windows under Cmd+H cannot be disabled
-			vim.keymap.set("n", "<D-Esc>", vimCmd("KittyNavigateLeft"), { silent = true })
-			vim.keymap.set("n", "<D-l>", vimCmd("KittyNavigateRight"), { silent = true })
-			vim.keymap.set("n", "<D-j>", vimCmd("KittyNavigateDown"), { silent = true })
-			vim.keymap.set("n", "<D-k>", vimCmd("KittyNavigateUp"), { silent = true })
-		end,
+      vim.keymap.set("n", "<D-Esc>", vimCmd("KittyNavigateLeft"), { silent = true })
+      vim.keymap.set("n", "<D-l>", vimCmd("KittyNavigateRight"), { silent = true })
+      vim.keymap.set("n", "<D-j>", vimCmd("KittyNavigateDown"), { silent = true })
+      vim.keymap.set("n", "<D-k>", vimCmd("KittyNavigateUp"), { silent = true })
+    end,
 	},
 	"tpope/vim-fugitive",
 	"mattn/emmet-vim",
@@ -429,7 +394,7 @@ cmp.setup.cmdline(":", {
 -- Set up lspconfig language servers LSP
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 	init_options = {
 		preferences = {
