@@ -17,10 +17,6 @@ local function contains(table, val)
 	return false
 end
 
--- local script settings
-
-local FT_TO_NOT_USE_LSP_FOR_FORMATTING = { "lua", "javascript", "typescript", "typescriptreact" }
-
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -29,6 +25,15 @@ vim.opt.shiftwidth = 0
 vim.opt.smartindent = true
 
 vim.g.mapleader = ","
+
+-- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+-- folds
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 7
+-- vim.opt.foldnestmax = 3
 
 -- in honor of master Wq
 -- https://sanctum.geek.nz/arabesque/vim-koans/
@@ -114,7 +119,6 @@ require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
 		"mhartington/formatter.nvim",
-		-- ft = FT_TO_NOT_USE_LSP_FOR_FORMATTING,
 		config = function()
 			vim.keymap.set("n", "<leader>al", vimCmd("Format"), { silent = true })
 			vim.keymap.set("n", "<leader>aL", vimCmd("FormatWrite"), { silent = true })
@@ -327,11 +331,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
-		-- if not contains(FT_TO_NOT_USE_LSP_FOR_FORMATTING, vim.bo.filetype) then
-			vim.keymap.set("n", "<leader>af", function()
-				vim.lsp.buf.format({ async = true })
-			end, opts)
-		-- end
+    vim.keymap.set("n", "<leader>af", function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
 	end,
 })
 
