@@ -206,3 +206,5 @@ function cleancache() {
 export NEXT_TELEMETRY_DISABLED=1
 
 eval "$(direnv hook zsh)"
+
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"

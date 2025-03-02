@@ -1,0 +1,7 @@
+[user]
+    name = tarnas14
+    email = tarnas14@gmail.com
+    ; https://sites.lafayette.edu/newquisk/archives/504
+    signingkey = 84BBF9715B8C9209
+[core]
+  sshCommand = ssh -i ~/.ssh/tarnas14

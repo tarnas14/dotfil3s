@@ -19,7 +19,7 @@ end
 
 -- local script settings
 
-local FT_TO_NOT_USE_LSP_FOR_FORMATTING = { "lua", "javascript" }
+local FT_TO_NOT_USE_LSP_FOR_FORMATTING = { "lua", "javascript", "typescript", "typescriptreact" }
 
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -47,6 +47,7 @@ vim.keymap.set("n", "C-S-l", vimCmd("vertical-resize -5"))
 vim.keymap.set("n", "C-S-h", vimCmd("vertical-resize +5"))
 
 vim.opt.relativenumber = true
+vim.opt.number = true
 
 -- buffer movement / control
 vim.keymap.set("n", "<C-h>", vimCmd("bprevious"), { silent = true })
@@ -110,10 +111,10 @@ require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim", config = true },
 	{
 		"mhartington/formatter.nvim",
-		ft = FT_TO_NOT_USE_LSP_FOR_FORMATTING,
+		-- ft = FT_TO_NOT_USE_LSP_FOR_FORMATTING,
 		config = function()
-			vim.keymap.set("n", "<leader>af", vimCmd("Format"), { silent = true })
-			vim.keymap.set("n", "<leader>aF", vimCmd("FormatWrite"), { silent = true })
+			vim.keymap.set("n", "<leader>al", vimCmd("Format"), { silent = true })
+			vim.keymap.set("n", "<leader>aL", vimCmd("FormatWrite"), { silent = true })
 			local opts = {
 				filetype = {
 					lua = {
@@ -121,6 +122,12 @@ require("lazy").setup({
 					},
 					javascript = {
 						require("formatter.filetypes.javascript").eslint_d,
+					},
+					typescript = {
+						require("formatter.filetypes.typescript").eslint_d,
+					},
+					typescriptreact = {
+						require("formatter.filetypes.typescriptreact").eslint_d,
 					},
 					["*"] = {
 						require("formatter.filetypes.any").remove_trailing_whitespace,
@@ -137,6 +144,8 @@ require("lazy").setup({
 			require("lint").linters_by_ft = {
 				lua = { "luacheck" },
 				javascript = { "eslint_d" },
+				typescript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
 			}
 
 			-- not sure if all these events are needed
@@ -353,11 +362,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
-		if not contains(FT_TO_NOT_USE_LSP_FOR_FORMATTING, vim.bo.filetype) then
+		-- if not contains(FT_TO_NOT_USE_LSP_FOR_FORMATTING, vim.bo.filetype) then
 			vim.keymap.set("n", "<leader>af", function()
 				vim.lsp.buf.format({ async = true })
 			end, opts)
-		end
+		-- end
 	end,
 })
 

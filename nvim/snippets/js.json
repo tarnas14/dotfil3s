@@ -5,6 +5,16 @@
       "console.log($1)"
 		]
 	},
+	"console.log json stringify": {
+		"prefix": "clj",
+		"body": [
+      "console.log(JSON.stringify($1, null, 2))"
+		]
+	},
+  "eslint explicit any": {
+    "prefix": "explicitAny",
+    "body": "// eslint-disable-next-line @typescript-eslint/no-explicit-any"
+  },
 	"jest test": {
 		"prefix": "it",
 		"body": [

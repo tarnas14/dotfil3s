@@ -11,7 +11,8 @@
 			{
 				"language": [
           "javascript",
-					"typescript"
+					"typescript",
+					"typescriptreact"
 				],
 				"path": "./js.json"
 			}

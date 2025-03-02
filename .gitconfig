@@ -1,11 +1,11 @@
 [user]
-    name = tarnas14
-    email = tarnas14@gmail.com
+    name = tarnas14-optio
+    email = mateusz.tarnaski@optioincentives.no
     ; https://sites.lafayette.edu/newquisk/archives/504
-    signingkey = 53638AC0D0732282
+    signingkey = 6160B1184E39CA86
 [core]
     excludesfile = ~/.gitignore_global
-	autocrlf = input
+    autocrlf = input
 [pull]
     rebase = false
 [push]
@@ -19,3 +19,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[includeIf "gitdir:~/projects/personal/"]
+  path = ~/dotfil3s/.gitconfig-personal
