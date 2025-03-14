@@ -212,7 +212,7 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter-context",
 		config = function()
 			vim.keymap.set("n", "<leader>C", function()
-				require("treesitter-context").go_to_context()
+				require("treesitter-context").go_to_context(vim.v.count1)
 			end, { silent = true })
 		end,
 	},
