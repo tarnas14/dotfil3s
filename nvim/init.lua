@@ -529,7 +529,7 @@ require("lualine").setup({
 vim.keymap.set("n", "<D-p>", vimCmd("Files"))
 vim.keymap.set("n", "<C-space>", vimCmd("Buffers"))
 vim.keymap.set("n", "<leader>/", vimCmd("Ag"))
-vim.keymap.set("n", "<leader>*", vimCmd(":call fzf#vim#ag('<C-r>a', fzf#vim#with_preview('right:50%'))"))
+vim.keymap.set("n", "<leader>*", vimCmd(":call fzf#vim#ag(expand('<cword>'), fzf#vim#with_preview('right:50%'))"))
 -- map <leader>l :BLines<CR>
 
 -- moving lines
