@@ -32,7 +32,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 7
+-- vim.opt.foldlevelstart = 7
 -- vim.opt.foldnestmax = 3
 
 -- in honor of master Wq
