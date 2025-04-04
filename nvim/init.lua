@@ -83,6 +83,27 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		lazy = false,
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
+	{
+		"kylechui/nvim-surround",
+		version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+	{
 		"olimorris/onedarkpro.nvim",
 		lazy = false,
 		priority = 9001,
@@ -105,6 +126,7 @@ require("lazy").setup({
 	},
 	-- this is configured correctly, but most language servers don't send it :(
 	{
+		-- nvim notifications (e.g. bottom right lsp loading)
 		"j-hui/fidget.nvim",
 		tag = "legacy",
 		event = "LspAttach",
@@ -113,6 +135,7 @@ require("lazy").setup({
 		},
 	},
 	{
+		-- lsp package manager
 		"williamboman/mason.nvim",
 		config = true,
 	},
@@ -200,7 +223,18 @@ require("lazy").setup({
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "elixir", "heex", "eex", "yaml", "c_sharp", "dockerfile", "javascript", "typescript" },
+				ensure_installed = {
+					"elixir",
+					"heex",
+					"eex",
+					"yaml",
+					"c_sharp",
+					"dockerfile",
+					"javascript",
+					"typescript",
+					"tsx",
+					"markdown",
+				},
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = false,
@@ -216,19 +250,19 @@ require("lazy").setup({
 			end, { silent = true })
 		end,
 	},
-  {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-        -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-      },
-      config = function()
-        vim.keymap.set("n", "<leader>E", vimCmd("Neotree reveal"))
-      end
-  },
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		},
+		config = function()
+			vim.keymap.set("n", "<leader>E", vimCmd("Neotree reveal"))
+		end,
+	},
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
@@ -253,36 +287,22 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"drybalka/tree-climber.nvim",
-		config = function()
-			local keyopts = { noremap = true, silent = true }
-			vim.keymap.set({ "n", "v", "o" }, "<leader>h", require("tree-climber").goto_parent, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "<leader>l", require("tree-climber").goto_child, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "<leader>j", require("tree-climber").goto_next, keyopts)
-			vim.keymap.set({ "n", "v", "o" }, "<leader>k", require("tree-climber").goto_prev, keyopts)
-			vim.keymap.set("n", "<c-a-s-k>", require("tree-climber").swap_prev, keyopts)
-			vim.keymap.set("n", "<c-a-s-j>", require("tree-climber").swap_next, keyopts)
-			vim.keymap.set("n", "<leader>h", require("tree-climber").highlight_node, keyopts)
-		end,
-	},
-	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {}, -- this is eqivualent to setup({}) function
 	},
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-	"tpope/vim-surround",
 	"itchyny/vim-cursorword",
 	{
 		"knubie/vim-kitty-navigator",
 		build = "cp ./*.py ~/.config/kitty/",
-    config = function()
-      -- Cmd+H is remapped in karabiner to send Cmd+Esc to the system, because hiding windows under Cmd+H cannot be disabled
-      vim.keymap.set("n", "<D-Esc>", vimCmd("KittyNavigateLeft"), { silent = true })
-      vim.keymap.set("n", "<D-l>", vimCmd("KittyNavigateRight"), { silent = true })
-      vim.keymap.set("n", "<D-j>", vimCmd("KittyNavigateDown"), { silent = true })
-      vim.keymap.set("n", "<D-k>", vimCmd("KittyNavigateUp"), { silent = true })
-    end,
+		config = function()
+			-- Cmd+H is remapped in karabiner to send Cmd+Esc to the system, because hiding windows under Cmd+H cannot be disabled
+			vim.keymap.set("n", "<D-Esc>", vimCmd("KittyNavigateLeft"), { silent = true })
+			vim.keymap.set("n", "<D-l>", vimCmd("KittyNavigateRight"), { silent = true })
+			vim.keymap.set("n", "<D-j>", vimCmd("KittyNavigateDown"), { silent = true })
+			vim.keymap.set("n", "<D-k>", vimCmd("KittyNavigateUp"), { silent = true })
+		end,
 	},
 	"tpope/vim-fugitive",
 	"mattn/emmet-vim",
@@ -313,6 +333,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+		-- local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		-- client.name ~= "ts_ls"
+		-- client.name == "ts_ls"
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -331,9 +354,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>R", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "<leader>af", function()
-      vim.lsp.buf.format({ async = true })
-    end, opts)
+		-- we have a custom one in ts_ls
+		vim.keymap.set("n", "<leader>af", function()
+			vim.lsp.buf.format({ async = true })
+		end, opts)
 	end,
 })
 
@@ -396,11 +420,68 @@ cmp.setup.cmdline(":", {
 -- Set up lspconfig language servers LSP
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local function ts_ls_organize_imports()
+	vim.lsp.buf.execute_command({
+		command = "_typescript.organizeImports",
+		arguments = { vim.api.nvim_buf_get_name(0) },
+		title = "",
+	})
+end
+
+local function ts_ls_add_missing_imports()
+	vim.lsp.buf.code_action({
+		apply = true,
+		context = {
+			---@diagnostic disable-next-line: assign-type-mismatch
+			only = { "source.addMissingImports.ts" },
+			diagnostics = {},
+		},
+	})
+end
+
+local function ts_ls_fix_all()
+	vim.lsp.buf.code_action({
+		apply = true,
+		context = {
+			---@diagnostic disable-next-line: assign-type-mismatch
+			only = { "source.fixAll.ts" },
+			diagnostics = {},
+		},
+	})
+end
+
+local function ts_ls_remove_unused()
+	vim.lsp.buf.code_action({
+		apply = true,
+		context = {
+			---@diagnostic disable-next-line: assign-type-mismatch
+			only = { "source.removeUnused.ts" },
+			diagnostics = {},
+		},
+	})
+end
+
 lspconfig.ts_ls.setup({
 	capabilities = capabilities,
+	on_attach = function()
+		vim.keymap.set("n", "<leader>oi", ts_ls_organize_imports, opts)
+		vim.keymap.set("n", "<leader>am", function()
+      ts_ls_add_missing_imports()
+      ts_ls_organize_imports()
+    end, opts)
+		vim.keymap.set("n", "<leader>ru", ts_ls_remove_unused, opts)
+		vim.keymap.set("n", "<leader>fa", function()
+			ts_ls_add_missing_imports()
+      ts_ls_organize_imports()
+			ts_ls_remove_unused()
+			ts_ls_fix_all()
+		end, opts)
+	end,
 	init_options = {
+		hostInfo = "neovim",
 		preferences = {
-			importModuleSpecifierPreference = "relative",
+			importModuleSpecifierPreference = "shortest",
 		},
 	},
 })
