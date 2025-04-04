@@ -317,6 +317,8 @@ require("lazy").setup({
 			vim.cmd("command! Q :BufDelOthers")
 		end,
 	},
+  { 'echasnovski/mini.diff', version = '*' },
+  { 'kevinhwang91/nvim-bqf' },
 })
 
 -- Global mappings.
