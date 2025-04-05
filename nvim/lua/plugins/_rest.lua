@@ -48,33 +48,6 @@ return {
 		},
 	},
 	{
-		"mhartington/formatter.nvim",
-		config = function()
-			vim.keymap.set("n", "<leader>al", vimCmd("Format"), { silent = true })
-			vim.keymap.set("n", "<leader>aL", vimCmd("FormatWrite"), { silent = true })
-			local opts = {
-				filetype = {
-					lua = {
-						require("formatter.filetypes.lua").stylua,
-					},
-					javascript = {
-						require("formatter.filetypes.javascript").prettier,
-					},
-					typescript = {
-						require("formatter.filetypes.typescript").prettier,
-					},
-					typescriptreact = {
-						require("formatter.filetypes.typescriptreact").prettier,
-					},
-					["*"] = {
-						require("formatter.filetypes.any").remove_trailing_whitespace,
-					},
-				},
-			}
-			require("formatter").setup(opts)
-		end,
-	},
-	{
 		"mfussenegger/nvim-lint",
 		build = "npm i -g eslint_d",
 		config = function()

@@ -20,10 +20,6 @@ vim.cmd("command! Wq wq")
 -- TODO check if there is a better one that does not put everything (only y, p)
 vim.opt.clipboard:append({ "unnamedplus" })
 
--- linting
--- for nvim-lint eslint_d
-vim.env.ESLINT_D_PPID = vim.fn.getpid()
-
 -- splits
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -35,8 +31,6 @@ vim.keymap.set("n", "C-S-h", vimCmd("vertical-resize +5"))
 -- buffer movement / control
 vim.keymap.set("n", "<C-h>", vimCmd("bprevious"), { silent = true })
 vim.keymap.set("n", "<C-l>", vimCmd("bnext"), { silent = true })
-
-require("config/lazy")
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -57,3 +51,5 @@ vim.keymap.set("n", "<C-A-j>", vimCmd("m .+1<CR>=="))
 vim.keymap.set("n", "<C-A-k>", vimCmd("m .-2<CR>=="))
 vim.keymap.set("v", "<C-A-j>", ":m '>+1<CR>gv=gv") -- cannot use vimCmd because it does not work otherwise :3
 vim.keymap.set("v", "<C-A-k>", ":m '<-2<CR>gv=gv") -- cannot use vimCmd because it does not work otherwise :3
+
+require("config/lazy")
