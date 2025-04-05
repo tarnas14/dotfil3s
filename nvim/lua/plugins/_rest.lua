@@ -190,4 +190,9 @@ return {
 	},
   { 'echasnovski/mini.diff', version = '*' },
   { 'kevinhwang91/nvim-bqf' },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 }
