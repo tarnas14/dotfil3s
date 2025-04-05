@@ -1,3 +1,6 @@
+; https://superuser.com/questions/366649/ssh-config-same-host-but-different-keys-and-usernames
+[url "github_tarnas14:"]
+    insteadOf = git@github.com:
 [user]
     name = tarnas14
     email = tarnas14@gmail.com
