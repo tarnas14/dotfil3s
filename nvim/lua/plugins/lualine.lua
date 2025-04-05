@@ -11,7 +11,7 @@
           lualine_a = { "mode" },
           lualine_b = { "diagnostics" },
           lualine_c = {},
-          lualine_x = { "encoding", "filetype", "require'lsp-status'.status()" },
+          lualine_x = { "aerial", "filetype", "require'lsp-status'.status()" },
           lualine_y = {},
           lualine_z = { "location" },
         },
@@ -41,7 +41,6 @@
               -- it can also be a function that returns
               -- the value of `max_length` dynamically.
               filetype_names = {
-                TelescopePrompt = "Telescope",
                 dashboard = "Dashboard",
                 packer = "Packer",
                 fzf = "FZF",
