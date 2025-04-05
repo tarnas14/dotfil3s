@@ -1,6 +1,6 @@
 require("utils")
 
-vim.keymap.set("n", "<leader>a", vimCmd("AerialToggle"))
+vim.keymap.set("n", "<leader>t", vimCmd("AerialToggle"))
 
 return {
   'stevearc/aerial.nvim',
