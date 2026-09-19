@@ -6,6 +6,8 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # pairs: path relative to this file, destination directory
 setup=(
+    ".gitconfig"                           "$HOME"
+    ".gitignore_global"                    "$HOME"
     "kanshi/config"                        "$HOME/.config/kanshi"
     "kitty/kitty.conf"                     "$HOME/.config/kitty"
     "kitty/current-theme.conf"             "$HOME/.config/kitty"
