@@ -1,0 +1,28 @@
+#!/bin/sh                                                                                 
+dir="$HOME/screen-recordings"
+pidfile="${XDG_RUNTIME_DIR:-/tmp}/screenrec.pid"
+
+case "$1" in
+    start)
+        if [ -f "$pidfile" ] && kill -0 "$(cat "$pidfile")" 2>/dev/null; then
+            notify-send -t 2000 "Screen recording" "Already recording, Ctrl+Shift+Print stops it"
+            exit 1
+        fi
+        mkdir -p "$dir"
+        geometry=$(slurp) || exit 0 # Escape in slurp cancels          
+        file="$dir/$(date +%Y-%m-%d_%H-%M-%S).mp4"
+        wf-recorder -g "$geometry" -c libx264 -x yuv420p -f "$file" &
+	pkill -RTMIN+8 waybar
+        echo $! > "$pidfile"
+        notify-send -t 2000 "Screen recording" "Recording $(basename "$file")"
+        ;;
+    stop)
+        if [ -f "$pidfile" ] && kill -INT "$(cat "$pidfile")" 2>/dev/null; then
+            pkill -RTMIN+8 waybar
+            rm -f "$pidfile"
+            notify-send -t 2000 "Screen recording" "Saved to $dir"
+        else
+            notify-send -t 2000 "Screen recording" "Nothing is recording"
+        fi
+        ;;
+esac

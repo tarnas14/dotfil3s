@@ -1,0 +1,21 @@
+#!/bin/sh                                                                                                         
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist-thumbs"                                                           
+mkdir -p "$cache"                                                                                                 
+find "$cache" -type f -mtime +1 -delete 2>/dev/null                                                               
+                                                                                                                  
+cliphist list | while IFS= read -r line; do                                                                       
+    case "$line" in                                                                                               
+        *'[[ binary data'*)                                                                                       
+            id=$(printf '%s' "$line" | cut -f1)                                                                   
+            thumb="$cache/$id.png"                                                                                
+            [ -s "$thumb" ] || printf '%s\n' "$line" | cliphist decode > "$thumb"                                 
+            label=$(printf '%s' "$line" | cut -f2- \
+                | sed -E 's/\[\[ binary data ([0-9.]+ [KMG]?i?B) ([a-z]+) ([0-9]+x[0-9]+) \]\]/image \3 \2, \1/') 
+            printf '%s\t%s\000icon\037%s\n' "$id" "$label" "$thumb"                                               
+            ;;                                                                                                    
+        *)  printf '%s\n' "$line" ;;                                                                              
+    esac                                                                                                          
+done \
+| rofi -dmenu -i -p clip -show-icons -display-columns 2 \
+       -theme-str 'element-icon { size: 3.5em; }' \
+| cliphist decode | wl-copy

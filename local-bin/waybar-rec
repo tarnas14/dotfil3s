@@ -1,0 +1,10 @@
+#!/bin/sh
+# ~/.local/bin/waybar-rec   (chmod +x)
+pidfile="${XDG_RUNTIME_DIR:-/tmp}/screenrec.pid"
+if [ -f "$pidfile" ] && kill -0 "$(cat "$pidfile")" 2>/dev/null; then
+    elapsed=$(( $(date +%s) - $(stat -c %Y "$pidfile") ))
+    printf '{"text":"● REC %02d:%02d","class":"recording","tooltip":"Click to stop"}\n' \
+        $((elapsed / 60)) $((elapsed % 60))
+else
+    printf '{"text":""}\n'
+fi
