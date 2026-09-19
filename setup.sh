@@ -6,6 +6,7 @@ here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # pairs: path relative to this file, destination directory
 setup=(
+    "kanshi/config"                        "$HOME/.config/kanshi"
     "kitty/kitty.conf"                     "$HOME/.config/kitty"
     "kitty/current-theme.conf"             "$HOME/.config/kitty"
     "local-bin/screenrec"                  "$HOME/.local/bin"
