@@ -84,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-Preferred editor for local and remote sessions
+# Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -109,7 +109,7 @@ fi
 # unalias from .zhsrc git plugin
 unalias gcmsg
 function gcmsg () {
-  branchname=$(git rev-parse --abbrev-ref head)
+  branchname=$(git rev-parse --abbrev-ref HEAD)
 
   if [[ "$branchname" =~ ^[a-za-z]+-[0-9]+- ]]; then
     jiranumber=$(echo $branchname | grep -eo '^[a-za-z]+-[0-9]+-' | tr a-z a-z)
