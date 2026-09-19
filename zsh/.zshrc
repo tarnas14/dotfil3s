@@ -121,3 +121,7 @@ function gcmsg () {
     git commit -m "$1"
   fi
 }
+
+# kitty diff for git
+alias gdk='git difftool --no-symlinks --dir-diff'
+alias gdcak='git difftool --cached --no-symlinks --dir-diff'
