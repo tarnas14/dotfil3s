@@ -1,8 +1,8 @@
 [user]
-    name = tarnas14-optio
-    email = mateusz.tarnaski@optioincentives.no
+    name = tarnas14
+    email = tarnas14@gmail.com
     ; https://sites.lafayette.edu/newquisk/archives/504
-    signingkey = 6160B1184E39CA86
+    signingkey = 06C2DFB88BC0F185
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = input
@@ -15,11 +15,17 @@
 [gpg]
     program = gpg
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[includeIf "gitdir:~/projects/personal/"]
-  path = ~/dotfil3s/.gitconfig-personal
-[includeIf "gitdir:~/dotfil3s/"]
-  path = ~/dotfil3s/.gitconfig-personal
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitten diff $LOCAL $REMOTE
+[difftool "kitty gui"]
+    cmd = kitten diff $LOCAL $REMOTE
