@@ -19,6 +19,7 @@
 	"custom/rec",
         "mpd",
         "idle_inhibitor",
+	"custom/airpods",
 	"wireplumber",
         "network",
         "cpu",
@@ -222,5 +223,11 @@
       "interval": 1,
       "signal": 8,
       "on-click": "~/.local/bin/screenrec stop"
+    },
+    "custom/airpods": {
+        "exec": "airpods-tui --waybar-watch",
+        "return-type": "json",
+        "format": "󰎈 {}",
+        "on-click": ""
     }
 } 

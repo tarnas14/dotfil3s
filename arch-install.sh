@@ -57,6 +57,7 @@ repo=(
     thunar gvfs thunar-volman
     imv zathura zathura-pdf-mupdf mpv
     yazi-git ffmpeg 7zip poppler fd ripgrep fzf zoxide imagemagick resvg
+    airpods-tui-git
 )
 
 aur=(
