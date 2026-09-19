@@ -1,4 +1,11 @@
 default-timeout=5000
 
+background-color=#1c0d05ee
+text-color=#f3dcb4
+border-color=#f2b134
+
+[urgency=critical]
+border-color=#ff5a36
+
 [mode=do-not-disturb]
 invisible=1

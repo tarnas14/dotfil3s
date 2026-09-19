@@ -1,2 +1,42 @@
+# actual logic
 fingerprint
 ignore-empty-password
+
+# styling
+show-failed-attempts
+image=~/wallpaper
+scaling=fill
+color=1c0d05
+
+font=JetBrainsMono Nerd Font
+indicator-radius=100
+indicator-thickness=10
+line-uses-ring
+
+# idle and typing
+inside-color=1c0d05cc
+ring-color=d98c3a
+key-hl-color=f2b134
+bs-hl-color=a63a12
+separator-color=00000000
+text-color=f3dcb4
+
+# verifying
+inside-ver-color=1c0d05cc
+ring-ver-color=3fb8b0
+text-ver-color=f3dcb4
+
+# wrong password
+inside-wrong-color=3a1a0acc
+ring-wrong-color=ff5a36
+text-wrong-color=f3dcb4
+
+# cleared with Escape or backspace to empty
+inside-clear-color=1c0d05cc
+ring-clear-color=c9a97a
+text-clear-color=f3dcb4
+
+# caps lock warning
+ring-caps-lock-color=f2b134
+text-caps-lock-color=f2b134
+

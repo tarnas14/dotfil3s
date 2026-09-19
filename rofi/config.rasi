@@ -166,4 +166,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "Arc-Dark"
+@theme "gruvbox-dark-hard"
