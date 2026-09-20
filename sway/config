@@ -91,9 +91,6 @@ focus_follows_mouse no
 mouse_warping none
 seat * hide_cursor 3000
 
-# set
-output DP-2 modeline 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync -vsync
-
 ## Lid
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
