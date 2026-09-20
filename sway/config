@@ -90,7 +90,7 @@ focus_follows_mouse no
 mouse_warping none
 seat * hide_cursor 3000
 
-# set 
+# set
 output DP-2 modeline 241.50 2560 2608 2640 2720 1440 1443 1448 1481 +hsync -vsync
 
 ## Lid
@@ -308,5 +308,6 @@ assign [app_id="Caprine"] workspace 2
 assign [app_id="brave-www.facebook.com__messages-Default"] workspace 2
 for_window [app_id="org.keepassxc.KeePassXC" title="^(?!(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$)"] move scratchpad
 for_window [app_id="org.keepassxc.KeePassXC" title="^(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$"] floating enable, focus
+for_window [app_id="blueman-manager"] floating enable, resize set width 25ppt height 25ppt, move position 74ppt 1ppt
 
 include /etc/sway/config.d/*
