@@ -41,7 +41,7 @@ configuration {
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-        combi-modes: "window,drun,run,kanshi";
+        combi-modes: "window,drun,kanshi,run";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
