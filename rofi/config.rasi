@@ -1,5 +1,5 @@
 configuration {
-	modes: "combi,drun,run,window,ssh";
+	modes: "combi,drun,run,window,ssh,kanshi:~/.local/bin/rofi-kanshi";
 	font: "JetBrainsMono Nerd Font 11";
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -41,7 +41,7 @@ configuration {
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-	combi-modes: "drun,run,window";
+        combi-modes: "window,drun,run,kanshi";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/

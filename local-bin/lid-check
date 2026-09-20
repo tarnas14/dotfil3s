@@ -1,0 +1,2 @@
+grep -q close /proc/acpi/button/lid/*/state && swaymsg output eDP-1 disable
+exit 0
