@@ -55,8 +55,9 @@ font pango:JetBrainsMono Nerd Font 11
 # title bar
 default_border pixel 2
 default_floating_border pixel 2
+# the "indic" is the "next window" indicator - it's one step lighter than the rest of the border
 #                       border  bg      text    indic   child_border
-client.focused          #d98c3a #d98c3a #1c0d05 #3fb8b0 #d98c3a
+client.focused          #d98c3a #d98c3a #1c0d05 #f2b134 #d98c3a
 client.focused_inactive #a63a12 #a63a12 #f3dcb4 #a63a12 #a63a12
 client.unfocused        #3a1a0a #3a1a0a #c9a97a #3a1a0a #3a1a0a
 client.urgent           #3fb8b0 #3fb8b0 #1c0d05 #3fb8b0 #3fb8b0
