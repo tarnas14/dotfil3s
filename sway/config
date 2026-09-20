@@ -287,6 +287,7 @@ assign [app_id="kitty"] workspace 7
 assign [app_id="signal"] workspace 2
 assign [app_id="Caprine"] workspace 2
 assign [app_id="brave-www.facebook.com__messages-Default"] workspace 2
-for_window [app_id="org.keepassxc.KeePassXC" title="FromNordpass - KeePassXC"] move scratchpad, resize set 1200 800
+for_window [app_id="org.keepassxc.KeePassXC" title="^(?!(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$)"] move scratchpad
+for_window [app_id="org.keepassxc.KeePassXC" title="^(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$"] floating enable, focus
 
 include /etc/sway/config.d/*
