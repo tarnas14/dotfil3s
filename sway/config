@@ -85,6 +85,11 @@ exec swayidle -w \
     before-sleep 'swaylock -p' \
     lock 'swaylock -p'
 
+# cursor
+focus_follows_mouse no
+mouse_warping none
+seat * hide_cursor 3000
+
 ## Lid
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
