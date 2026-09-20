@@ -17,6 +17,7 @@ setup=(
     "local-bin/rofi-kanshi"                "$HOME/.local/bin"
     "local-bin/waybar-rec"                 "$HOME/.local/bin"
     "mako/config"                          "$HOME/.config/mako"
+    "nvim"                                 "$HOME/.config"
     "rofi/config.rasi"                     "$HOME/.config/rofi"
     "sway/config"                          "$HOME/.config/sway"
     "swaylock/config"                      "$HOME/.config/swaylock"

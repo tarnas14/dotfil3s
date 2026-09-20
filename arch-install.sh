@@ -4,68 +4,68 @@
 set -euo pipefail
 
 if ! command -v yay >/dev/null 2>&1; then
-    echo "yay not found, bootstrapping it from the AUR"
-    sudo pacman -S --needed --noconfirm base-devel git
-    tmp="$(mktemp -d)"
-    git clone https://aur.archlinux.org/yay.git "$tmp/yay"
-    (cd "$tmp/yay" && makepkg -si --noconfirm)
-    rm -rf "$tmp"
+  echo "yay not found, bootstrapping it from the AUR"
+  sudo pacman -S --needed --noconfirm base-devel git
+  tmp="$(mktemp -d)"
+  git clone https://aur.archlinux.org/yay.git "$tmp/yay"
+  (cd "$tmp/yay" && makepkg -si --noconfirm)
+  rm -rf "$tmp"
 fi
 
 repo=(
-    # compositor and session
-    sway swaybg swayidle waybar brightnessctl grim slurp pavucontrol xorg-xwayland
-    greetd greetd-tuigreet
-    linux-lts
+  # compositor and session
+  sway swaybg swayidle waybar brightnessctl grim slurp pavucontrol xorg-xwayland
+  greetd greetd-tuigreet
+  linux-lts
 
-    # audio, network, bluetooth, power
-    pipewire pipewire-pulse pipewire-alsa wireplumber
-    networkmanager network-manager-applet
-    bluez bluez-utils blueman
-    tlp tlp-rdw
+  # audio, network, bluetooth, power
+  pipewire pipewire-pulse pipewire-alsa wireplumber
+  networkmanager network-manager-applet
+  bluez bluez-utils blueman
+  tlp tlp-rdw
 
-    # launcher, notifications, portals, clipboard, screenshots, session helpers
-    rofi rofi-emoji wtype
-    mako libnotify
-    xdg-desktop-portal-wlr xdg-desktop-portal-gtk
-    polkit-gnome kanshi wlsunset
-    wl-clipboard cliphist
-    swappy wf-recorder gifski playerctl
-    jq
+  # launcher, notifications, portals, clipboard, screenshots, session helpers
+  rofi rofi-emoji wtype
+  mako libnotify
+  xdg-desktop-portal-wlr xdg-desktop-portal-gtk
+  polkit-gnome kanshi wlsunset
+  wl-clipboard cliphist
+  swappy wf-recorder gifski playerctl
+  jq
 
-    # Qt and GTK on Wayland, fonts, theming
-    qt5-wayland qt6-wayland
-    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji noto-fonts-cjk
-    papirus-icon-theme nwg-look
+  # Qt and GTK on Wayland, fonts, theming
+  qt5-wayland qt6-wayland
+  ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji noto-fonts-cjk
+  papirus-icon-theme nwg-look
 
-    # shell and terminal
-    kitty zsh zsh-autosuggestions zsh-syntax-highlighting
+  # shell and terminal
+  kitty zsh zsh-autosuggestions zsh-syntax-highlighting
 
-    # development
-    git base-devel neovim mise
-    docker docker-compose
+  # development
+  git base-devel neovim tree-sitter-cli mise
+  docker docker-compose
 
-    # system housekeeping
-    man-db man-pages xdg-user-dirs
-    ufw fwupd fprintd
-    snapper snap-pac restic
-    reflector pacman-contrib efibootmgr
-    gnome-keyring libsecret
+  # system housekeeping
+  man-db man-pages xdg-user-dirs
+  ufw fwupd fprintd
+  snapper snap-pac restic
+  reflector pacman-contrib efibootmgr
+  gnome-keyring libsecret
 
-    # applications
-    keepassxc syncthing signal-desktop
-    thunar gvfs thunar-volman
-    imv zathura zathura-pdf-mupdf mpv
-    yazi-git ffmpeg 7zip poppler fd ripgrep fzf zoxide imagemagick resvg
-    airpods-tui-git
+  # applications
+  keepassxc syncthing signal-desktop
+  thunar gvfs thunar-volman
+  imv zathura zathura-pdf-mupdf mpv
+  yazi-git ffmpeg 7zip poppler fd ripgrep fzf zoxide imagemagick resvg
+  airpods-tui-git
 )
 
 aur=(
-    brave-bin
-    wl-clip-persist
-    lazydocker
-    keepmenu
-    swaylock-fprintd-git   # provides swaylock, pacman will offer to replace the upstream one
+  brave-bin
+  wl-clip-persist
+  lazydocker
+  keepmenu
+  swaylock-fprintd-git # provides swaylock, pacman will offer to replace the upstream one
 )
 
 yay -S --needed "${repo[@]}" "${aur[@]}"
