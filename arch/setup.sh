@@ -1,29 +1,29 @@
 #!/usr/bin/env bash
-# setup.sh — link dotfiles from this repository into place
+# arch/setup.sh — link dotfiles from this repository into place (Arch + sway)
 set -euo pipefail
 
-here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # pairs: path relative to this file, destination directory
 setup=(
     ".gitconfig"                           "$HOME"
     ".gitignore_global"                    "$HOME"
-    "kanshi/config"                        "$HOME/.config/kanshi"
+    "arch/kanshi/config"                        "$HOME/.config/kanshi"
     "kitty/kitty.conf"                     "$HOME/.config/kitty"
-    "kitty/current-theme.conf"             "$HOME/.config/kitty"
-    "local-bin/lid-check"                  "$HOME/.local/bin"
-    "local-bin/screenrec"                  "$HOME/.local/bin"
-    "local-bin/rofi-clip"                  "$HOME/.local/bin"
-    "local-bin/rofi-kanshi"                "$HOME/.local/bin"
-    "local-bin/waybar-rec"                 "$HOME/.local/bin"
-    "mako/config"                          "$HOME/.config/mako"
+    "arch/kitty/current-theme.conf"             "$HOME/.config/kitty"
+    "arch/local-bin/lid-check"                  "$HOME/.local/bin"
+    "arch/local-bin/screenrec"                  "$HOME/.local/bin"
+    "arch/local-bin/rofi-clip"                  "$HOME/.local/bin"
+    "arch/local-bin/rofi-kanshi"                "$HOME/.local/bin"
+    "arch/local-bin/waybar-rec"                 "$HOME/.local/bin"
+    "arch/mako/config"                          "$HOME/.config/mako"
     "nvim"                                 "$HOME/.config"
     "rofi/config.rasi"                     "$HOME/.config/rofi"
-    "sway/config"                          "$HOME/.config/sway"
-    "swaylock/config"                      "$HOME/.config/swaylock"
-    "waybar/config.jsonc"                  "$HOME/.config/waybar"
-    "waybar/style.css"                     "$HOME/.config/waybar"
-    "xdg-desktop-portal/sway-portals.conf" "$HOME/.config/xdg-desktop-portal"
+    "arch/sway/config"                          "$HOME/.config/sway"
+    "arch/swaylock/config"                      "$HOME/.config/swaylock"
+    "arch/waybar/config.jsonc"                  "$HOME/.config/waybar"
+    "arch/waybar/style.css"                     "$HOME/.config/waybar"
+    "arch/xdg-desktop-portal/sway-portals.conf" "$HOME/.config/xdg-desktop-portal"
     "zsh/.zshrc"                           "$HOME"
     "zsh/.zshenv"                          "$HOME"
 )

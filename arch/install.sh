@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install-apps.sh — every package the Arch + Sway setup uses, repositories and AUR.
+# arch/install.sh — every package the Arch + Sway setup uses, repositories and AUR.
 # Safe to re-run: --needed skips what is already installed.
 set -euo pipefail
 
