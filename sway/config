@@ -272,12 +272,13 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
     # Special key to take a screenshot with grim and edit with swappy
-    bindsym Print exec grim -g "$(slurp)" - | swappy -f -
-    bindsym Shift+Print exec grim - | wl-copy
+    bindsym Ctrl+Shift+Mod1+3 exec grim -g "$(slurp)" - | wl-copy
+    bindsym Ctrl+Shift+Mod1+4 exec grim -g "$(slurp)" - | swappy -f -
+    bindsym Ctrl+Shift+Mod1+5 exec grim - | wl-copy
 
     # screenr ecording
-    bindsym Ctrl+Print exec ~/.local/bin/screenrec start
-    bindsym Ctrl+Shift+Print exec ~/.local/bin/screenrec stop
+    bindsym Ctrl+Shift+Mod1+6 exec ~/.local/bin/screenrec start
+    bindsym Ctrl+Shift+Mod1+7 exec ~/.local/bin/screenrec stop
 
 ## rofi emoji picker
 bindsym $mod+period exec rofi -modi emoji -show emoji
