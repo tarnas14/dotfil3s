@@ -8,3 +8,6 @@ configuration {
     combi-modes: "win,drun,run";
     display-win: "window";
 }
+
+// host theme; wins over the @theme line in base.rasi because it comes later
+@theme "onedark"

@@ -22,6 +22,7 @@ setup=(
     "ubuntu/local-bin/rofi-window"  "$HOME/.local/bin"
     "ubuntu/local-bin/dnd-toggle"   "$HOME/.local/bin"
     "ubuntu/rofi/config.rasi"       "$HOME/.config/rofi"
+    "ubuntu/rofi/onedark.rasi"      "$HOME/.config/rofi"
     "ubuntu/autostart"              "$HOME/.config"
 )
 

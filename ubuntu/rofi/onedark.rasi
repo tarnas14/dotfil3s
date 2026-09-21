@@ -1,0 +1,28 @@
+/* One Dark for rofi, same palette as kitty and nvim on the Ubuntu machine.
+   Linked as ~/.config/rofi/onedark.rasi by ubuntu/setup.sh; the font comes from
+   the configuration block, not from here, so a size override stays in config.rasi. */
+* {
+    bg:      #282c34;
+    bg-alt:  #21252b;
+    fg:      #abb2bf;
+    fg-dim:  #5c6370;
+    accent:  #56b6c2;
+    urgent:  #e06c75;
+    background-color: transparent;
+    text-color:       @fg;
+}
+window   { background-color: @bg; border: 2px; border-color: @accent; padding: 8px; width: 40%; }
+mainbox  { spacing: 8px; }
+inputbar { children: [ prompt, entry ]; background-color: @bg-alt; padding: 8px; spacing: 8px; }
+prompt   { text-color: @accent; }
+listview { lines: 10; spacing: 2px; scrollbar: false; }
+element  { padding: 6px 8px; spacing: 8px; }
+element normal.urgent, element alternate.urgent { text-color: @urgent; }
+element selected.normal { background-color: @accent; text-color: @bg; }
+element selected.urgent { background-color: @urgent; text-color: @bg; }
+element-icon { size: 1.2em; }
+element-text { text-color: inherit; highlight: bold; }
+mode-switcher { spacing: 4px; }
+button   { padding: 6px; background-color: @bg-alt; text-color: @fg-dim; }
+button selected { background-color: @accent; text-color: @bg; }
+message  { padding: 8px; background-color: @bg-alt; }

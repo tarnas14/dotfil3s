@@ -123,12 +123,32 @@ fkey workspace-active-tile-toggle "@as []"                # was Shift+Super+w
 fkey window-swap-last-active      "@as []"                # was Super+Return
 fkey window-toggle-always-float   "@as []"                # was Shift+Super+c
 fkey prefs-open                   "@as []"                # was Super+period
-# left alone: Ctrl+Super+hjkl swap, Super+x focus border toggle, Ctrl+Super+plus/minus gaps
+fkey focus-border-toggle          "@as []"                # was Super+x, one key off Super+Shift+x (close); toggled the border off by accident
+# left alone: Ctrl+Super+hjkl swap, Ctrl+Super+plus/minus gaps
 
 f=/org/gnome/shell/extensions/forge
 dconf write $f/window-gap-size 6                       # gaps inner 6
 dconf write $f/window-gap-hidden-on-single true        # smart_gaps on
-dconf write $f/focus-border-size 2
+dconf write $f/focus-border-toggle true              # Super+x flips this off; keep it on
+
+# Border colours and size live in Forge's stylesheet, not in dconf (the focus-border-*
+# dconf keys are not read by the extension). Forge writes the file on first enable;
+# on a fresh machine run this script again after the first login. One Dark palette,
+# 2px and square like the sway/kitty borders.
+css="$HOME/.config/forge/stylesheet/forge/stylesheet.css"
+if [[ -f "$css" ]]; then
+  border() { # class, rgba
+    sed -i -E "/^\.$1 \{/,/^\}/{s/border-color:[^;]+;/border-color: $2;/;s/border-width:[^;]+;/border-width: 2px;/;s/border-radius:[^;]+;/border-radius: 0px;/}" "$css"
+  }
+  border window-tiled-border   "rgba(86, 182, 194, 1)"    # cyan   #56b6c2, focused window
+  border window-stacked-border "rgba(229, 192, 123, 1)"   # yellow #e5c07b
+  border window-tabbed-border  "rgba(97, 175, 239, 1)"    # blue   #61afef
+  border window-floated-border "rgba(198, 120, 221, 1)"   # purple #c678dd
+  # flipping css-updated makes the running extension reload the stylesheet
+  if [[ "$(dconf read $f/css-updated)" == "true" ]]; then dconf write $f/css-updated false; else dconf write $f/css-updated true; fi
+else
+  echo "note: $css not there yet, Forge creates it on first enable; re-run for the border colours"
+fi
 
 ### GPaste: clipboard history like cliphist -max-items 10 (schema comes with gpaste-2)
 if gsettings list-schemas | grep -qx org.gnome.GPaste; then
