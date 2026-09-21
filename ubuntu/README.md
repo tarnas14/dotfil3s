@@ -11,6 +11,7 @@ Forge tiles inside GNOME with sway's keys; rofi does the launching; kitty, zsh a
 chsh -s /usr/bin/zsh
 ./ubuntu/setup.sh            symlinks (subset of ../setup.sh plus the ubuntu/ files)
 ./ubuntu/gnome-settings.sh   keys, workspaces, keyboard, touchpad, extensions
+edit ubuntu/gitconfig.local   name, e-mail, signing key (see the top-level README)
 log out, log in
 mise use -g node@lts; nvim  lazy and mason install the rest
 ```
@@ -70,3 +71,7 @@ GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super
 | `rofi/config.rasi`            | imports `../rofi/config.rasi` as `base.rasi`, swaps kanshi for `win`     |
 | `forge/windows.json`          | float rules, copied once (Forge rewrites the file, a symlink would not survive) |
 | `autostart/*.desktop`         | the `exec` lines                                                         |
+| `gitconfig.local`             | work identity, linked as `~/.gitconfig.local`; fill in name, e-mail, key |
+| `kitty/current-theme.conf`    | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen |
+| `kitty/local-theme-overrides.conf` | borders, tabs, `hide_window_decorations`; last file kitty reads      |
+| `nvim/host.lua`               | colourscheme for this host, loaded via `/etc/os-release`                 |

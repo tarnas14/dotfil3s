@@ -13,6 +13,7 @@ Sync this directory to `~/.config/nvim` and start Neovim once; lazy.nvim install
 | `lua/config/keymaps.lua`     | Splits, buffers as tabs, diagnostics, line moving, comments.            |
 | `lua/config/autocmds.lua`    | Yank highlight, compose filetype, cursor restore.                       |
 | `lua/config/lazy.lua`        | Plugin manager bootstrap.                                               |
+| `lua/config/host.lua`        | Per-host settings: reads `/etc/os-release`, loads `<repo>/<id>/nvim/host.lua`. |
 | `lua/plugins/*.lua`          | One file per concern, each returns lazy.nvim specs.                     |
 | `lua/util/docker_lsp.lua`    | Helper for language servers that run inside a container.                |
 | `templates/project.nvim.lua` | Per-project `.nvim.lua` example.                                        |
