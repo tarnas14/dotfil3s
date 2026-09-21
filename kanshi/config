@@ -1,10 +1,10 @@
 profile both {
-    output DP-2 enable scale 1 mode 2560x1440@60 position 0,0
+    output DP-3 enable scale 1 mode 2560x1440@60 position 0,0
     output eDP-1 enable scale 1.3 position -210,1440
     exec ~/.local/bin/lid-check
 }
 
 profile laptop-only {
-    output DP-2 disable
+    output DP-3 disable
     output eDP-1 enable scale 1.3 position 0,0
 }
