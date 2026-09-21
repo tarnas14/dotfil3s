@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=kitty
+Exec=kitty
+X-GNOME-Autostart-enabled=true
+

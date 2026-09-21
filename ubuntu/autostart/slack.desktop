@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=slack
+Exec=/snap/bin/slack
+X-GNOME-Autostart-enabled=true

@@ -1,0 +1,9 @@
+#!/bin/sh
+# rofi 2.0 needs the layer-shell protocol on Wayland and GNOME's Mutter does not
+# implement it, so on GNOME rofi runs as an X11 client on XWayland (-x11).
+# Its usual override-redirect window never gets keyboard input under Mutter, so
+# -normal-window makes it an ordinary window that Mutter focuses like any other.
+# Tested on GNOME 50, 2026-09-21. WAYLAND_DISPLAY stays set, so everything rofi
+# launches is still a native Wayland application.
+# Lives in ~/.local/bin so every script and keybinding that says `rofi` gets this.
+exec /usr/bin/rofi -x11 -normal-window "$@"

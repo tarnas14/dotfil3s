@@ -1,0 +1,24 @@
+{
+  "overrides": [
+    {
+      "wmClass": "gnome-control-center",
+      "mode": "float"
+    },
+    {
+      "wmClass": "org.gnome.Settings",
+      "mode": "float"
+    },
+    {
+      "wmClass": "pavucontrol",
+      "mode": "float"
+    },
+    {
+      "wmClass": "Rofi",
+      "mode": "float"
+    },
+    {
+      "wmClass": "rofi",
+      "mode": "float"
+    }
+  ]
+}

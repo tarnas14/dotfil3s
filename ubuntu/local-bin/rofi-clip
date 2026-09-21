@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Clipboard history through rofi, GNOME edition. Mutter has no data-control
+# protocol, so cliphist cannot watch the clipboard here; GPaste's shell extension
+# tracks it and gpaste-client reads it. Same keys and the same look as the sway
+# version: Super+c picks an entry and puts it on the clipboard.
+#   rofi-clip           put the chosen entry on the clipboard
+#   rofi-clip --print   print the chosen entry to stdout instead (nvim's ,p)
+set -uo pipefail
+
+uuids=() rows=()
+# gpaste-client --oneline history: "<uuid>: <text>", images show as "[Image, WxH (date)]"
+while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    uuids+=("${line%%: *}")
+    rows+=("${line#*: }")
+done < <(gpaste-client --oneline history 2>/dev/null)
+
+[[ ${#uuids[@]} -eq 0 ]] && { notify-send -t 2000 "Clipboard" "History is empty"; exit 0; }
+
+# -format i: rofi prints the index of the chosen row
+i=$(printf '%s\n' "${rows[@]}" | rofi -dmenu -i -p clip -format i) || exit 0
+[[ -z "$i" ]] && exit 0
+uuid="${uuids[$i]}"
+
+if [[ "${1:-}" == "--print" ]]; then
+    gpaste-client --raw get "$uuid"
+else
+    gpaste-client select "$uuid"
+fi

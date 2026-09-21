@@ -1,0 +1,38 @@
+#!/bin/sh
+# rofi script mode: a window switcher for GNOME Wayland.
+# rofi's own window mode cannot see native Wayland windows on GNOME, so the list
+# comes from the Window Calls extension (window-calls@domandoman.xyz) over D-Bus.
+#   rofi -show win            with  modes: "...,win:~/.local/bin/rofi-window"
+set -u
+bus="--session --dest org.gnome.Shell --object-path /org/gnome/Shell/Extensions/Windows"
+iface="org.gnome.Shell.Extensions.Windows"
+
+# gdbus prints a GVariant tuple: ('...',) with \' for quotes inside
+unwrap() { sed -E "s/^\('//; s/',\)\$//; s/\\\\'/'/g"; }
+
+# second call: rofi hands back the selected row, ROFI_INFO holds the window id
+if [ -n "${ROFI_INFO:-}" ]; then
+    gdbus call $bus --method "$iface.Activate" "$ROFI_INFO" >/dev/null 2>&1
+    exit 0
+fi
+
+printf '\0prompt\037window\n'
+printf '\0markup-rows\037true\n'
+
+list=$(gdbus call $bus --method "$iface.List" 2>/dev/null) || {
+    printf 'Window Calls extension is not running\n'
+    exit 0
+}
+
+# window_type 0 is a normal window; skip docks, menus and the like
+printf '%s' "$list" | unwrap \
+    | jq -r '.[] | select(.window_type == 0 and (.wm_class | ascii_downcase) != "rofi") | "\(.id)\t\(.workspace)\t\(.wm_class)\t\(.focus)"' \
+    | while IFS="$(printf '\t')" read -r id ws class focus; do
+        title=$(gdbus call $bus --method "$iface.GetTitle" "$id" 2>/dev/null | unwrap)
+        icon=$(printf '%s' "$class" | tr 'A-Z' 'a-z')
+        mark=""
+        [ "$focus" = "true" ] && mark="●"
+        # workspace   class   title, same shape as sway's "{w}  {c}  {t}"
+        printf '%s <b>%-2s</b> %-18s %s\0info\037%s\037icon\037%s\n' \
+            "$mark" "$((ws + 1))" "$class" "$title" "$id" "$icon"
+    done

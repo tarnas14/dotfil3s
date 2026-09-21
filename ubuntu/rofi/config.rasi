@@ -1,0 +1,10 @@
+// GNOME variant: the shared config, minus the kanshi mode, plus the Window Calls
+// window switcher as a script mode called "win". Linked as ~/.config/rofi/config.rasi,
+// the shared file is linked next to it as base.rasi.
+@import "base.rasi"
+
+configuration {
+    modes: "combi,drun,run,ssh,win:~/.local/bin/rofi-window";
+    combi-modes: "win,drun,run";
+    display-win: "window";
+}

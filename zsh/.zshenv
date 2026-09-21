@@ -14,3 +14,6 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # NEXT
 export NEXT_TELEMETRY_DISABLED_1
+
+# ~/.local/bin: nvim, yazi, mise, fd and the rofi wrapper on ubuntu; harmless on arch
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"

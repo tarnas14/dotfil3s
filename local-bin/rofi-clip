@@ -1,4 +1,6 @@
-#!/bin/sh                                                                                                         
+#!/bin/sh
+# rofi-clip           put the chosen entry on the clipboard
+# rofi-clip --print   print it to stdout instead (nvim's ,p)                                                                                                         
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist-thumbs"                                                           
 mkdir -p "$cache"                                                                                                 
 find "$cache" -type f -mtime +1 -delete 2>/dev/null                                                               
@@ -18,4 +20,4 @@ cliphist list | while IFS= read -r line; do
 done \
 | rofi -dmenu -i -p clip -show-icons -display-columns 2 \
        -theme-str 'element-icon { size: 3.5em; }' \
-| cliphist decode | wl-copy
+| cliphist decode | if [ "${1:-}" = "--print" ]; then cat; else wl-copy; fi

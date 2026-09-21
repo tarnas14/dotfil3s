@@ -1,0 +1,8 @@
+#!/bin/sh
+# Toggle GNOME's do-not-disturb, the equivalent of `makoctl mode -t do-not-disturb`.
+if [ "$(gsettings get org.gnome.desktop.notifications show-banners)" = "true" ]; then
+    gsettings set org.gnome.desktop.notifications show-banners false
+else
+    gsettings set org.gnome.desktop.notifications show-banners true
+    notify-send -t 1500 "Notifications" "Banners back on"
+fi

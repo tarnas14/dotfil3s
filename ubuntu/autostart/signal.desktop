@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=signal
+Exec=sh -c 'sleep 3 && signal-desktop --use-tray-icon'
+X-GNOME-Autostart-enabled=true
+

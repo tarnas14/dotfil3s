@@ -11,8 +11,9 @@ map({ "n", "x" }, "p", '"+p', { desc = "put from clipboard" })
 map({ "n", "x" }, "P", '"+P', { desc = "put before from clipboard" })
 
 -- Pick an entry from the clipboard history through rofi and put it at the cursor.
+-- ~/.local/bin/rofi-clip --print speaks to cliphist on sway and to GPaste on GNOME.
 map("n", "<leader>p", function()
-  local out = vim.fn.system("cliphist list | rofi -dmenu -p clip | cliphist decode")
+  local out = vim.fn.system("rofi-clip --print")
   if vim.v.shell_error ~= 0 or out == "" then
     return
   end

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=brave
+Exec=brave
+X-GNOME-Autostart-enabled=true
+
