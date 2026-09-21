@@ -1,0 +1,8 @@
+; identity for the Ubuntu work system, included from ~/.gitconfig
+[user]
+    name = <full name as it should appear in work commits>
+    email = <work e-mail>
+    ; signingkey = <long key id, once generated: gpg --list-secret-keys --keyid-format long>
+[commit]
+    ; remove this line once signingkey above is set
+    gpgsign = false

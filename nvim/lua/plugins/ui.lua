@@ -5,7 +5,8 @@ return {
     priority = 1000,
     config = function()
       vim.o.background = "dark"
-      vim.cmd.colorscheme("melange")
+      -- colourscheme comes from <repo>/<host>/nvim/host.lua, melange when there is none
+      vim.cmd.colorscheme(require("config.host").config().colorscheme or "melange")
       vim.api.nvim_create_user_command("Dark", function()
         vim.o.background = "dark"
         vim.cmd.colorscheme("onedark")

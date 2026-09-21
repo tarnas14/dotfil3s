@@ -1,0 +1,6 @@
+; identity for the private Arch system, included from ~/.gitconfig
+[user]
+    name = tarnas14
+    email = tarnas14@gmail.com
+    ; https://sites.lafayette.edu/newquisk/archives/504
+    signingkey = 06C2DFB88BC0F185

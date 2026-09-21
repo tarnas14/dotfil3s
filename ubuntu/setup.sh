@@ -11,11 +11,12 @@ setup=(
     ".gitconfig"                    "$HOME"
     ".gitignore_global"             "$HOME"
     "kitty/kitty.conf"              "$HOME/.config/kitty"
-    "kitty/current-theme.conf"      "$HOME/.config/kitty"
     "nvim"                          "$HOME/.config"
     "zsh/.zshrc"                    "$HOME"
     "zsh/.zshenv"                   "$HOME"
     # gnome specific
+    "ubuntu/kitty/current-theme.conf"         "$HOME/.config/kitty"
+    "ubuntu/kitty/local-theme-overrides.conf" "$HOME/.config/kitty"
     "ubuntu/local-bin/rofi"         "$HOME/.local/bin"
     "ubuntu/local-bin/rofi-clip"    "$HOME/.local/bin"
     "ubuntu/local-bin/rofi-window"  "$HOME/.local/bin"
@@ -60,5 +61,6 @@ else
     ok "$forge_cfg copied from ubuntu/forge/windows.json"
 fi
 
-# the shared rofi config is imported by the GNOME one under a different name
-link "$root/rofi/config.rasi" "$HOME/.config/rofi/base.rasi"
+# links whose name differs from the file in the repository
+link "$root/ubuntu/gitconfig.local" "$HOME/.gitconfig.local"
+link "$root/rofi/config.rasi"       "$HOME/.config/rofi/base.rasi"

@@ -1,8 +1,3 @@
-[user]
-    name = tarnas14
-    email = tarnas14@gmail.com
-    ; https://sites.lafayette.edu/newquisk/archives/504
-    signingkey = 06C2DFB88BC0F185
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = input
@@ -29,3 +24,6 @@
     cmd = kitten diff $LOCAL $REMOTE
 [difftool "kitty gui"]
     cmd = kitten diff $LOCAL $REMOTE
+[include]
+    ; identity and key per machine: arch/gitconfig.local or ubuntu/gitconfig.local, linked by that host's setup.sh
+    path = ~/.gitconfig.local

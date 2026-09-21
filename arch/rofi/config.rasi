@@ -1,0 +1,7 @@
+// Arch variant: the shared config as is. Linked as ~/.config/rofi/config.rasi,
+// the shared file is linked next to it as base.rasi. Host overrides (font size,
+// theme) go into the configuration block below and win over base.rasi.
+@import "base.rasi"
+
+configuration {
+}

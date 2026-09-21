@@ -1,9 +1,4 @@
-nvim/plugged
-nvim/autoload
-nvim/.netrwhist
-
-# copied by vim-kitty-navigator (see init.lua)
+# copied by kitty-navigator.nvim into ~/.config/kitty (a real directory), listed in case they ever land here
 kitty/neighboring_window.py
 kitty/pass_keys.py
-
-karabiner/automatic_backups
+kitty/navigate_kitty.py
