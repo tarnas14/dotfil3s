@@ -51,9 +51,9 @@ gsettings set $shell focus-active-notification "[]"
 gsettings set $mutter switch-monitor "['XF86Display']"   # Super+p -> window switcher
 gsettings set org.gnome.mutter.wayland.keybindings restore-shortcuts "[]"  # Super+Escape -> lock
 gsettings set $mutter cancel-input-capture "[]"           # Super+Shift+Escape -> suspend
-gsettings set $mutter toggle-tiled-left "[]"             # Super+Left/Right -> Forge focus, like sway's arrow keys
+gsettings set $mutter toggle-tiled-left "[]"             # Super+arrows do nothing, on sway too
 gsettings set $mutter toggle-tiled-right "[]"
-for d in left right up down; do gsettings set $wm move-to-monitor-$d "[]"; done   # Super+Shift+arrows -> Forge move
+for d in left right up down; do gsettings set $wm move-to-monitor-$d "[]"; done   # Super+Shift+arrows do nothing either
 gsettings set $media screensaver "['<Super>Escape']"     # frees Super+l
 gsettings set $media logout "['<Super><Shift>e']"
 for n in 1 2 3 4 5 6 7 8 9; do
@@ -101,14 +101,14 @@ gsettings set $media custom-keybindings "[$(IFS=,; echo "${custom_paths[*]}")]"
 ### Forge: keys from sway/config. dconf works before the extension has loaded.
 fk=/org/gnome/shell/extensions/forge/keybindings
 fkey() { dconf write "$fk/$1" "$2"; }
-fkey window-focus-left            "['<Super>h', '<Super>Left']"
-fkey window-focus-down            "['<Super>j', '<Super>Down']"
-fkey window-focus-up              "['<Super>k', '<Super>Up']"
-fkey window-focus-right           "['<Super>l', '<Super>Right']"
-fkey window-move-left             "['<Shift><Super>h', '<Shift><Super>Left']"
-fkey window-move-down             "['<Shift><Super>j', '<Shift><Super>Down']"
-fkey window-move-up               "['<Shift><Super>k', '<Shift><Super>Up']"
-fkey window-move-right            "['<Shift><Super>l', '<Shift><Super>Right']"
+fkey window-focus-left            "['<Super>h']"
+fkey window-focus-down            "['<Super>j']"
+fkey window-focus-up              "['<Super>k']"
+fkey window-focus-right           "['<Super>l']"
+fkey window-move-left             "['<Shift><Super>h']"
+fkey window-move-down             "['<Shift><Super>j']"
+fkey window-move-up               "['<Shift><Super>k']"
+fkey window-move-right            "['<Shift><Super>l']"
 fkey con-split-horizontal         "['<Super>b']"
 fkey con-split-vertical           "['<Super>v']"
 fkey con-split-layout-toggle      "['<Super>e']"
