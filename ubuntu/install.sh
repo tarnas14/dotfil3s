@@ -64,6 +64,36 @@ if ! command -v yazi >/dev/null; then
   rm -rf /tmp/yazi /tmp/yazi.zip
 fi
 
+# airpods-tui: battery, noise modes and settings over Apple's AACP, same tool as on Arch.
+# Prebuilt tarball from GitHub; the AUR hook's three steps done by hand: binary, user
+# service, and an Apple DeviceID in bluez's main.conf (AirPods only open the AACP
+# channel to a host that identifies as Apple). AirPods paired before the DeviceID was
+# set have to be forgotten and paired again.
+if ! command -v airpods-tui >/dev/null; then
+  echo "installing airpods-tui from GitHub releases"
+  url="$(curl -fsSL https://api.github.com/repos/annoyedmilk/airpods-tui/releases/latest \
+        | jq -r '.assets[] | select(.name | test("x86_64\\.tar\\.gz$")) | .browser_download_url')"
+  fetch /tmp/airpods-tui.tgz "$url"
+  rm -rf /tmp/airpods-tui && mkdir -p /tmp/airpods-tui && tar -xzf /tmp/airpods-tui.tgz -C /tmp/airpods-tui --strip-components=1
+  install -m755 /tmp/airpods-tui/airpods-tui ~/.local/bin/
+  mkdir -p ~/.config/systemd/user
+  sed "s|ExecStart=/usr/bin/airpods-tui|ExecStart=$HOME/.local/bin/airpods-tui|" /tmp/airpods-tui/airpods-tui.service \
+    > ~/.config/systemd/user/airpods-tui.service
+  rm -rf /tmp/airpods-tui /tmp/airpods-tui.tgz
+fi
+if ! grep -qE '^\s*DeviceID\s*=\s*bluetooth:004C:' /etc/bluetooth/main.conf; then
+  echo "setting the Apple DeviceID in /etc/bluetooth/main.conf"
+  if grep -q '^\[General\]' /etc/bluetooth/main.conf; then
+    sudo sed -i '/^\[General\]/a DeviceID = bluetooth:004C:0000:0000' /etc/bluetooth/main.conf
+  else
+    printf '\n[General]\nDeviceID = bluetooth:004C:0000:0000\n' | sudo tee -a /etc/bluetooth/main.conf >/dev/null
+  fi
+  sudo systemctl restart bluetooth
+  echo "  AirPods paired before this need to be forgotten and paired again"
+fi
+systemctl --user daemon-reload
+systemctl --user enable --now airpods-tui.service
+
 # JetBrainsMono Nerd Font (kitty uses JetBrainsMonoNL Nerd Font Mono, the apt font is unpatched)
 if ! fc-list | grep -q "JetBrainsMonoNL Nerd Font Mono"; then
   echo "installing JetBrainsMono Nerd Font"
