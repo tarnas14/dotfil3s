@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-"""Reading mode for kitty.
+"""Zoom and reading mode for kitty, as one toggle with two ways in.
 
-The active window alone in the stack layout (as Alt+a z does), plus horizontal
-padding so the text is a centred column a fraction of the OS window wide.
-Pressing the key again puts padding, layout and font back.
+    map alt+a>z       kitten reading_mode.py zoom     # the focused window alone, full width
+    map alt+a>shift+z kitten reading_mode.py 0.5      # the same, padded to a centred half-width column
+    map alt+a>shift+z kitten reading_mode.py 0.5 +2   # ... and the font two points bigger
 
-    map alt+a>shift+z kitten reading_mode.py 0.5      # column half the window wide
-    map alt+a>shift+z kitten reading_mode.py 0.5 +2   # and the font two points bigger
+Both keys enter, and while either mode is on both keys leave it: zoom exits with
+alt+a z, reading mode exits with alt+a z or alt+a Shift+z. Leaving puts back the
+padding, the previous layout and the font.
 
 Runs inside the kitty process (no_ui), so it works on the window and tab directly.
-The toggle state lives on the window object; kitty re-executes this file on
-every key press, so module globals would not survive between presses.
+The state lives on the window object; kitty re-executes this file on every key
+press, so module globals would not survive between presses.
 """
-from typing import Any, List
+from typing import Any, List, Tuple
 
 STATE_ATTR = "_reading_mode"
 
@@ -24,20 +25,24 @@ def main(args: List[str]) -> str:
 from kittens.tui.handler import result_handler  # noqa: E402
 
 
-def parse(args: List[str]) -> "tuple[float, str]":
+def parse(args: List[str]) -> Tuple[float, str]:
+    """-> (padding ratio, font argument). A ratio of 0 means zoom without padding."""
     params = [a for a in args if not a.endswith(".py")]
-    ratio = float(params[0]) if params else 0.5
+    mode = params[0] if params else "0.5"
     font = params[1] if len(params) > 1 else ""
-    return max(0.1, min(1.0, ratio)), font
+    if mode == "zoom":
+        return 0.0, font
+    return max(0.1, min(1.0, float(mode))), font
 
 
 @result_handler(no_ui=True)
 def handle_result(args: List[str], answer: str, target_window_id: int, boss: Any) -> str:
-    # returns a one-line status; `kitten @ kitten reading_mode.py 0.5` prints it, the key mapping ignores it
+    # returns a one-line status; `kitten @ kitten reading_mode.py ...` prints it, a key mapping ignores it
     try:
         return toggle(args, target_window_id, boss)
     except Exception:
         import traceback
+
         return traceback.format_exc()
 
 
@@ -46,29 +51,37 @@ def toggle(args: List[str], target_window_id: int, boss: Any) -> str:
 
     w = boss.window_id_map.get(target_window_id) or boss.active_window
     if w is None:
-        return "reading mode: no window"
+        return "no window"
     tab = w.tabref()
     if tab is None:
-        return "reading mode: window has no tab"
+        return "window has no tab"
     ratio, font = parse(args)
 
     state = getattr(w, STATE_ATTR, None)
     if state is not None:
-        # leave: default padding, previous layout, default font
-        w.patch_edge_width("padding", "left", None)
-        w.patch_edge_width("padding", "right", None)
+        # either key leaves, whichever mode is on
+        if state.get("padded"):
+            w.patch_edge_width("padding", "left", None)
+            w.patch_edge_width("padding", "right", None)
         if state.get("layout_changed") and tab.current_layout.name == "stack":
             tab.last_used_layout()
         if state.get("font"):
             boss.change_font_size(False, None, 0)
         delattr(w, STATE_ATTR)
         tab.relayout()
-        return f"reading mode off (window {w.id}, layout {tab.current_layout.name})"
+        return f"off (window {w.id}, layout {tab.current_layout.name})"
 
     layout_changed = False
     if tab.current_layout.name != "stack":
         tab.goto_layout("stack")
         layout_changed = True
+    w.scroll_prompt_to_bottom()  # what `combine : toggle_layout stack : scroll_prompt_to_bottom` did
+
+    if ratio <= 0:
+        setattr(w, STATE_ATTR, {"padded": False, "layout_changed": layout_changed, "font": False})
+        tab.relayout()
+        return f"zoom on (window {w.id}, layout {tab.current_layout.name})"
+
     if font:
         op = font[0] if font[0] in "+-*/" else None
         boss.change_font_size(False, op, float(font[1:] if op else font))
@@ -84,6 +97,9 @@ def toggle(args: List[str], target_window_id: int, boss: Any) -> str:
 
     w.patch_edge_width("padding", "left", pad_pt)
     w.patch_edge_width("padding", "right", pad_pt)
-    setattr(w, STATE_ATTR, {"layout_changed": layout_changed, "font": bool(font)})
+    setattr(w, STATE_ATTR, {"padded": True, "layout_changed": layout_changed, "font": bool(font)})
     tab.relayout()
-    return f"reading mode on (window {w.id}, layout {tab.current_layout.name}, os window {width_px}px, padding {pad_pt:.1f}pt each side)"
+    return (
+        f"reading on (window {w.id}, layout {tab.current_layout.name}, "
+        f"os window {width_px}px, padding {pad_pt:.1f}pt each side)"
+    )

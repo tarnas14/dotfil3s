@@ -53,7 +53,9 @@ Two keys for reading long text in a centred column half the screen wide, one per
 
 | Where           | Key            | What                                                                                        |
 | --------------- | -------------- | ------------------------------------------------------------------------------------------- |
-| kitty           | Alt+a Shift+z  | `kitty/reading_mode.py`: stack layout like Alt+a z, plus padding so the text is a 50% column; again to leave |
+| kitty           | Alt+a z        | `kitty/reading_mode.py`: the focused window alone in the stack layout, full width |
+| kitty           | Alt+a Shift+z  | the same, padded to a centred 50% column for reading |
+| kitty           | either of them | leaves whichever of the two is on |
 | nvim            | , z            | no-neck-pain.nvim: padding windows either side leave a 50% column, numbers, signs and statusline off, wrapped, kitty font +2; aerial (, T) and splits keep working; , z again, q or Escape to leave |
 
 Use one at a time. Shell output goes through kitty's key; files and kitty scrollback opened in
