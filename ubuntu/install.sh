@@ -15,6 +15,8 @@ sudo apt install -y \
   python3-venv python3-pip \
   `# launcher, clipboard, notifications` \
   rofi rofimoji wl-clipboard libnotify-bin papirus-icon-theme \
+  `# pactl for looking at pipewire (profiles, codecs); pipewire-pulse answers it` \
+  pulseaudio-utils \
   `# clipboard history: GPaste tracks it from inside the shell, cliphist cannot on Mutter` \
   gnome-shell-extension-gpaste \
   `# gnome extension plumbing: auto-move-windows lives in gnome-shell-extensions` \

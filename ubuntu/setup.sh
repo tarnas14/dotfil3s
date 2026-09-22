@@ -30,6 +30,7 @@ setup=(
     "ubuntu/camera/lfbw-start"      "$HOME/.local/bin"
     "ubuntu/camera/virtual-camera"  "$HOME/.local/bin"
     "ubuntu/camera/lfbw.service"    "$HOME/.config/systemd/user"
+    "ubuntu/wireplumber/51-bluetooth-headset.conf" "$HOME/.config/wireplumber/wireplumber.conf.d"
 )
 
 warn() { printf 'warn  %s\n' "$*" >&2; }
