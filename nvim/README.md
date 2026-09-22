@@ -48,7 +48,7 @@ Keys that changed from the old config are marked.
 | , E and , e                  | yazi at the current file, yazi at the working directory.                                     |
 | , f and , F                  | Flash jump, flash treesitter selection. Replaces pounce.                                     |
 | , T                          | Symbols outline. Moved from , t to free the prefix for tests.                                |
-| , z                          | Reading mode: zen-mode, centred column half the width, wrapped, kitty font +2. New.          |
+| , z                          | Reading mode: no-neck-pain centres the buffer at half the width, wraps, kitty font +2; , T and splits still work; q or Esc leaves. New. |
 | , tn, , tf, , ts, , tl, , tv | Test nearest, file, suite, last again, open the last test file. New.                         |
 | , cct, , ccf                 | Claude Code: toggle the split, focus it. New.                                                |
 | , ccs                        | Claude Code: send the selection. Visual mode. New.                                           |

@@ -54,11 +54,12 @@ Two keys for reading long text in a centred column half the screen wide, one per
 | Where           | Key            | What                                                                                        |
 | --------------- | -------------- | ------------------------------------------------------------------------------------------- |
 | kitty           | Alt+a Shift+z  | `kitty/reading_mode.py`: stack layout like Alt+a z, plus padding so the text is a 50% column; again to leave |
-| nvim            | , z            | zen-mode.nvim: the buffer in a 50% float, numbers and signs off, wrapped, kitty font +2; again to leave |
+| nvim            | , z            | no-neck-pain.nvim: padding windows either side leave a 50% column, numbers, signs and statusline off, wrapped, kitty font +2; aerial (, T) and splits keep working; , z again, q or Escape to leave |
 
 Use one at a time. Shell output goes through kitty's key; files and kitty scrollback opened in
 nvim (kitty-scrollback.nvim) go through nvim's. The column width is the `0.5` in the kitty
-mapping and `window.width` in `nvim/lua/plugins/reading.lua`.
+mapping and `width` in `nvim/lua/plugins/reading.lua` (columns, half of the terminal at load time;
+`:NoNeckPainResize N` changes it live).
 
 ## Brave: keyboard shortcut for "move tab to a new window"
 
