@@ -125,3 +125,35 @@ function gcmsg () {
 # kitty diff for git
 alias gdk='git difftool --no-symlinks --dir-diff'
 alias gdcak='git difftool --cached --no-symlinks --dir-diff'
+
+# dx-init-wrapper-begin
+dx() {
+  # Find the command + subcommand, skipping any leading -v/--verbose. Plain
+  # iteration over "$@" — portable across bash and zsh (no ${!var} indirection).
+  local _cmd="" _sub="" _skipping=1 _arg
+  for _arg in "$@"; do
+    if [[ $_skipping -eq 1 && ( "$_arg" == "-v" || "$_arg" == "--verbose" ) ]]; then
+      continue
+    fi
+    _skipping=0
+    if [[ -z "$_cmd" ]]; then
+      _cmd="$_arg"
+    elif [[ -z "$_sub" ]]; then
+      _sub="$_arg"
+      break
+    fi
+  done
+  if [[ ( "$_cmd" == "worktree" || "$_cmd" == "wt" ) && ( "$_sub" == "create" || "$_sub" == "rm" ) ]]; then
+    local cdfile
+    cdfile=$(mktemp "${TMPDIR:-/tmp}/dx-cd.XXXXXX") || return 1
+    DX_CD_FILE="$cdfile" command dx "$@"
+    local rc=$?
+    if [[ $rc -eq 0 && -s "$cdfile" ]]; then
+      cd "$(cat "$cdfile")"
+    fi
+    rm -f "$cdfile"
+    return $rc
+  fi
+  command dx "$@"
+}
+# dx-init-wrapper-end

@@ -46,7 +46,7 @@ repo=(
   docker docker-compose
 
   # system housekeeping
-  man-db man-pages xdg-user-dirs
+  man-db man-pages xdg-user-dirs btop
   ufw fwupd fprintd
   snapper snap-pac restic
   reflector pacman-contrib efibootmgr

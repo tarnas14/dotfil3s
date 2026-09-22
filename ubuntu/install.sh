@@ -10,7 +10,7 @@ sudo apt update
 sudo apt install -y \
   `# shell, terminal, editor tooling` \
   zsh kitty git build-essential unzip curl jq \
-  fzf ripgrep fd-find zoxide tree-sitter-cli shfmt lazygit \
+  fzf ripgrep fd-find zoxide tree-sitter-cli shfmt lazygit btop \
   `# mason installs python servers (basedpyright) into a venv, ubuntu splits that out of python3` \
   python3-venv python3-pip \
   `# launcher, clipboard, notifications` \
