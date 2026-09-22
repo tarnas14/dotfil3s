@@ -295,6 +295,9 @@ assign [app_id="kitty"] workspace 7
 assign [app_id="signal"] workspace 2
 assign [app_id="Caprine"] workspace 2
 assign [app_id="brave-www.facebook.com__messages-Default"] workspace 2
+# spotify runs on xwayland (class) unless launched with ozone wayland (app_id)
+assign [class="Spotify"] workspace 10
+assign [app_id="spotify"] workspace 10
 for_window [app_id="org.keepassxc.KeePassXC" title="^(?!(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$)"] move scratchpad
 for_window [app_id="org.keepassxc.KeePassXC" title="^(Unlock Database - KeePassXC|KeePassXC - Browser Access Request|Settings - KeePassXC)$"] floating enable, focus
 for_window [app_id="blueman-manager"] floating enable, resize set width 25ppt height 25ppt, move position 74ppt 1ppt

@@ -37,7 +37,7 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 | Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
 | gaps inner 6, smart_gaps               | Forge gap 6, hidden on single window                                    |
 | client.focused colours                 | not ported: Forge focus border stays default, colours come later          |
-| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal, slack and messenger 2       |
+| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal, slack and messenger 2, spotify 10       |
 | exec lines                             | `~/.config/autostart/*.desktop`: brave, messenger (own Brave profile, see `applications/messenger.desktop`), signal, slack, kitty (no keepassxc) |
 | keepassxc in scratchpad, blueman float | no KeePassXC on this machine; Settings and pavucontrol float via `forge/windows.json` |
 | Super+a focus parent, Super+space      | no equivalent, Super+a stays GNOME's app grid                           |

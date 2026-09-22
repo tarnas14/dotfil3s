@@ -40,6 +40,9 @@ if [[ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ]]; then
 fi
 sudo apt-get install -y google-cloud-cli kubectl google-cloud-cli-gke-gcloud-auth-plugin
 
+# Spotify: the snap is published by Spotify itself; Brave and Slack are snaps here too
+snap list spotify >/dev/null 2>&1 || sudo snap install spotify
+
 mkdir -p ~/.local/bin ~/.local/share/fonts
 
 # Ubuntu ships fd as fdfind; fzf-lua and yazi look for fd
