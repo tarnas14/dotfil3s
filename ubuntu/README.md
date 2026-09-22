@@ -20,7 +20,7 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 
 | sway                                   | GNOME                                                                   |
 | -------------------------------------- | ----------------------------------------------------------------------- |
-| Super+hjkl, Super+Shift+hjkl           | Forge focus and move, same keys                                         |
+| Super+hjkl / arrows, Super+Shift+same  | Forge focus and move, same keys (Mutter's half-tiling and move-to-monitor cleared) |
 | Super+b, Super+v, Super+e              | Forge split horizontal, vertical, toggle split layout                   |
 | Super+s, Super+w                       | Forge stacked, tabbed                                                   |
 | Super+Shift+space                      | Forge toggle float                                                      |
