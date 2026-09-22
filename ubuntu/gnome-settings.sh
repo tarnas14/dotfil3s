@@ -169,6 +169,11 @@ fi
 dconf write /org/gnome/shell/extensions/notification-position/position "'top-right'"
 dconf write /org/gnome/shell/extensions/notification-position/show-indicator false
 
+### Top bar: clock on the right between the tray icons and quick settings, like waybar.
+### Items not listed stay where GNOME puts them; unlisted tray icons sit left of the listed ones.
+dconf write /org/gnome/shell/extensions/top-bar-organizer/right-box-order "['dateMenu', 'quickSettings']"
+dconf write /org/gnome/shell/extensions/top-bar-organizer/center-box-order "@as []"
+
 ### Window to workspace rules (sway assign), via the Auto Move Windows extension
 dconf write /org/gnome/shell/extensions/auto-move-windows/application-list \
   "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2']"
@@ -180,6 +185,7 @@ enabled=(
   auto-move-windows@gnome-shell-extensions.gcampax.github.com
   GPaste@gnome-shell-extensions.gnome.org
   notification-position@drugo.dev
+  top-bar-organizer@julian.gse.jsts.xyz
   ubuntu-appindicators@ubuntu.com
   ding@rastersoft.com
 )
