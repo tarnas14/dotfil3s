@@ -164,6 +164,11 @@ if gsettings list-schemas | grep -qx org.gnome.GPaste; then
   done
 fi
 
+### Notifications: GNOME Shell replaces mako. Banners top-right like mako; per-app switches
+### live in Settings > Notifications (dconf /org/gnome/desktop/notifications/application/<id>/enable)
+dconf write /org/gnome/shell/extensions/notification-position/position "'top-right'"
+dconf write /org/gnome/shell/extensions/notification-position/show-indicator false
+
 ### Window to workspace rules (sway assign), via the Auto Move Windows extension
 dconf write /org/gnome/shell/extensions/auto-move-windows/application-list \
   "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2']"
@@ -174,6 +179,7 @@ enabled=(
   window-calls@domandoman.xyz
   auto-move-windows@gnome-shell-extensions.gcampax.github.com
   GPaste@gnome-shell-extensions.gnome.org
+  notification-position@drugo.dev
   ubuntu-appindicators@ubuntu.com
   ding@rastersoft.com
 )

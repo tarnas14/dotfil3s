@@ -32,6 +32,7 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 | Super+Escape, Super+Shift+Escape       | lock, suspend                                                           |
 | Super+Shift+e                          | GNOME logout dialog                                                     |
 | Super+n, Super+Shift+n                 | notification list, do-not-disturb toggle                                |
+| mako                                   | GNOME Shell notifications; Notification Banner Position extension puts banners top-right; per-app on/off in Settings > Notifications; Claude Code's own are off via `preferredNotifChannel` in `~/.claude/settings.json` (they would arrive as "kitty") |
 | Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
 | gaps inner 6, smart_gaps               | Forge gap 6, hidden on single window                                    |
 | client.focused colours                 | not ported: Forge focus border stays default, colours come later          |

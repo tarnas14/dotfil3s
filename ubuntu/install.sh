@@ -107,6 +107,7 @@ if ! jq -e --arg v "$shell_version" '.["shell-version"] | index($v)' "$forge_dir
   echo "installed forge@jmmaranan.com $(jq -r .version "$forge_dir/metadata.json") from git"
 fi
 install_ext window-calls@domandoman.xyz # D-Bus window list for ~/.local/bin/rofi-window
+install_ext notification-position@drugo.dev # banners top-right instead of top-centre, where mako had them
 
 sudo usermod -aG docker "$USER"
 
