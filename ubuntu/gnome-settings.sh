@@ -41,6 +41,10 @@ gsettings set org.gnome.mutter center-new-windows true   # rofi is a normal wind
 gsettings reset org.gnome.mutter.wayland xwayland-allow-grabs
 gsettings reset org.gnome.mutter.wayland xwayland-grab-access-rules
 
+### A bare Super press opens the overview; easy to hit by accident, so the overview moves to Super+m
+gsettings set org.gnome.mutter overlay-key ''
+gsettings set $shell toggle-overview "['<Super>m']"
+
 ### Free the keys sway uses from GNOME's defaults
 gsettings set $wm minimize "[]"                          # Super+h -> focus left
 gsettings set $wm show-desktop "['<Primary><Super>d', '<Primary><Alt>d']"   # Ubuntu puts show-desktop on Super+d -> launcher

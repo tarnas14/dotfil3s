@@ -32,6 +32,7 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 | Super+Escape, Super+Shift+Escape       | lock, suspend                                                           |
 | Super+Shift+e                          | GNOME logout dialog                                                     |
 | Super+n, Super+Shift+n                 | notification list, do-not-disturb toggle                                |
+| (none)                                 | Super+m opens GNOME's overview; a bare Super press no longer does         |
 | waybar                                 | GNOME top bar; Top Bar Organizer extension moves the clock to the right next to the tray (`right-box-order`), drag-and-drop in its prefs for anything else |
 | mako                                   | GNOME Shell notifications; Notification Banner Position extension puts banners top-right; per-app on/off in Settings > Notifications; Claude Code's own are off via `preferredNotifChannel` in `~/.claude/settings.json` (they would arrive as "kitty") |
 | Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
