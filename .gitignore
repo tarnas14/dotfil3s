@@ -2,3 +2,4 @@
 kitty/neighboring_window.py
 kitty/pass_keys.py
 kitty/navigate_kitty.py
+__pycache__/

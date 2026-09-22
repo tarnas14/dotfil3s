@@ -11,6 +11,7 @@ setup=(
     ".gitconfig"                    "$HOME"
     ".gitignore_global"             "$HOME"
     "kitty/kitty.conf"              "$HOME/.config/kitty"
+    "kitty/reading_mode.py"         "$HOME/.config/kitty"
     "nvim"                          "$HOME/.config"
     "zsh/.zshrc"                    "$HOME"
     "zsh/.zshenv"                   "$HOME"

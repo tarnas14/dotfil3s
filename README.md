@@ -47,6 +47,19 @@ palette goes into `ubuntu/kitty/*`, `ubuntu/nvim/host.lua` and Forge's border co
 `ubuntu/gnome-settings.sh`. Window borders and startup applications are per host by nature
 (`arch/sway/config` versus `ubuntu/gnome-settings.sh` and `ubuntu/autostart/`).
 
+## Reading mode
+
+Two keys for reading long text in a centred column half the screen wide, one per layer:
+
+| Where           | Key            | What                                                                                        |
+| --------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| kitty           | Alt+a Shift+z  | `kitty/reading_mode.py`: stack layout like Alt+a z, plus padding so the text is a 50% column; again to leave |
+| nvim            | , z            | zen-mode.nvim: the buffer in a 50% float, numbers and signs off, wrapped, kitty font +2; again to leave |
+
+Use one at a time. Shell output goes through kitty's key; files and kitty scrollback opened in
+nvim (kitty-scrollback.nvim) go through nvim's. The column width is the `0.5` in the kitty
+mapping and `window.width` in `nvim/lua/plugins/reading.lua`.
+
 ## Brave: keyboard shortcut for "move tab to a new window"
 
 Brave has no default key for it, but its commands can be bound:
