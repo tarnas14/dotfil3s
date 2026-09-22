@@ -1,8 +1,7 @@
 ; identity for the Ubuntu work system, included from ~/.gitconfig
+; placeholders below are deliberately valid values: tools that use libgit2 (mise, for one)
+; refuse to run with angle brackets in the name. Replace them before committing anything.
 [user]
-    name = <full name as it should appear in work commits>
-    email = <work e-mail>
-    ; signingkey = <long key id, once generated: gpg --list-secret-keys --keyid-format long>
-[commit]
-    ; remove this line once signingkey above is set
-    gpgsign = false
+    name = Mateusz Tarnaski
+    email = mateusz.tarnaski@optioincentives.com
+    signingkey = 284A62F9B9717027
