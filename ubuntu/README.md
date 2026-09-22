@@ -79,3 +79,4 @@ GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super
 | `kitty/current-theme.conf`    | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen |
 | `kitty/local-theme-overrides.conf` | borders, tabs, `hide_window_decorations`; last file kitty reads      |
 | `nvim/host.lua`               | colourscheme for this host, loaded via `/etc/os-release`                 |
+| `camera/`                     | virtual camera: `lfbw.ini` settings (background image, size), `lfbw-start` picks the C920 or the built-in camera, `lfbw.service` runs it; v4l2loopback provides `/dev/video10` "Virtual Camera" |

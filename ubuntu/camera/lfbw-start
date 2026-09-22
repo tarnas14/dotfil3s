@@ -1,0 +1,10 @@
+#!/bin/sh
+# Starts the fake-background webcam with the best source camera available:
+# the Logitech C920 when docked, the built-in Framework camera otherwise.
+# Systemd runs this (lfbw.service); `systemctl --user restart lfbw` after plugging a camera in.
+cam=/dev/video0
+for candidate in /dev/v4l/by-id/usb-046d_HD_Pro_Webcam_C920_*-video-index0 \
+                 /dev/v4l/by-id/usb-Framework_Laptop_Webcam_Module*-video-index0; do
+    if [ -e "$candidate" ]; then cam="$candidate"; break; fi
+done
+exec "$HOME/.local/share/lfbw/bin/lfbw" -c "$HOME/.config/lfbw.ini" -w "$cam" "$@"

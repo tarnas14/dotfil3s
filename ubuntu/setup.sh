@@ -26,6 +26,9 @@ setup=(
     "ubuntu/rofi/onedark.rasi"      "$HOME/.config/rofi"
     "ubuntu/autostart"              "$HOME/.config"
     "ubuntu/applications/messenger.desktop" "$HOME/.local/share/applications"
+    "ubuntu/camera/lfbw.ini"        "$HOME/.config"
+    "ubuntu/camera/lfbw-start"      "$HOME/.local/bin"
+    "ubuntu/camera/lfbw.service"    "$HOME/.config/systemd/user"
 )
 
 warn() { printf 'warn  %s\n' "$*" >&2; }

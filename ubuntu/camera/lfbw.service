@@ -1,0 +1,16 @@
+# Fake-background webcam on /dev/video10, see ubuntu/camera/. Linked into
+# ~/.config/systemd/user by ubuntu/setup.sh; systemctl --user enable --now lfbw
+[Unit]
+Description=Fake background webcam (Linux-Fake-Background-Webcam on /dev/video10)
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/lfbw-start
+# SIGINT only pauses lfbw (and reloads the background image); SIGQUIT ends it
+KillSignal=SIGQUIT
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

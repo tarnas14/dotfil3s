@@ -97,6 +97,26 @@ fi
 systemctl --user daemon-reload
 systemctl --user enable --now airpods-tui.service
 
+# Virtual camera with background replacement. v4l2loopback (Ubuntu's dkms package builds
+# for the running kernel; Secure Boot is off on this machine, so no module signing) provides
+# /dev/video10 as "Virtual Camera"; exclusive_caps=1 is what makes Chromium and Electron
+# apps list it. Linux-Fake-Background-Webcam reads the real camera, cuts out the person
+# with mediapipe and writes the composite there. Settings: ubuntu/camera/.
+sudo apt-get install -y v4l2loopback-dkms v4l2loopback-utils v4l-utils
+printf 'options v4l2loopback devices=1 video_nr=10 exclusive_caps=1 card_label="Virtual Camera"\n' \
+  | sudo tee /etc/modprobe.d/v4l2loopback.conf >/dev/null
+printf 'v4l2loopback\n' | sudo tee /etc/modules-load.d/v4l2loopback.conf >/dev/null
+lsmod | grep -q '^v4l2loopback' || sudo modprobe v4l2loopback
+# mediapipe ships no wheels past Python 3.12, so the tool gets its own interpreter from mise
+mise install python@3.12 -y
+if [[ ! -x ~/.local/share/lfbw/bin/lfbw ]]; then
+  echo "installing Linux-Fake-Background-Webcam into ~/.local/share/lfbw"
+  "$(mise where python@3.12)/bin/python3" -m venv ~/.local/share/lfbw
+  ~/.local/share/lfbw/bin/pip install --quiet --upgrade pip
+  ~/.local/share/lfbw/bin/pip install --quiet git+https://github.com/fangfufu/Linux-Fake-Background-Webcam.git
+fi
+# the service unit is linked by setup.sh; enabling it is the last step in the guide
+
 # JetBrainsMono Nerd Font (kitty uses JetBrainsMonoNL Nerd Font Mono, the apt font is unpatched)
 if ! fc-list | grep -q "JetBrainsMonoNL Nerd Font Mono"; then
   echo "installing JetBrainsMono Nerd Font"
