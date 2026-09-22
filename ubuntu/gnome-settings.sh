@@ -176,7 +176,7 @@ dconf write /org/gnome/shell/extensions/top-bar-organizer/center-box-order "@as 
 
 ### Window to workspace rules (sway assign), via the Auto Move Windows extension
 dconf write /org/gnome/shell/extensions/auto-move-windows/application-list \
-  "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2']"
+  "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2', 'messenger.desktop:2']"
 
 ### Extensions: tiling-assistant and the dock fight with a tiler
 enabled=(

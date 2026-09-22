@@ -37,8 +37,8 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 | Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
 | gaps inner 6, smart_gaps               | Forge gap 6, hidden on single window                                    |
 | client.focused colours                 | not ported: Forge focus border stays default, colours come later          |
-| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal and slack 2       |
-| exec lines                             | `~/.config/autostart/*.desktop`: brave, signal, slack, kitty (no keepassxc, no messenger here) |
+| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal, slack and messenger 2       |
+| exec lines                             | `~/.config/autostart/*.desktop`: brave, messenger (own Brave profile, see `applications/messenger.desktop`), signal, slack, kitty (no keepassxc) |
 | keepassxc in scratchpad, blueman float | no KeePassXC on this machine; Settings and pavucontrol float via `forge/windows.json` |
 | Super+a focus parent, Super+space      | no equivalent, Super+a stays GNOME's app grid                           |
 | Super+Shift+r reload                   | nothing to reload                                                       |
@@ -73,6 +73,7 @@ GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super
 | `rofi/config.rasi`            | imports `../rofi/config.rasi` as `base.rasi`, swaps kanshi for `win`     |
 | `forge/windows.json`          | float rules, copied once (Forge rewrites the file, a symlink would not survive) |
 | `autostart/*.desktop`         | the `exec` lines                                                         |
+| `applications/messenger.desktop` | Messenger as `brave --app` with `--user-data-dir` under the snap's common dir; linked into `~/.local/share/applications` and, via a repo symlink, into autostart |
 | `gitconfig.local`             | work identity, linked as `~/.gitconfig.local`; fill in name, e-mail, key |
 | `kitty/current-theme.conf`    | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen |
 | `kitty/local-theme-overrides.conf` | borders, tabs, `hide_window_decorations`; last file kitty reads      |

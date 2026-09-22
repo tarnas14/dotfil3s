@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Messenger
+Comment=Facebook Messenger as a Brave app window with its own profile, separate from the main browser
+Exec=sh -c "exec brave --user-data-dir=\\$HOME/snap/brave/common/messenger --app=https://www.facebook.com/messages"
+Icon=brave-browser
+Terminal=false
+Categories=Network;InstantMessaging;
+StartupWMClass=brave-www.facebook.com__messages-Default
+X-GNOME-Autostart-enabled=true

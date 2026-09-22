@@ -24,6 +24,7 @@ setup=(
     "ubuntu/rofi/config.rasi"       "$HOME/.config/rofi"
     "ubuntu/rofi/onedark.rasi"      "$HOME/.config/rofi"
     "ubuntu/autostart"              "$HOME/.config"
+    "ubuntu/applications/messenger.desktop" "$HOME/.local/share/applications"
 )
 
 warn() { printf 'warn  %s\n' "$*" >&2; }
