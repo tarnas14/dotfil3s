@@ -1,0 +1,25 @@
+#!/bin/sh
+# Switch the fake-background webcam (lfbw.service) on or off, or control its autostart.
+#   virtual-camera on       start processing now (the service also starts at login when enabled)
+#   virtual-camera off      stop it; the real cameras are released and can be picked directly in apps
+#   virtual-camera enable   start at login          virtual-camera disable   do not start at login
+#   virtual-camera status   service state, device, CPU use
+# /dev/video10 "Virtual Camera" stays listed either way (it is a kernel device); when the
+# service is off it simply shows no frames, so pick the real camera in the app.
+unit=lfbw.service
+case "${1:-status}" in
+    on)      systemctl --user start "$unit" && echo "virtual camera on (pick \"Virtual Camera\" in the app)" ;;
+    off)     systemctl --user stop "$unit" && echo "virtual camera off (pick the real camera in the app)" ;;
+    enable)  systemctl --user enable --now "$unit" && echo "virtual camera on, and at every login" ;;
+    disable) systemctl --user disable --now "$unit" && echo "virtual camera off, and not at login" ;;
+    toggle)  if systemctl --user is-active -q "$unit"; then exec "$0" off; else exec "$0" on; fi ;;
+    status)
+        printf 'service:  %s (autostart: %s)\n' "$(systemctl --user is-active "$unit")" "$(systemctl --user is-enabled "$unit" 2>/dev/null)"
+        printf 'device:   %s\n' "$([ -e /dev/video10 ] && echo '/dev/video10 present' || echo '/dev/video10 missing (modprobe v4l2loopback)')"
+        pid=$(systemctl --user show -p MainPID --value "$unit")
+        if [ "${pid:-0}" -gt 0 ]; then
+            printf 'process:  pid %s, %s%% cpu, %s MB, %s threads\n' "$pid" \
+                "$(ps -o %cpu= -p "$pid" | tr -d ' ')" "$(( $(ps -o rss= -p "$pid") / 1024 ))" "$(ps -o nlwp= -p "$pid" | tr -d ' ')"
+        fi ;;
+    *) echo "usage: virtual-camera on|off|toggle|enable|disable|status" >&2; exit 2 ;;
+esac

@@ -28,6 +28,7 @@ setup=(
     "ubuntu/applications/messenger.desktop" "$HOME/.local/share/applications"
     "ubuntu/camera/lfbw.ini"        "$HOME/.config"
     "ubuntu/camera/lfbw-start"      "$HOME/.local/bin"
+    "ubuntu/camera/virtual-camera"  "$HOME/.local/bin"
     "ubuntu/camera/lfbw.service"    "$HOME/.config/systemd/user"
 )
 

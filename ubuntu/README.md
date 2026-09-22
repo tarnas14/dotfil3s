@@ -33,6 +33,7 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 | Super+Shift+e                          | GNOME logout dialog                                                     |
 | Super+n, Super+Shift+n                 | notification list, do-not-disturb toggle                                |
 | (none)                                 | Super+m opens GNOME's overview; a bare Super press no longer does         |
+| (none)                                 | Ctrl+Alt+Left/Right no longer switch workspaces; Super+Page_Up/Down and Super+Alt+Left/Right still do |
 | waybar                                 | GNOME top bar; Top Bar Organizer extension moves the clock to the right next to the tray (`right-box-order`), drag-and-drop in its prefs for anything else |
 | mako                                   | GNOME Shell notifications; Notification Banner Position extension puts banners top-right; per-app on/off in Settings > Notifications; Claude Code's own are off via `preferredNotifChannel` in `~/.claude/settings.json` (they would arrive as "kitty") |
 | Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
@@ -79,4 +80,4 @@ GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super
 | `kitty/current-theme.conf`    | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen |
 | `kitty/local-theme-overrides.conf` | borders, tabs, `hide_window_decorations`; last file kitty reads      |
 | `nvim/host.lua`               | colourscheme for this host, loaded via `/etc/os-release`                 |
-| `camera/`                     | virtual camera: `lfbw.ini` settings (background image, size), `lfbw-start` picks the C920 or the built-in camera, `lfbw.service` runs it; v4l2loopback provides `/dev/video10` "Virtual Camera" |
+| `camera/`                     | virtual camera: `lfbw.ini` settings (background image, size), `lfbw-start` picks the C920 or the built-in camera, `lfbw.service` runs it, `virtual-camera on|off|toggle|enable|disable|status` controls it; v4l2loopback provides `/dev/video10` "Virtual Camera" |

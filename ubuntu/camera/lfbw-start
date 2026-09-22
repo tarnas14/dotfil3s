@@ -2,6 +2,12 @@
 # Starts the fake-background webcam with the best source camera available:
 # the Logitech C920 when docked, the built-in Framework camera otherwise.
 # Systemd runs this (lfbw.service); `systemctl --user restart lfbw` after plugging a camera in.
+# OpenCV and the TensorFlow Lite runtime each size their thread pool to the 24 cores, which
+# cost 139% of a core (82 threads) for 720p at 30 fps and kept every core awake. Four threads
+# give the same picture at 63%. Measured 2026-09-22; override by exporting the variables first.
+export OPENCV_FOR_THREADS_NUM="${OPENCV_FOR_THREADS_NUM:-4}"
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}"
+
 cam=/dev/video0
 for candidate in /dev/v4l/by-id/usb-046d_HD_Pro_Webcam_C920_*-video-index0 \
                  /dev/v4l/by-id/usb-Framework_Laptop_Webcam_Module*-video-index0; do

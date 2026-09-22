@@ -58,6 +58,8 @@ gsettings set $mutter cancel-input-capture "[]"           # Super+Shift+Escape -
 gsettings set $mutter toggle-tiled-left "[]"             # Super+arrows do nothing, on sway too
 gsettings set $mutter toggle-tiled-right "[]"
 for d in left right up down; do gsettings set $wm move-to-monitor-$d "[]"; done   # Super+Shift+arrows do nothing either
+gsettings set $wm switch-to-workspace-left  "['<Super>Page_Up', '<Super>KP_Prior', '<Super><Alt>Left']"    # Ctrl+Alt+Left/Right dropped, hit by accident
+gsettings set $wm switch-to-workspace-right "['<Super>Page_Down', '<Super>KP_Next', '<Super><Alt>Right']"
 gsettings set $media screensaver "['<Super>Escape']"     # frees Super+l
 gsettings set $media logout "['<Super><Shift>e']"
 for n in 1 2 3 4 5 6 7 8 9; do
