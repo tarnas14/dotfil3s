@@ -47,6 +47,18 @@ palette goes into `ubuntu/kitty/*`, `ubuntu/nvim/host.lua` and Forge's border co
 `ubuntu/gnome-settings.sh`. Window borders and startup applications are per host by nature
 (`arch/sway/config` versus `ubuntu/gnome-settings.sh` and `ubuntu/autostart/`).
 
+## Brave: keyboard shortcut for "move tab to a new window"
+
+Brave has no default key for it, but its commands can be bound:
+
+1. `brave://flags/#brave-commands`, set to Enabled, relaunch. Newer builds ship the page without the
+   flag; check step 2 first.
+2. `brave://settings/system/shortcuts`, find **Move Tab to New Window**, click the field, press the
+   chord (Ctrl+Shift+N is free of Brave defaults on Linux; avoid Super chords, GNOME and sway take those first).
+
+Stored in the browser profile, not in this repository, so it is a per-machine step. Extension
+shortcuts live at `brave://extensions/shortcuts`.
+
 ## gpg password prompt inline
 
 https://stackoverflow.com/questions/41052538/git-error-gpg-failed-to-sign-data#answer-61314861
