@@ -66,6 +66,12 @@ nvim (kitty-scrollback.nvim) go through nvim's. The column width is the `0.5` in
 mapping and `width` in `nvim/lua/plugins/reading.lua` (columns, half of the terminal at load time;
 `:NoNeckPainResize N` changes it live).
 
+## Fan control
+
+Framework 13 fan curves through `fw-fanctrl`, on both machines.
+Arch installs it from the AUR entry in `arch/install.sh`; Ubuntu builds it with `ubuntu/fan-control/install.sh`.
+See `fan-control.md`.
+
 ## Brave: keyboard shortcut for "move tab to a new window"
 
 Brave has no default key for it, but its commands can be bound:

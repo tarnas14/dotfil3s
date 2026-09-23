@@ -66,6 +66,7 @@ aur=(
   lazydocker
   keepmenu
   swaylock-fprintd-git # provides swaylock, pacman will offer to replace the upstream one
+  fw-fanctrl-gui-bin   # fan curves; pulls fw-fanctrl and framework-system. See ../fan-control.md
 )
 
 yay -S --needed "${repo[@]}" "${aur[@]}"
@@ -82,5 +83,6 @@ Packages installed. Services and one-time steps are still manual, see the guide:
   sudo systemctl enable NetworkManager-dispatcher
   sudo usermod -aG docker "$USER"
   systemctl --user enable --now syncthing
+  sudo systemctl enable --now fw-fanctrl fw-fanctrl-suspend   # fan curves, see fan-control.md
   chsh -s /usr/bin/zsh, then the Oh My Zsh installer, then log out and in
 EOF
