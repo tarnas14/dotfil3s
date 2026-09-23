@@ -160,3 +160,5 @@ dx() {
   command dx "$@"
 }
 # dx-init-wrapper-end
+
+source ~/.zshrc-local
