@@ -126,6 +126,9 @@ alias gdcak='git difftool --cached --no-symlinks --dir-diff'
 
 alias mr='mise run'
 
+alias rebootToArch='systemctl reboot --boot-loader-entry=arch-linux.efi'
+alias rebootToUbuntu='systemctl reboot --boot-loader-entry=ubuntu.conf'
+
 # dx-init-wrapper-begin
 dx() {
   # Find the command + subcommand, skipping any leading -v/--verbose. Plain
