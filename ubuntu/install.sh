@@ -25,6 +25,7 @@ sudo apt install -y \
   fonts-noto-color-emoji fonts-noto-cjk \
   `# development` \
   docker.io docker-compose-v2 \
+  postgresql-client \
   `# applications` \
   syncthing playerctl \
   imv zathura mpv ffmpeg 7zip poppler-utils imagemagick resvg \

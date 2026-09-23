@@ -44,6 +44,7 @@ repo=(
   # development
   git base-devel neovim tree-sitter-cli mise
   docker docker-compose
+  postgresql-libs # psql and pg_dump; the postgresql package is the server
 
   # system housekeeping
   man-db man-pages xdg-user-dirs btop
