@@ -18,33 +18,33 @@ mise use -g node@lts; nvim  lazy and mason install the rest
 
 ## What maps to what
 
-| sway                                   | GNOME                                                                   |
-| -------------------------------------- | ----------------------------------------------------------------------- |
-| Super+hjkl, Super+Shift+hjkl           | Forge focus and move; Super+arrows unbound on both systems (Mutter half-tiling cleared) |
-| Super+b, Super+v, Super+e              | Forge split horizontal, vertical, toggle split layout                   |
-| Super+s, Super+w                       | Forge stacked, tabbed                                                   |
-| Super+Shift+space                      | Forge toggle float                                                      |
-| Super+r resize mode                    | no modes in Forge: Super+Alt+hjkl resizes directly                      |
-| Super+f, Super+Shift+x                 | GNOME fullscreen, close                                                 |
-| Super+1..0, Super+Shift+1..0           | GNOME static workspaces 1 to 10 (the window does not follow the move)   |
-| Super+Return, Super+d, Super+p         | kitty, `rofi -show combi`, `rofi -show win`                             |
-| Super+c, Super+Shift+c, Super+period   | rofi-clip (GPaste), gpaste-client empty, rofimoji (copies only)         |
-| Super+Escape, Super+Shift+Escape       | lock, suspend                                                           |
-| Super+Shift+e                          | GNOME logout dialog                                                     |
-| Super+n, Super+Shift+n                 | notification list, do-not-disturb toggle                                |
-| (none)                                 | Super+m opens GNOME's overview; a bare Super press no longer does         |
-| (none)                                 | Ctrl+Alt+Left/Right no longer switch workspaces; Super+Page_Up/Down and Super+Alt+Left/Right still do |
-| waybar                                 | GNOME top bar; Top Bar Organizer extension moves the clock to the right next to the tray (`right-box-order`), drag-and-drop in its prefs for anything else |
+| sway                                   | GNOME                                                                                                                                                                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Super+hjkl, Super+Shift+hjkl           | Forge focus and move; Super+arrows unbound on both systems (Mutter half-tiling cleared)                                                                                                                                                                 |
+| Super+b, Super+v, Super+e              | Forge split horizontal, vertical, toggle split layout                                                                                                                                                                                                   |
+| Super+s, Super+w                       | Forge stacked, tabbed                                                                                                                                                                                                                                   |
+| Super+Shift+space                      | Forge toggle float                                                                                                                                                                                                                                      |
+| Super+r resize mode                    | no modes in Forge: Super+Alt+hjkl resizes directly                                                                                                                                                                                                      |
+| Super+f, Super+Shift+x                 | GNOME fullscreen, close                                                                                                                                                                                                                                 |
+| Super+1..0, Super+Shift+1..0           | GNOME static workspaces 1 to 10 (the window does not follow the move)                                                                                                                                                                                   |
+| Super+Return, Super+d, Super+p         | kitty, `rofi -show combi`, `rofi -show win`                                                                                                                                                                                                             |
+| Super+c, Super+Shift+c, Super+period   | rofi-clip (GPaste), gpaste-client empty, rofimoji (copies only)                                                                                                                                                                                         |
+| Super+Escape, Super+Shift+Escape       | lock, suspend                                                                                                                                                                                                                                           |
+| Super+Shift+e                          | GNOME logout dialog                                                                                                                                                                                                                                     |
+| Super+n, Super+Shift+n                 | notification list, do-not-disturb toggle                                                                                                                                                                                                                |
+| (none)                                 | Super+m opens GNOME's overview; a bare Super press no longer does                                                                                                                                                                                       |
+| (none)                                 | Ctrl+Alt+Left/Right no longer switch workspaces; Super+Page_Up/Down and Super+Alt+Left/Right still do                                                                                                                                                   |
+| waybar                                 | GNOME top bar; Top Bar Organizer extension moves the clock to the right next to the tray (`right-box-order`), drag-and-drop in its prefs for anything else                                                                                              |
 | mako                                   | GNOME Shell notifications; Notification Banner Position extension puts banners top-right; per-app on/off in Settings > Notifications; Claude Code's own are off via `preferredNotifChannel` in `~/.claude/settings.json` (they would arrive as "kitty") |
-| Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI               |
-| gaps inner 6, smart_gaps               | Forge gap 6, hidden on single window                                    |
-| client.focused colours                 | not ported: Forge focus border stays default, colours come later          |
-| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal, slack and messenger 2, spotify 10       |
-| exec lines                             | `~/.config/autostart/*.desktop`: brave, messenger (own Brave profile, see `applications/messenger.desktop`), signal, slack, kitty (no keepassxc) |
-| keepassxc in scratchpad, blueman float | no KeePassXC on this machine; Settings and pavucontrol float via `forge/windows.json` |
-| Super+a focus parent, Super+space      | no equivalent, Super+a stays GNOME's app grid                           |
-| Super+Shift+r reload                   | nothing to reload                                                       |
-| media keys, brightness, lid            | GNOME does these                                                        |
+| Ctrl+Shift+Alt+4 / 5 / 6               | GNOME screenshot UI, full screenshot, screen recording UI                                                                                                                                                                                               |
+| gaps inner 6, smart_gaps               | Forge gap 6, hidden on single window                                                                                                                                                                                                                    |
+| client.focused colours                 | not ported: Forge focus border stays default, colours come later                                                                                                                                                                                        |
+| assign to workspaces                   | Auto Move Windows extension: brave 9, kitty 7, signal, slack and messenger 2, spotify 10, dbeaver 6                                                                                                                                                     |
+| exec lines                             | `~/.config/autostart/*.desktop`: brave, messenger (own Brave profile, see `applications/messenger.desktop`), signal, slack, kitty (no keepassxc)                                                                                                        |
+| keepassxc in scratchpad, blueman float | no KeePassXC on this machine; Settings and pavucontrol float via `forge/windows.json`                                                                                                                                                                   |
+| Super+a focus parent, Super+space      | no equivalent, Super+a stays GNOME's app grid                                                                                                                                                                                                           |
+| Super+Shift+r reload                   | nothing to reload                                                                                                                                                                                                                                       |
+| media keys, brightness, lid            | GNOME does these                                                                                                                                                                                                                                        |
 
 GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super+v notifications, Super+p switch monitor, Super+l lock, Super+Escape restore shortcuts, Super+1..9 dock launchers, Ubuntu's tiling-assistant and dock (disabled).
 
@@ -64,21 +64,21 @@ GNOME defaults that had to move: Super+h minimize, Super+s quick settings, Super
 
 ## Files
 
-| Path                          | Purpose                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------ |
-| `install.sh`                  | packages and downloads, counterpart of `../arch-install.sh`              |
-| `setup.sh`                    | symlinks, counterpart of `../setup.sh`                                   |
-| `gnome-settings.sh`           | `sway/config` as gsettings and dconf                                     |
-| `local-bin/rofi`              | `rofi -x11` wrapper                                                      |
-| `local-bin/rofi-window`       | window switcher script mode over Window Calls                            |
-| `local-bin/dnd-toggle`        | `makoctl mode -t do-not-disturb` equivalent                              |
-| `rofi/config.rasi`            | imports `../rofi/config.rasi` as `base.rasi`, swaps kanshi for `win`     |
-| `forge/windows.json`          | float rules, copied once (Forge rewrites the file, a symlink would not survive) |
-| `autostart/*.desktop`         | the `exec` lines                                                         |
-| `applications/messenger.desktop` | Messenger as `brave --app` with `--user-data-dir` under the snap's common dir; linked into `~/.local/share/applications` and, via a repo symlink, into autostart |
-| `gitconfig.local`             | work identity, linked as `~/.gitconfig.local`; fill in name, e-mail, key |
-| `kitty/current-theme.conf`    | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen |
-| `kitty/local-theme-overrides.conf` | borders, tabs, `hide_window_decorations`; last file kitty reads      |
-| `nvim/host.lua`               | colourscheme for this host, loaded via `/etc/os-release`                 |
+| Path                                    | Purpose                                                                                                                                                                                                                |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `install.sh`                            | packages and downloads, counterpart of `../arch-install.sh`                                                                                                                                                            |
+| `setup.sh`                              | symlinks, counterpart of `../setup.sh`                                                                                                                                                                                 |
+| `gnome-settings.sh`                     | `sway/config` as gsettings and dconf                                                                                                                                                                                   |
+| `local-bin/rofi`                        | `rofi -x11` wrapper                                                                                                                                                                                                    |
+| `local-bin/rofi-window`                 | window switcher script mode over Window Calls                                                                                                                                                                          |
+| `local-bin/dnd-toggle`                  | `makoctl mode -t do-not-disturb` equivalent                                                                                                                                                                            |
+| `rofi/config.rasi`                      | imports `../rofi/config.rasi` as `base.rasi`, swaps kanshi for `win`                                                                                                                                                   |
+| `forge/windows.json`                    | float rules, copied once (Forge rewrites the file, a symlink would not survive)                                                                                                                                        |
+| `autostart/*.desktop`                   | the `exec` lines                                                                                                                                                                                                       |
+| `applications/messenger.desktop`        | Messenger as `brave --app` with `--user-data-dir` under the snap's common dir; linked into `~/.local/share/applications` and, via a repo symlink, into autostart                                                       |
+| `gitconfig.local`                       | work identity, linked as `~/.gitconfig.local`; fill in name, e-mail, key                                                                                                                                               |
+| `kitty/current-theme.conf`              | Ubuntu kitty theme, placeholder copy of Arch's until the palette is chosen                                                                                                                                             |
+| `kitty/local-theme-overrides.conf`      | borders, tabs, `hide_window_decorations`; last file kitty reads                                                                                                                                                        |
+| `nvim/host.lua`                         | colourscheme for this host, loaded via `/etc/os-release`                                                                                                                                                               |
 | `wireplumber/51-bluetooth-headset.conf` | Bluetooth headsets: native HFP backend with mSBC (16 kHz) so the hands-free profile is as good as Classic Bluetooth allows; A2DP keeps AAC/SBC-XQ. Opening the mic still switches AirPods to HFP, that is the protocol |
-| `camera/`                     | virtual camera: `lfbw.ini` settings (background image, size), `lfbw-start` picks the C920 or the built-in camera, `lfbw.service` runs it, `virtual-camera on|off|toggle|enable|disable|status` controls it; v4l2loopback provides `/dev/video10` "Virtual Camera" |
+| `camera/`                               | virtual camera: `lfbw.ini` settings (background image, size), `lfbw-start` picks the C920 or the built-in camera, `lfbw.service` runs it, `virtual-camera on                                                           | off | toggle | enable | disable | status`controls it; v4l2loopback provides`/dev/video10` "Virtual Camera" |

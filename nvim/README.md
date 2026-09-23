@@ -126,6 +126,27 @@ The CLI has to be logged in once from a terminal before the first use.
 Deletes and changes stay inside Neovim, which keeps the ten-entry history clean.
 `,p` opens the history in rofi from inside Neovim.
 
+## kitty scrollback in Neovim
+
+kitty-scrollback.nvim opens the terminal's scrollback in a Neovim buffer, so the last
+screens of output can be searched, yanked and written out with the usual keys. The kitty
+side is mapped in `kitty/kitty.conf`:
+
+| Key                       | Shows                                            |
+| ------------------------- | ------------------------------------------------ |
+| Alt+a e, Ctrl+Shift+h     | the whole scrollback buffer                      |
+| Alt+a g                   | the output of the last command only              |
+| Ctrl+Shift+right-click    | the output of the command that was clicked       |
+
+`q` closes the buffer and returns to the shell. The last two need kitty's shell
+integration marks, which are on by default.
+
+After updating the plugin, regenerate its kitten:
+
+```sh
+nvim --headless +KittyScrollbackGenerateKittens +qa
+```
+
 ## kitty side of the navigator
 
 The plugin copies its kittens into `~/.config/kitty` on install.

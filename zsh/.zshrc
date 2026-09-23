@@ -73,7 +73,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose dotenv fzf mise ssh colored-man-pages)
+plugins=(git docker docker-compose fzf mise ssh colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,14 +109,12 @@ fi
 # unalias from .zhsrc git plugin
 unalias gcmsg
 function gcmsg () {
-  branchname=$(git rev-parse --abbrev-ref HEAD)
+  local branchname=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$branchname" =~ ^[a-za-z]+-[0-9]+- ]]; then
-    jiranumber=$(echo $branchname | grep -eo '^[a-za-z]+-[0-9]+-' | tr a-z a-z)
-    git commit -m "${jiranumber::-1} $1"
-  elif [[ "$branchname" =~ ^[0-9]+- ]]; then
-    issuenumber=$(echo $branchname | grep -eo '^[0-9]+-' | tr a-z a-z)
-    git commit -m "$1"$'\n\n'"issue: #${issuenumber::-1}"
+  if [[ $branchname =~ '^([a-zA-Z]+-[0-9]+)-' ]]; then
+    git commit -m "${(U)match[1]} $1"
+  elif [[ $branchname =~ '^([0-9]+)-' ]]; then
+    git commit -m "$1"$'\n\n'"issue: #${match[1]}"
   else
     git commit -m "$1"
   fi
@@ -125,6 +123,8 @@ function gcmsg () {
 # kitty diff for git
 alias gdk='git difftool --no-symlinks --dir-diff'
 alias gdcak='git difftool --cached --no-symlinks --dir-diff'
+
+alias mr='mise run'
 
 # dx-init-wrapper-begin
 dx() {

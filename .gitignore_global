@@ -9,3 +9,10 @@ elm-stuff
 yarn-error.log
 nohup.out
 .DS_Store
+docker-compose.override.yml
+
+# tarnas-internal-tools-and-flows
+.dx
+.mise
+.worktrees
+notes.md

@@ -58,6 +58,9 @@ Two keys for reading long text in a centred column half the screen wide, one per
 | kitty           | either of them | leaves whichever of the two is on |
 | nvim            | , z            | no-neck-pain.nvim: padding windows either side leave a 50% column, numbers, signs and statusline off, wrapped, kitty font +2; aerial (, T) and splits keep working; , z again, q or Escape to leave |
 
+Terminal output itself opens in Neovim with Alt+a e for the whole scrollback and Alt+a g for the
+last command's output, through kitty-scrollback.nvim; see `nvim/README.md`.
+
 Use one at a time. Shell output goes through kitty's key; files and kitty scrollback opened in
 nvim (kitty-scrollback.nvim) go through nvim's. The column width is the `0.5` in the kitty
 mapping and `width` in `nvim/lua/plugins/reading.lua` (columns, half of the terminal at load time;
