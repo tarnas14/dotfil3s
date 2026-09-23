@@ -43,6 +43,16 @@ if [[ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ]]; then
 fi
 sudo apt-get install -y google-cloud-cli kubectl google-cloud-cli-gke-gcloud-auth-plugin
 
+# The graphical session must not start before /data is mounted, or every symlink from
+# $HOME into the repository is dangling when GNOME reads it. See the drop-in for why.
+dropin=/etc/systemd/system/gdm.service.d/wait-for-data.conf
+src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/systemd/gdm-wait-for-data.conf"
+if ! sudo cmp -s "$src" "$dropin"; then
+  echo "installing the gdm drop-in that waits for /data"
+  sudo install -D -o root -g root -m 644 "$src" "$dropin"
+  sudo systemctl daemon-reload
+fi
+
 # Spotify: the snap is published by Spotify itself; Brave and Slack are snaps here too
 snap list spotify >/dev/null 2>&1 || sudo snap install spotify
 
