@@ -54,7 +54,7 @@ repo=(
   gnome-keyring libsecret
 
   # applications
-  keepassxc syncthing signal-desktop spotify-launcher
+  keepassxc syncthing-git signal-desktop spotify-launcher
   thunar gvfs thunar-volman
   imv zathura zathura-pdf-mupdf mpv
   yazi-git ffmpeg 7zip poppler fd ripgrep fzf zoxide imagemagick resvg
