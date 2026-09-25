@@ -47,6 +47,28 @@ palette goes into `ubuntu/kitty/*`, `ubuntu/nvim/host.lua` and Forge's border co
 `ubuntu/gnome-settings.sh`. Window borders and startup applications are per host by nature
 (`arch/sway/config` versus `ubuntu/gnome-settings.sh` and `ubuntu/autostart/`).
 
+## Committing
+
+Commits made on Ubuntu that are meant to be re-signed with the personal key from Arch have to be
+created unsigned, because the shared `.gitconfig` turns signing on and the rebase would otherwise
+just swap one signature for another.
+Two mise tasks wrap that:
+
+```
+mise run no-sign-commit -- -m "message"   # or nsc; any git commit flags after the --
+mise run resign-commits                   # or rsc; from Arch, re-signs everything since master
+mise run unsign-last                      # or usl; strips the signature from a commit made by habit
+```
+
+`resign-commits` takes an optional base branch, defaults to `master`, and takes `-y` to skip the
+confirmation.
+Pass something else when the commits are on `master` itself, `origin/master` for everything not yet pushed, or a commit hash.
+It refuses on a dirty tree, without a signing key, or when the key it is told to use is not in this
+machine's keyring, since that last case stops the rebase half way through.
+
+`unsign-last` rewrites a single commit, so it refuses on a dirty tree or once that commit is on a
+remote, and does nothing when the commit is unsigned already.
+
 ## Reading mode
 
 Two keys for reading long text in a centred column half the screen wide, one per layer:

@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#MISE description="Re-sign every commit on this branch that is not on the base branch"
+#MISE alias="rsc"
+# Rewrites history, so it refuses on a dirty tree, without a signing key, or when the
+# commits already exist on a remote and a force push would be needed to publish them.
+set -euo pipefail
+
+base="master"
+assume_yes=false
+for arg in "$@"; do
+    case "$arg" in
+        -y | --yes) assume_yes=true ;;
+        -*) echo "usage: resign-commits [base-branch, default master] [-y]" >&2; exit 2 ;;
+        *) base="$arg" ;;
+    esac
+done
+
+git rev-parse --verify --quiet "$base" >/dev/null ||
+    { echo "no such branch: $base" >&2; exit 1; }
+git diff --quiet && git diff --cached --quiet ||
+    { echo "working tree is dirty, commit or stash first" >&2; exit 1; }
+
+key="$(git config --get user.signingkey || true)"
+[ -n "$key" ] ||
+    { echo "no user.signingkey set; is ~/.gitconfig.local the right host's?" >&2; exit 1; }
+
+# a key git names but the keyring does not hold fails on the first amend and leaves
+# the rebase half finished, so check before starting rather than after
+if [ "$(git config --get gpg.format || echo openpgp)" = "openpgp" ] &&
+   ! gpg --list-secret-keys "$key" >/dev/null 2>&1; then
+    echo "no secret key $key in this keyring; are you on the machine that holds it?" >&2
+    exit 1
+fi
+
+range="$base..HEAD"
+count="$(git rev-list --count "$range")"
+[ "$count" -gt 0 ] ||
+    { echo "nothing to re-sign: $(git branch --show-current) has no commits beyond $base"; exit 0; }
+
+echo "re-signing $count commit(s) on $(git branch --show-current) with key $key:"
+git log --format='  %h %G? %s' "$range"
+
+if git branch -r --contains "$(git rev-list "$range" | tail -1)" 2>/dev/null | grep -q .; then
+    echo
+    echo "warning: some of these are already on a remote, publishing will need --force-with-lease"
+fi
+
+if [ "$assume_yes" = false ]; then
+    printf '\nrewrite these commits? [y/N] '
+    read -r reply
+    case "$reply" in [yY]*) ;; *) echo "aborted"; exit 1 ;; esac
+fi
+
+if ! git rebase --exec 'git commit --amend --no-edit -S' "$base"; then
+    echo "rebase stopped part way; 'git rebase --abort' puts the branch back" >&2
+    exit 1
+fi
+
+echo
+git log --format='  %h %G? %s' "$range"

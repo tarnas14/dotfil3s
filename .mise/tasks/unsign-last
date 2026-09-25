@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#MISE description="Drop the GPG signature from the last commit, leaving message and author alone"
+#MISE alias="usl"
+# For a commit made with a plain `git commit` when it was meant for the re-signing pass
+# from Arch. Rewrites one commit, so it refuses once that commit is on a remote.
+set -euo pipefail
+
+git diff --quiet && git diff --cached --quiet ||
+    { echo "working tree is dirty; the amend would sweep staged changes into the commit" >&2; exit 1; }
+
+if git branch -r --contains HEAD 2>/dev/null | grep -q .; then
+    echo "HEAD is already on a remote; rewriting it would need a force push" >&2
+    exit 1
+fi
+
+case "$(git log --format='%G?' -1)" in
+    N) echo "already unsigned: $(git log --format='%h %s' -1)"; exit 0 ;;
+esac
+
+git commit --amend --no-gpg-sign --no-edit
+git log --format='  %h %G? %s' -1

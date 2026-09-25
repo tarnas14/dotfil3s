@@ -3,3 +3,9 @@ kitty/neighboring_window.py
 kitty/pass_keys.py
 kitty/navigate_kitty.py
 __pycache__/
+
+# ~/.gitignore_global excludes .mise; these task files are part of the repository.
+# Each level has to be re-included, because git will not look inside an excluded directory.
+!.mise/
+!.mise/tasks/
+!.mise/tasks/*

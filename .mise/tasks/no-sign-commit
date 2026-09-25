@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#MISE description="Commit without a GPG signature, for commits to be re-signed from Arch later"
+#MISE alias="nsc"
+# The shared .gitconfig sets commit.gpgsign, so a plain commit here is signed with
+# whichever key ~/.gitconfig.local names. Commits meant for the re-signing pass have
+# to be created unsigned, otherwise the rebase replaces one signature with another.
+set -euo pipefail
+
+exec git -c commit.gpgsign=false commit "$@"
