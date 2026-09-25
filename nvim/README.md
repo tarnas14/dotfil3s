@@ -56,7 +56,7 @@ Keys that changed from the old config are marked.
 | , cca, , ccd                 | Claude Code: accept or deny the proposed diff. New.                                          |
 | , C                          | Jump to the enclosing context.                                                               |
 | , p                          | Put an entry chosen from the clipboard history. New.                                         |
-| y, Y, p, P                   | Yank and put through the system clipboard. d, c and x do not touch it.                       |
+| y, d, c, x, p                | Vanilla, and all of them go through the system clipboard. Changed.                           |
 | Ctrl + /                     | Toggle comment.                                                                              |
 | Ctrl + Alt + j k             | Move line or selection.                                                                      |
 | , ld, , dn, , dp, , dd       | Line diagnostics, next, previous, buffer list.                                               |
@@ -121,9 +121,14 @@ The CLI has to be logged in once from a terminal before the first use.
 
 ## Clipboard behaviour
 
-`clipboard` is empty on purpose.
-`y` and `p` are mapped to the `+` register, so every yank reaches Wayland and therefore cliphist, and `p` pastes whatever cliphist last put on the clipboard.
-Deletes and changes stay inside Neovim, which keeps the ten-entry history clean.
+`clipboard` is `unnamedplus`, so yank, delete, change and put all use the `+` register.
+Nothing is remapped: `y`, `d`, `c`, `x`, `p` and `P` behave exactly as they do in vanilla Neovim, and everything they touch is also on the system clipboard.
+So `dd` here can be pasted into a browser with Ctrl+V, and `p` puts back whatever was last yanked, deleted, or copied in another application.
+
+The earlier arrangement mapped `y` and `p` to `"+` by hand and left deletes in Neovim's own registers, to keep the clipboard history free of things you never meant to copy.
+That silently broke `dd` followed by `p`, because `p` read the clipboard while the delete had gone to the unnamed register.
+The trade is now the other way round: the clipboard history fills with deletes as well as copies, so raise GPaste's `max-history-size` past ten if the history stops being useful.
+
 `,p` opens the history in rofi from inside Neovim.
 
 ## kitty scrollback in Neovim
