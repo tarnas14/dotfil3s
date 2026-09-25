@@ -187,7 +187,7 @@ dconf write /org/gnome/shell/extensions/top-bar-organizer/center-box-order "@as 
 #### check the id:
 #### ls /usr/share/applications ~/.local/share/applications /var/lib/snapd/desktop/applications 2>/dev/null | grep -i dbeaver
 dconf write /org/gnome/shell/extensions/auto-move-windows/application-list \
-  "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2', 'messenger.desktop:2', 'spotify_spotify.desktop:10', 'dbeaver-ce.desktop:6']"
+  "['brave_brave.desktop:9', 'kitty.desktop:7', 'signal-desktop.desktop:2', 'slack_slack.desktop:2', 'messenger.desktop:2', 'spotify_spotify.desktop:10', 'dbeaver-ce_dbeaver-ce.desktop:6']"
 
 ### Extensions: tiling-assistant and the dock fight with a tiler
 enabled=(

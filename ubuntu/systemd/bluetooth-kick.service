@@ -1,0 +1,13 @@
+[Unit]
+Description=Reload btusb when the Bluetooth firmware upload failed at boot
+After=bluetooth.service
+Wants=bluetooth.service
+
+[Service]
+# simple rather than oneshot: the script watches for up to forty seconds and a oneshot
+# would hold multi-user.target for that long
+Type=simple
+ExecStart=/usr/local/bin/bluetooth-kick
+
+[Install]
+WantedBy=multi-user.target

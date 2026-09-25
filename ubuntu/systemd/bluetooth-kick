@@ -1,0 +1,41 @@
+#!/bin/sh
+# Copied to /usr/local/bin by ubuntu/install.sh, run by bluetooth-kick.service.
+#
+# The MT7925 is one chip presenting Wi-Fi on PCIe and Bluetooth on USB, sharing a power
+# and reset domain. When the Bluetooth half is probed while that shared hardware is still
+# being brought up, its vendor command channel never answers: the kernel logs an all-zero
+# HW/SW version, then "Execution of wmt command timed out" about ten seconds later, and
+# no controller appears. Reloading the driver re-runs the handshake once things have
+# settled, which is enough. A warm reboot is not, because the chip keeps its state.
+#
+# Does nothing when the controller came up normally.
+set -u
+
+have_controller() { bluetoothctl list 2>/dev/null | grep -q .; }
+
+# the driver itself takes about ten seconds to give up, so do not judge too early
+wait_for_controller() {
+    n=0
+    while [ "$n" -lt "$1" ]; do
+        have_controller && return 0
+        n=$((n + 1))
+        sleep 1
+    done
+    return 1
+}
+
+if wait_for_controller 25; then
+    exit 0
+fi
+
+logger -t bluetooth-kick "no controller after 25s, reloading btusb"
+modprobe -r btusb btmtk 2>/dev/null || true
+modprobe btusb
+
+if wait_for_controller 15; then
+    logger -t bluetooth-kick "controller came up after reloading btusb"
+    exit 0
+fi
+
+logger -t bluetooth-kick "still no controller; the chip needs a full power off, a reboot will not do"
+exit 1
