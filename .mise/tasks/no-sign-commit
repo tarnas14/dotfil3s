@@ -6,4 +6,4 @@
 # to be created unsigned, otherwise the rebase replaces one signature with another.
 set -euo pipefail
 
-exec git -c commit.gpgsign=false commit "$@"
+exec git -c commit.gpgsign=false commit -m "$1"
