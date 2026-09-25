@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=dbeaver-ce
+Exec=/snap/bin/dbeaver-ce
+X-GNOME-Autostart-enabled=true

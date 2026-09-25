@@ -37,8 +37,8 @@ sudo apt install -y \
 if [[ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ]]; then
   sudo apt-get install -y ca-certificates gnupg curl
   curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/cloud.google.gpg
-  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
-    | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
+  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" |
+    sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
   sudo apt-get update
 fi
 sudo apt-get install -y google-cloud-cli kubectl google-cloud-cli-gke-gcloud-auth-plugin
@@ -55,6 +55,7 @@ fi
 
 # Spotify: the snap is published by Spotify itself; Brave and Slack are snaps here too
 snap list spotify >/dev/null 2>&1 || sudo snap install spotify
+snap list dbeaver-ce >/dev/null 2>&1 || sudo snap install dbeaver-ce
 
 mkdir -p ~/.local/bin ~/.local/share/fonts
 
@@ -87,14 +88,14 @@ fi
 # set have to be forgotten and paired again.
 if ! command -v airpods-tui >/dev/null; then
   echo "installing airpods-tui from GitHub releases"
-  url="$(curl -fsSL https://api.github.com/repos/annoyedmilk/airpods-tui/releases/latest \
-        | jq -r '.assets[] | select(.name | test("x86_64\\.tar\\.gz$")) | .browser_download_url')"
+  url="$(curl -fsSL https://api.github.com/repos/annoyedmilk/airpods-tui/releases/latest |
+    jq -r '.assets[] | select(.name | test("x86_64\\.tar\\.gz$")) | .browser_download_url')"
   fetch /tmp/airpods-tui.tgz "$url"
   rm -rf /tmp/airpods-tui && mkdir -p /tmp/airpods-tui && tar -xzf /tmp/airpods-tui.tgz -C /tmp/airpods-tui --strip-components=1
   install -m755 /tmp/airpods-tui/airpods-tui ~/.local/bin/
   mkdir -p ~/.config/systemd/user
   sed "s|ExecStart=/usr/bin/airpods-tui|ExecStart=$HOME/.local/bin/airpods-tui|" /tmp/airpods-tui/airpods-tui.service \
-    > ~/.config/systemd/user/airpods-tui.service
+    >~/.config/systemd/user/airpods-tui.service
   rm -rf /tmp/airpods-tui /tmp/airpods-tui.tgz
 fi
 if ! grep -qE '^\s*DeviceID\s*=\s*bluetooth:004C:' /etc/bluetooth/main.conf; then
@@ -116,8 +117,8 @@ systemctl --user enable --now airpods-tui.service
 # apps list it. Linux-Fake-Background-Webcam reads the real camera, cuts out the person
 # with mediapipe and writes the composite there. Settings: ubuntu/camera/.
 sudo apt-get install -y v4l2loopback-dkms v4l2loopback-utils v4l-utils
-printf 'options v4l2loopback devices=1 video_nr=10 exclusive_caps=1 card_label="Virtual Camera"\n' \
-  | sudo tee /etc/modprobe.d/v4l2loopback.conf >/dev/null
+printf 'options v4l2loopback devices=1 video_nr=10 exclusive_caps=1 card_label="Virtual Camera"\n' |
+  sudo tee /etc/modprobe.d/v4l2loopback.conf >/dev/null
 printf 'v4l2loopback\n' | sudo tee /etc/modules-load.d/v4l2loopback.conf >/dev/null
 lsmod | grep -q '^v4l2loopback' || sudo modprobe v4l2loopback
 # mediapipe ships no wheels past Python 3.12, so the tool gets its own interpreter from mise
@@ -183,8 +184,8 @@ if ! jq -e --arg v "$shell_version" '.["shell-version"] | index($v)' "$forge_dir
   rm -rf "$src"
   echo "installed forge@jmmaranan.com $(jq -r .version "$forge_dir/metadata.json") from git"
 fi
-install_ext window-calls@domandoman.xyz # D-Bus window list for ~/.local/bin/rofi-window
-install_ext notification-position@drugo.dev # banners top-right instead of top-centre, where mako had them
+install_ext window-calls@domandoman.xyz           # D-Bus window list for ~/.local/bin/rofi-window
+install_ext notification-position@drugo.dev       # banners top-right instead of top-centre, where mako had them
 install_ext top-bar-organizer@julian.gse.jsts.xyz # clock next to the tray icons, waybar style
 
 sudo usermod -aG docker "$USER"
